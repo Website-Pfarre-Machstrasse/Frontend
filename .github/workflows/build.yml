@@ -35,6 +35,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+#      - uses: testspace-com/setup-testspace@v1
+#        with:
+#          domain: ${{ github.repository_owner }}
+#          token: ${{ secrets.TESTSPACE_TOKEN }}
+
       - name: Install
         run: npm ci
 
@@ -49,11 +54,11 @@ jobs:
 
 #      - name: e2e
 #        run: npm run e2e:ci
-
-#      - uses: testspace-com/setup-testspace@v1
-#        with:
-#          domain: ${{ github.repository_owner }}
-#          token: ${{ secrets.TESTSPACE_TOKEN }}
+        
+#      - name: Publish Results to Testspace
+#        run: |
+#          testspace results.xml
+#        if: always()
 
       - name: Build
         run: npm run build:prod

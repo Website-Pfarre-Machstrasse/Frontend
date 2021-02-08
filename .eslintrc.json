@@ -1,0 +1,162 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:rxjs/recommended"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "rxjs"
+      ],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "no-underscore-dangle": "off",
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "default",
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "allow",
+            "trailingUnderscore": "forbid"
+          },
+          {
+            "selector": "variable",
+            "modifiers": [
+              "global",
+              "const"
+            ],
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          {
+            "selector": [
+              "parameterProperty",
+              "classProperty"
+            ],
+            "format": [
+              "camelCase"
+            ],
+            "modifiers": [
+              "private"
+            ],
+            "leadingUnderscore": "require"
+          },
+          {
+            "selector": [
+              "method",
+              "accessor"
+            ],
+            "format": [
+              "camelCase"
+            ],
+            "modifiers": [
+              "private"
+            ],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": [
+              "objectLiteralProperty",
+              "objectLiteralMethod"
+            ],
+            "format": null
+          },
+          {
+            "selector": "parameter",
+            "format": [
+              "camelCase"
+            ],
+            "modifiers": [
+              "unused"
+            ],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "parameterProperty",
+            "format": [
+              "camelCase"
+            ],
+            "modifiers": [
+              "private"
+            ],
+            "leadingUnderscore": "require"
+          },
+          {
+            "selector": "typeLike",
+            "format": [
+              "PascalCase"
+            ]
+          }
+        ],
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": false,
+            "methods": false,
+            "parameters": false,
+            "properties": true,
+            "variables": false,
+            "types": {
+              "^EventEmitter$": false
+            }
+          }
+        ],
+        "rxjs/no-exposed-subjects": [
+          "error",
+          {
+            "allowProtected": true
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

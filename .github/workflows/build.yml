@@ -55,12 +55,12 @@ jobs:
 #      - name: e2e
 #        run: npm run e2e:ci
 
-      - name: Publish Results to Testspace
-        run: |
-          testspace analysis.xml
-          testspace ./coverage/clover.xml
-          testspace ./reports/TESTS-*.xml
-        if: always()
+#      - name: Publish Results to Testspace
+#        run: |
+#          testspace analysis.xml
+#          testspace ./coverage/clover.xml
+#          testspace ./reports/TESTS-*.xml
+#        if: always()
 
       - name: Build
         run: npm run build:prod

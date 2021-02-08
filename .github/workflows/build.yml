@@ -1,0 +1,68 @@
+name: Test and Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm ci
+
+      - name: Clean
+        run: npm run clean
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test:ci
+
+#      - name: e2e
+#        run: npm run e2e:ci
+
+#      - uses: testspace-com/setup-testspace@v1
+#        with:
+#          domain: ${{ github.repository_owner }}
+#          token: ${{ secrets.TESTSPACE_TOKEN }}
+
+      - name: Build
+        run: npm run build:prod
+
+      - name: Tar Artifact
+        run: tar -cvf Website-Pfarre-Machstrasse.tar ./dist/Website-Pfarre-Machstrasse
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Website-Pfarre-Machstrasse
+          path: Website-Pfarre-Machstrasse.tar

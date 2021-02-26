@@ -1,0 +1,8 @@
+- [ ] Die neue Website soll eine Bildergalerie bieten. 
+- [ ] Die Bilder für die Bildergalerie sollen von Administratoren über die Web-Schnittstelle hochladbar sein. 
+- [ ] Die Bildergalerie soll verschiedene Seiten unterstützen, auf denen von Administratoren Bilder zugeordnet werden können. 
+- [x] Die Skalierung der Bilder soll am Server automatisch erfolgen, um eine übersichtliche Darstellung zu ermöglichen. 
+- [ ] Die Bildergalerie soll Videos unterstützen. 
+- [ ] Die Videos sollen von Administratoren über die Web-Schnittstelle hochladbar sein. 
+- [ ] Videos sollen auf dem Server in normiertem Format gespeichert werden. (z.B.: vereinheitlichte Auflösung)
+

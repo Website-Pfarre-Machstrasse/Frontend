@@ -75,6 +75,9 @@
                   "maximumError": "5kb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "./tsconfig-es5.app.json"
             }
           }
         },
@@ -86,6 +89,9 @@
           "configurations": {
             "production": {
               "browserTarget": "Website-Pfarre-Machstrasse:build:production"
+            },
+            "es5": {
+              "browserTarget": "Website-Pfarre-Machstrasse:build:es5"
             }
           }
         },
@@ -110,6 +116,11 @@
               "src/styles.scss"
             ],
             "scripts": []
+          },
+          "configurations": {
+            "es5": {
+              "tsConfig": "./tsconfig-es5.spec.json"
+            }
           }
         },
         "lint": {
@@ -130,6 +141,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "Website-Pfarre-Machstrasse:serve:production"
+            },
+            "es5": {
+              "devServerTarget": "Website-Pfarre-Machstrasse:serve:es5"
             }
           }
         }

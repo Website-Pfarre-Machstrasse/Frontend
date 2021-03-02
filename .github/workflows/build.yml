@@ -47,7 +47,7 @@ jobs:
         run: npm run clean
 
       - name: Lint
-        run: npm run lint:ci
+        run: npm run lint #:ci
 
       - name: Test
         run: npm run test:ci
@@ -57,7 +57,7 @@ jobs:
 
 #      - name: Publish Results to Testspace
 #        run: |
-#          testspace analysis.xml
+#          testspace ./analysis/*-lint.xml
 #          testspace ./coverage/clover.xml
 #          testspace ./reports/TESTS-*.xml
 #        if: always()

@@ -1,3 +1,3 @@
-# Menu
+# Cookie Banner
 
-- [ ] Two-layered navigation menu
+- [ ] Implement a cookie banner

@@ -1577,6 +1577,20 @@
     <inspection_tool class="InvalidPropertyKeyForm" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="InvalidProvidedBy" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="InvalidRequestParameters" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InvalidConfigValue" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidI18nProperty" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidImplementedBy" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InvalidInjectorMethodSignature" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidInterfacePrefix" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidMemberReference" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidMixinPluginRegistration" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidMixinRegistration" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidMixinTarget" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InvalidPropertyKeyForm" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InvalidProvidedBy" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InvalidRequestParameters" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InvokerTarget" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="IsCancelled" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IterableUsedAsVararg" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IteratorHasNextCallsIteratorNext" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IteratorNextDoesNotThrowNoSuchElementException" enabled="false" level="WARNING" enabled_by_default="false" />

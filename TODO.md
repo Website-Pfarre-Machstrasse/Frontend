@@ -1,3 +1,4 @@
-# Menu
+# Admin Interface - Menu
 
-- [ ] Two-layered navigation menu
+- [ ] Add new site/category
+- [ ] Move site/category

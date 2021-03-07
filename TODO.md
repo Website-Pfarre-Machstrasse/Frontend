@@ -1,3 +1,3 @@
-# Menu
+# Drucken
 
-- [ ] Two-layered navigation menu
+- [ ] Implement a printing feature

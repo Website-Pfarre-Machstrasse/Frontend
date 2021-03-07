@@ -1,3 +1,4 @@
-# Menu
+# Startseite
 
-- [ ] Two-layered navigation menu
+- [ ] Main Text
+- [ ] Calendar Overview

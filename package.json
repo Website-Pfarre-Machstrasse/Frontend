@@ -6,8 +6,11 @@
     "clean": "rimraf ./dist",
     "start": "ng serve",
     "build": "ng build",
+    "postbuild": "node postbuild.js",
     "build:prod": "ng build --prod",
+    "postbuild:prod": "node postbuild.js",
     "lint:code": "ng lint",
+    "lint:code:fix": "ng lint --fix",
     "lint:code:ci": "ng lint --format checkstyle --silent --force > analysis/code-lint.xml",
     "lint:style": "stylelint src/**/*.scss",
     "lint:style:ci": "stylelint --custom-formatter ./checkstyle src/**/*.scss -o analysis/style-lint.xml",
@@ -17,7 +20,8 @@
     "test": "ng test",
     "e2e:ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
     "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "update-angular": "ng update @angular/cli @angular/core --allow-dirty"
   },
   "private": true,
   "dependencies": {
@@ -64,6 +68,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "karma-junit-reporter": "^2.0.1",
     "protractor": "~7.0.0",
+    "purgecss": "^4.0.2",
     "source-map-explorer": "^2.5.2",
     "stylelint": "^13.11.0",
     "stylelint-config-sass-guidelines": "^8.0.0",

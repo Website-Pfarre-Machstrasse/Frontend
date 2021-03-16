@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CoreModule} from './core/core.module';
+import {AuthModule} from './auth/auth.module';
+import {AppConfig} from './core/config/app-config';
+
+export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appConfig.load();
 
 @NgModule({
   declarations: [
@@ -14,9 +18,17 @@ import {CoreModule} from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule
+    CoreModule,
+    AuthModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppConfig],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

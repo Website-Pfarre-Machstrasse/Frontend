@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Login</h2>
+<form (click)="$event.stopPropagation();" (ngSubmit)="login()" [formGroup]="form">
+  <div mat-dialog-content style="height: 12rem;">
+    <mat-form-field appearance="standard">
+      <mat-label>E-Mail-Adresse</mat-label>
+      <input formControlName="email" matInput placeholder="email@example.com" required type="email">
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Passwort</mat-label>
+      <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput placeholder="Password"
+             required>
+      <button (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword" mat-icon-button matSuffix type="button">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div align="end" mat-dialog-actions>
+    <button (click)="close()" mat-flat-button type="reset">Cancel</button>
+    <button autofocus color="primary" mat-flat-button type="submit">Login</button>
+  </div>
+</form>

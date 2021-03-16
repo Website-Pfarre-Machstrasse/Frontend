@@ -52,7 +52,7 @@ export class AuthService implements OnDestroy {
     window.removeEventListener('storage', this.storageEventListener.bind(this));
   }
 
-  public login(username: string, password: string): Observable<void> {
+  public login(username: string, password: string): Observable<boolean> {
     return this._http
       .post<LoginResult>(this.loginUrl, { username, password })
       .pipe(
@@ -60,7 +60,7 @@ export class AuthService implements OnDestroy {
           this.setLocalStorage(x);
           this.startTokenTimer();
           this.updateUser();
-          return;
+          return true;
         })
       );
   }

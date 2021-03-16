@@ -1,4 +1,4 @@
-import {NgModule, Optional, SkipSelf} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AuthGuard} from './auth.guard';
 import {AuthService} from './auth.service';
@@ -9,11 +9,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
   declarations: [LoginFormComponent],
   imports: [
+    HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
     MatDialogModule,
@@ -26,7 +28,8 @@ import {MatButtonModule} from '@angular/material/button';
     AuthService,
     AuthInterceptor
   ],
-  exports: [LoginFormComponent]
+  exports: [LoginFormComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AuthModule {
   constructor(@Optional() @SkipSelf() parentModule: AuthModule) {

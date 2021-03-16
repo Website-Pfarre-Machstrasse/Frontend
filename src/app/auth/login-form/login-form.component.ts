@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Optional} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {AuthService} from '../auth.service';
@@ -18,10 +18,10 @@ export class LoginFormComponent {
   });
   private _logger: Logger;
 
-  constructor(public dialogRef: MatDialogRef<LoginFormComponent>,
-              private _fb: FormBuilder,
+  constructor(private _fb: FormBuilder,
               private _userService: AuthService,
-              loggerService: LoggerService) {
+              loggerService: LoggerService,
+              @Optional() public dialogRef?: MatDialogRef<LoginFormComponent>) {
     this._logger = loggerService.getLogger('Login');
   }
 
@@ -34,8 +34,6 @@ export class LoginFormComponent {
   }
 
   public close(): void {
-    if (this.dialogRef?.close) {
-      this.dialogRef.close(false);
-    }
+    this.dialogRef?.close?.(false);
   }
 }

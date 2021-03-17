@@ -71,8 +71,8 @@
           },
           {
             "selector": [
-              "parameterProperty",
-              "classProperty"
+              "classProperty",
+              "parameterProperty"
             ],
             "format": [
               "camelCase"
@@ -81,6 +81,18 @@
               "private"
             ],
             "leadingUnderscore": "require"
+          },
+          {
+            "selector": [
+              "classProperty"
+            ],
+            "format": [
+              "UPPER_CASE"
+            ],
+            "modifiers": [
+              "static",
+              "readonly"
+            ]
           },
           {
             "selector": [
@@ -126,6 +138,13 @@
             "selector": "typeLike",
             "format": [
               "PascalCase"
+            ]
+          },
+          {
+            "selector": "enumMember",
+            "format": [
+              "PascalCase",
+              "UPPER_CASE"
             ]
           }
         ],

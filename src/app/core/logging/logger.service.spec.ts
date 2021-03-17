@@ -3,12 +3,13 @@ import { TestBed } from '@angular/core/testing';
 import { LoggerService } from './logger.service';
 import {LogHandler} from './log-handler';
 import {LogEntry} from './log-entry';
+import {LoggingModule} from './logging.module';
 
 describe('LoggerService', () => {
   let service: LoggerService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({imports: [LoggingModule.forRoot()]});
     service = TestBed.inject(LoggerService);
   });
 

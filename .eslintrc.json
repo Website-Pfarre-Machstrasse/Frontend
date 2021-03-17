@@ -70,6 +70,29 @@
             ]
           },
           {
+            "selector": "accessor",
+            "format": [
+              "UPPER_CASE"
+            ],
+            "modifiers": [
+              "static"
+            ]
+          },
+          {
+            "selector": [
+              "classProperty",
+              "classMethod"
+            ],
+            "format": [
+              "UPPER_CASE"
+            ],
+            "modifiers": [
+              "static",
+              "readonly"
+            ],
+            "leadingUnderscore": "forbid"
+          },
+          {
             "selector": [
               "classProperty",
               "parameterProperty"
@@ -81,18 +104,6 @@
               "private"
             ],
             "leadingUnderscore": "require"
-          },
-          {
-            "selector": [
-              "classProperty"
-            ],
-            "format": [
-              "UPPER_CASE"
-            ],
-            "modifiers": [
-              "static",
-              "readonly"
-            ]
           },
           {
             "selector": [

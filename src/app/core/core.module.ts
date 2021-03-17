@@ -1,18 +1,19 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {LoggerService} from './logging/logger.service';
-
+import { LoggingModule } from './logging/logging.module';
+import {ErrorInterceptor} from './error.interceptor';
+import {AppConfig} from './config/app-config';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    LoggingModule.forRoot()
   ],
   providers: [
-    {
-      provide: LoggerService
-    }
+    AppConfig,
+    ErrorInterceptor
   ]
 })
 export class CoreModule {

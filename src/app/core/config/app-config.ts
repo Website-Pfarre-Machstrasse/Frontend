@@ -14,7 +14,7 @@ export class AppConfig {
   }
   constructor(private _http: HttpClient) {}
   load(): Promise<void> {
-    const configFile = environment.configFile;
+    const configFile = document.baseURI+environment.configFile;
     return new Promise<void>((resolve, reject) => {
       this._http.get<IConfig>(configFile).toPromise().then(config => {
         if (config != null) {

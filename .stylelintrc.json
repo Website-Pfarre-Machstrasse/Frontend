@@ -4,5 +4,13 @@
     "stylelint-scss"
   ],
   "rules": {
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": ["attribute", "class"]
+      }
+    ],
+    "selector-max-compound-selectors": [4],
+    "max-nesting-depth": [6]
   }
 }

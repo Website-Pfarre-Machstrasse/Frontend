@@ -1,33 +1,9 @@
-
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
 @import '~@angular/material/theming';
-
-@include mat-core();
-
-$primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-pink, A200, A100, A400);
-$warn: mat-palette($mat-red);
-
-$light-theme: mat-light-theme((
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn,
-  )
-));
-
-$dark-theme: mat-dark-theme((
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn,
-  )
-));
-
-@include angular-material-theme($light-theme);
-
-@media (prefers-color-scheme: dark) {
-  @include angular-material-color($dark-theme);
-}
+@import 'theme';
 
 html,
 body {
@@ -37,4 +13,271 @@ body {
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
+}
+
+@include mat-core();
+
+@include angular-material-theme($light-theme);
+@include theme-extension($light-theme);
+
+@media (prefers-color-scheme: dark) {
+  @include angular-material-color($dark-theme);
+  @include theme-extension($dark-theme);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.center-container {
+  flex-grow: 1;
+}
+
+app-nav {
+  /*region Desktop Menu*/
+  @include media-breakpoint-up(lg) {
+    nav {
+      position: sticky;
+      top: 0;
+    }
+
+    .toggle {
+      display: none;
+    }
+
+    .logo {
+      order: 0;
+    }
+
+    .button,
+    .text {
+      order: 2;
+    }
+
+    .menu {
+      justify-content: flex-start;
+
+      .button {
+        margin-right: 0;
+      }
+
+      li {
+        padding: 20px 10px;
+
+        &.item {
+          display: block;
+          flex-basis: auto;
+          order: 1;
+
+          &:hover ul,
+          ul:hover {
+            display: block !important;
+          }
+
+          &.text,
+          &.button {
+            margin-left: auto;
+            padding: 8px 10px;
+          }
+
+          &.button {
+            padding-right: 0;
+          }
+
+          &.text {
+            display: block !important;
+          }
+
+          ul {
+            margin-left: -10px;
+            margin-right: -10px;
+            margin-top: 20px;
+            position: absolute;
+
+            &.open {
+              display: none;
+            }
+          }
+
+          &.text + .item.button {
+            margin-left: 0;
+          }
+        }
+      }
+
+      &.visible {
+        padding-bottom: 0;
+      }
+    }
+  }
+  /*endregion Desktop Menu*/
+  /*region Tablet Menu*/
+  @include media-breakpoint-up(md) {
+    .menu {
+      justify-content: flex-end;
+    }
+
+    .item.button,
+    .item.text {
+      display: block;
+      flex-basis: auto;
+      order: 1;
+      padding: 7px 5px;
+    }
+
+    .toggle {
+      order: 2;
+    }
+
+    .menu {
+      li.brand {
+        img {
+          display: inline !important;
+          height: 3rem;
+          margin: -1rem;
+          margin-right: 0;
+          padding-right: 2rem;
+        }
+      }
+
+      li.button {
+        border: 0;
+        margin-right: 1rem;
+
+        a {
+          border-radius: 50em;
+          padding: 7px 15px;
+          text-decoration: none;
+
+          &:hover {
+            transition: all 0.25s;
+          }
+        }
+
+        &:hover {
+          background: unset;
+        }
+      }
+    }
+  }
+
+  /*endregion Tablet Menu*/
+  /*region Mobile Menu*/
+  .toggle {
+    align-self: flex-end;
+    cursor: pointer;
+    order: 1;
+  }
+
+  .item {
+    display: none;
+    flex-basis: 100%;
+    order: 3;
+    text-align: center;
+
+    &.text {
+      display: none !important;
+    }
+
+    &.visible {
+      display: block;
+    }
+
+    &.button {
+      order: 2;
+    }
+
+    ul {
+      display: none;
+      margin-top: 15px;
+    }
+  }
+
+  .menu {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 10px 0 10px 15px;
+
+    li {
+      font-size: 16px;
+      padding: 15px 0;
+      white-space: nowrap;
+
+      &.brand {
+        flex-grow: 1;
+        font-size: 22px;
+
+        img {
+          display: none;
+        }
+      }
+
+      &.toggle {
+        line-height: 0;
+        padding: 20px 5px;
+      }
+
+      a {
+        display: block;
+      }
+    }
+  }
+
+  /*endregion Mobile Menu*/
+  /*region General*/
+  nav {
+    padding: 0 20px;
+    z-index: 100;
+  }
+
+  nav * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    list-style-type: none;
+
+    &.visible {
+      padding-bottom: 15px;
+    }
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .item ul.open {
+    display: block;
+  }
+
+  .button {
+    padding: 10px 5px;
+  }
+  /*endregion General*/
+}
+
+app-footer footer {
+  display: flex;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 0;
+
+  a {
+    align-self: center;
+    flex: 1 0 100%;
+  }
 }

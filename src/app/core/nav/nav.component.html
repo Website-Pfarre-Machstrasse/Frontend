@@ -1,0 +1,20 @@
+<nav>
+  <ul class="menu" *rxSubscribe="categories$; let categories" [class.visible]="visible">
+    <li class="brand"><img src="assets/logo.svg" alt="Pfarre Machstrasse Logo"/>Pfarre Machstrasse</li>
+    <li class="item" [class.visible]="visible" *ngFor="let category of categories" [class.open]="openCat === category.id" routerLinkActive="active">
+      <a (click)="openCat === category.id ? openCat = null : openCat = category.id">{{category.title}}</a>
+      <ul [class.open]="openCat === category.id" *rxSubscribe="category.pages$; let pages">
+        <li *ngFor="let page of pages">
+          <a [routerLink]="[category.id, page.id]" routerLinkActive="active">{{page.title}}</a>
+        </li>
+      </ul>
+    </li>
+    <li class="item button" [class.visible]="visible">
+      <a (click)="logout()" *ngIf="isLoggedIn() | async">Logout</a>
+      <a (click)="openLogin()" *ngIf="(isLoggedIn() | async) === false">Login</a>
+    </li>
+    <li class="toggle" (click)="visible = !visible">
+      <mat-icon>menu</mat-icon>
+    </li>
+  </ul>
+</nav>

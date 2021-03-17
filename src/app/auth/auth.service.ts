@@ -5,8 +5,8 @@ import {Router} from '@angular/router';
 import {catchError, delay, map, tap} from 'rxjs/operators';
 import {LoggerService} from '../core/logging/logger.service';
 import {Logger} from '../core/logging/logger';
-import {User} from './user';
-import {LoginResult} from './login-result';
+import {User} from '../data/user';
+import {LoginResult} from '../data/login-result';
 import {AppConfig} from '../core/config/app-config';
 
 

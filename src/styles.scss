@@ -60,6 +60,10 @@ app-nav {
   .brand {
     flex-grow: 0;
 
+    a {
+      width: fit-content;
+    }
+
     img {
       display: none;
 
@@ -94,7 +98,7 @@ app-nav {
       }
 
       &.brand {
-        font-size: 22px;
+        font-size: 24px;
       }
     }
 

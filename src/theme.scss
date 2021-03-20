@@ -68,7 +68,7 @@ $dark-theme: mat-dark-theme((
 
     *,
     a {
-      color: mat-color($primary, default-contrast);
+      color: mat-contrast($primary, 300);
     }
 
     .mat-select-arrow {

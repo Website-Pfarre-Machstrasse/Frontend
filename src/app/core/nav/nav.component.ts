@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {LoginFormComponent} from '../../auth/login-form/login-form.component';
 import {Category} from '../../data/category';
 import {ContentService} from '../../shared/services/content.service';
+import {User} from '../../data/user';
 
 @Component({
   selector: 'app-nav',
@@ -16,6 +17,10 @@ export class NavComponent {
 
   public get categories$(): Observable<Category[]> {
     return this._contentService.getCategories();
+  }
+
+  public get user$(): Observable<User> {
+    return this._userService.user$;
   }
 
   constructor(private _contentService: ContentService,

@@ -2,13 +2,14 @@
   <ul class="menu" *rxSubscribe="categories$; let categories" [class.visible]="visible">
     <li class="brand" tabindex="0"><img src="assets/logo.svg" alt="Pfarre Machstrasse Logo"/>Pfarre Machstrasse</li>
     <li class="item" [tabIndex]="i" [class.visible]="visible" *ngFor="let category of categories; index as i" [class.open]="openCat === category.id" routerLinkActive="active">
-      <a (click)="openCat === category.id ? openCat = null : openCat = category.id">{{category.title}}</a>
+      <a (click)="openCat === category.id ? openCat = null : openCat = category.id">{{ category.title }}</a>
       <ul [class.open]="openCat === category.id" *rxSubscribe="category.pages$; let pages">
         <li *ngFor="let page of pages" [tabIndex]="i">
-          <a [routerLink]="[category.id, page.id]" routerLinkActive="active">{{page.title}}</a>
+          <a [routerLink]="[category.id, page.id]" routerLinkActive="active">{{ page.title }}</a>
         </li>
       </ul>
     </li>
+    <li class="item text" *ngIf="isLoggedIn() | async">{{ (user$ | async)?.username }}</li>
     <li class="item button" tabindex="-1" [class.visible]="visible">
       <a (click)="logout()" *ngIf="isLoggedIn() | async">Logout</a>
       <a (click)="openLogin()" *ngIf="(isLoggedIn() | async) === false">Login</a>

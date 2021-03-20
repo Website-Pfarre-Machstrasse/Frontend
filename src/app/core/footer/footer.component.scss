@@ -1,0 +1,14 @@
+footer {
+  display: flex;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 0;
+
+  a {
+    align-self: center;
+    flex: 1 0 100%;
+  }
+}

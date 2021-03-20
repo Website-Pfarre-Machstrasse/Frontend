@@ -8,6 +8,6 @@ import {Category} from '../../data/category';
 export class ContentService {
 
   public getCategories(): Observable<Category[]> {
-    return of([]);
+    return of([{id: 'test', title: 'Category', pages$: of([{id: 'test', title: 'Page', content$: of('')}])}]);
   }
 }

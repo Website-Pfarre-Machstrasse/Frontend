@@ -11,6 +11,9 @@ import {AppConfig} from './config/app-config';
     CommonModule,
     LoggingModule.forRoot()
   ],
+  exports: [
+    LoggingModule
+  ],
   providers: [
     AppConfig,
     ErrorInterceptor

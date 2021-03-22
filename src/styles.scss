@@ -1,33 +1,9 @@
-
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
 @import '~@angular/material/theming';
-
-@include mat-core();
-
-$primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-pink, A200, A100, A400);
-$warn: mat-palette($mat-red);
-
-$light-theme: mat-light-theme((
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn,
-  )
-));
-
-$dark-theme: mat-dark-theme((
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn,
-  )
-));
-
-@include angular-material-theme($light-theme);
-
-@media (prefers-color-scheme: dark) {
-  @include angular-material-color($dark-theme);
-}
+@import 'theme';
 
 html,
 body {
@@ -37,4 +13,270 @@ body {
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
+}
+
+@include mat-core();
+
+@include angular-material-theme($light-theme);
+@include theme-extension($light-theme);
+
+@media (prefers-color-scheme: dark) {
+  @include angular-material-color($dark-theme);
+  @include theme-extension($dark-theme);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.center-container {
+  flex-grow: 1;
+}
+
+app-nav {
+  .item {
+    display: none;
+    flex-basis: 100%;
+    order: 3;
+    text-align: center;
+
+    &:not(.button) {
+      line-height: 36px;
+    }
+
+    ul {
+      display: none;
+      line-height: 1em;
+      margin-top: 15px;
+    }
+  }
+
+  .visible {
+    display: block;
+  }
+
+  .brand {
+    flex-grow: 0;
+    padding: 0.5rem 0;
+
+    a {
+      width: fit-content;
+    }
+
+    img {
+      display: none;
+
+      @include media-breakpoint-up(sm) {
+        display: inline !important;
+        height: 2.5rem;
+        margin: -0.8rem 0;
+        padding-right: 2rem;
+      }
+    }
+  }
+
+  .text {
+    display: none !important;
+    order: 2;
+  }
+
+  .menu {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.5em 0;
+
+    li {
+      font-size: 16px;
+      white-space: nowrap;
+
+      a {
+        display: block;
+      }
+
+      &.brand {
+        font-size: 1.5em;
+      }
+    }
+
+    li:not(.toggle, .brand) {
+      padding: 15px 10px;
+    }
+
+    .button {
+      order: 2;
+    }
+
+    .toggle {
+      align-self: flex-end;
+      cursor: pointer;
+      font-size: 1em;
+      margin-left: 1rem;
+      order: 1;
+      padding: 0;
+    }
+  }
+
+  nav {
+    padding: 0 20px;
+    z-index: 100;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+
+    &.visible {
+      padding-bottom: 15px;
+    }
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .button {
+    padding: 10px 5px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  app-nav {
+    .item {
+      &.open {
+        ul {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  app-nav {
+    .brand {
+      order: 0;
+    }
+
+    .visible {
+      padding-bottom: 0;
+    }
+
+    .text {
+      display: block !important;
+      margin-left: auto;
+      padding: 8px 10px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+    }
+
+    .menu {
+      justify-content: flex-start;
+      padding: 0;
+
+      li {
+        padding: 20px 10px;
+      }
+
+      .toggle {
+        display: none;
+      }
+
+      .button {
+        margin-left: 0.5em;
+        margin-right: 0;
+        order: 2;
+        padding: 8px 0 8px 10px;
+      }
+    }
+
+    .item {
+      display: block;
+      flex-basis: auto;
+      order: 1;
+
+      &:hover ul,
+      ul:hover,
+      &:focus ul,
+      ul:focus,
+      &:focus-within ul,
+      ul:focus-within {
+        display: block !important;
+      }
+
+      &.text + &.button {
+        margin-left: 0;
+      }
+
+      ul {
+        margin-left: -10px;
+        margin-right: -10px;
+        position: absolute;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  app-nav {
+    .brand {
+      flex-grow: 1;
+
+      img {
+        height: 3.5rem;
+        margin: -1.2rem 0;
+      }
+    }
+
+    .menu {
+      justify-content: flex-end;
+
+      .button {
+        border: 0;
+        display: block;
+        flex-basis: auto;
+        margin-right: 1rem;
+        order: 1;
+        padding: 7px 5px;
+
+        a {
+          border-radius: 50em;
+          padding: 7px 15px;
+          text-decoration: none;
+
+          &:hover {
+            transition: all 0.25s;
+          }
+        }
+
+        &:hover {
+          background: unset;
+        }
+      }
+
+      .toggle {
+        order: 2;
+        padding: 1rem 0;
+      }
+    }
+
+    .text {
+      display: block;
+      flex-basis: auto;
+      order: 1;
+      padding: 7px 5px;
+    }
+  }
 }

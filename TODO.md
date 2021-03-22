@@ -1,4 +1,3 @@
-# Authentication
+# Menu
 
-- [ ] Implement authentication
-- [ ] Enable corresponding menu points
+- [ ] Two-layered navigation menu

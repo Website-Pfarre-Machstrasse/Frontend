@@ -73,7 +73,7 @@ export class LoggerService {
       } else {
         loggerFactory = this._loggerFactory;
       }
-      this._loggers[name] = loggerFactory(this._rootLogger, name);
+      this._loggers[name] = loggerFactory(this.getRootLogger(), name);
     }
     const logger = this._loggers[name];
     if (this._handlerForName && name in this._handlerForName) {

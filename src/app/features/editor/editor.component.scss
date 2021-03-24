@@ -1,0 +1,55 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  padding: 1rem;
+}
+
+.editor-container {
+  border: solid 2px;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  height: 80.7vh;
+
+  &.fullscreen {
+    border: 0;
+    border-radius: 0;
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    z-index: 1000;
+  }
+}
+
+.toolbar {
+  border-bottom: solid 2px;
+  display: flex;
+
+  .group .divider {
+    display: inline;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 0;
+  }
+
+  .spacer {
+    flex-grow: 1;
+  }
+
+  mat-form-field {
+    width: 10rem;
+  }
+}
+
+.inner-container {
+  display: flex;
+  height: calc(100% - 43px);
+}

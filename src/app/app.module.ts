@@ -12,8 +12,11 @@ import {HeaderComponent} from './core/header/header.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from './shared/shared.module';
+import {AuthService} from './auth/auth.service';
 
-export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appConfig.load();
+export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
+    appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
+  });
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appC
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [AppConfig],
+      deps: [AppConfig, AuthService],
       multi: true
     }
   ],

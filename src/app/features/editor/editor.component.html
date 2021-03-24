@@ -1,0 +1,67 @@
+<main class="container">
+  <div class="editor-container" [class.fullscreen]="fullscreen">
+    <div class="toolbar">
+      <div *ngFor="let group of toolbar; index as i" class="group">
+        <hr class="divider" *ngIf="i > 0"/>
+        <ng-container *ngFor="let action of group">
+          <mat-form-field *ngIf="action.type === 'select'" appearance="outline">
+            <mat-select [attr.title]="action.title"
+                        [attr.aria-label]="action.title"
+                        class="toolbar-action"
+                        [value]="headingValue"
+                        (valueChange)="executeAction(action.action, $event)">
+              <mat-option *ngFor="let option of action.options; index as value" [value]="value">{{option}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button *ngIf="action.type == 'button'"
+                  (click)="executeAction(action.action)"
+                  [attr.title]="action.title"
+                  [attr.aria-label]="action.title"
+                  class="toolbar-action"
+                  type="button"
+                  [id]="action.action"
+                  mat-icon-button>
+            <mat-icon>{{action.icon}}</mat-icon>
+          </button>
+        </ng-container>
+      </div>
+      <div class="spacer"></div>
+      <div class="group">
+        <mat-button-toggle-group name="viewMode" aria-label="View Mode" appearance="standard" [(value)]="viewMode">
+          <mat-button-toggle [value]="0" title="Editor Only">
+            <mat-icon>subject</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle [value]="1" title="Side by Side">
+            <mat-icon>vertical_split</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle [value]="2" title="Preview Only">
+            <mat-icon>image</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <button (click)="fullscreen = !fullscreen"
+                [attr.title]="fullscreen ? 'Close preview' : 'Open preview'"
+                [attr.aria-label]="fullscreen ? 'Close preview' : 'Open preview'"
+                mat-icon-button>
+          <mat-icon>{{ fullscreen ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="inner-container">
+      <ngx-codemirror
+        [style.width.%]="viewMode > 0 ? 50 : 100"
+        [style.border-right]="viewMode > 0 ? 'solid' : 'none'"
+        [style.display]="viewMode === 2 ? 'none' : ''"
+        [(ngModel)]="content"
+        (drop)="onFileDropped($event)"
+        (cursorActivity)="onCursorMoved($event)"
+        [options]="editorOptions"
+        #codemirrorComponent
+      ></ngx-codemirror>
+      <app-renderer
+        [style.width.%]="viewMode < 2 ? 50 : 100"
+        [text]="content"
+        [style.display]="viewMode > 0 ? '' : 'none'"
+      ></app-renderer>
+    </div>
+  </div>
+</main>

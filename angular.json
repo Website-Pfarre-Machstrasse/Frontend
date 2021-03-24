@@ -29,13 +29,24 @@
               "src/assets",
               "src/site.webmanifest",
               {
-                "glob": "**/*",
-                "input": "node_modules/ace-builds/src-min",
-                "output": "./assets/ace-builds/"
+                "glob": "**/*.css",
+                "input": "node_modules/codemirror/theme",
+                "output": "./assets/codemirror/theme/"
+              },
+              {
+                "glob": "**/*.css",
+                "input": "node_modules/codemirror/lib",
+                "output": "./assets/codemirror/lib/"
+              },
+              {
+                "glob": "**/*.js",
+                "input": "node_modules/codemirror",
+                "output": "./assets/codemirror/"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/features/editor/editor.theme.scss"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [

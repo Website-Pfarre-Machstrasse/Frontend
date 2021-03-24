@@ -1,0 +1,183 @@
+@import 'src/theme';
+
+@mixin editor-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is_dark);
+
+  ngx-codemirror {
+    //noinspection Stylelint
+    .CodeMirror-cursor {
+      border-left: 1px solid map-get($foreground, text);
+      border-right: 0;
+      width: 0;
+    }
+
+    //noinspection Stylelint
+    .CodeMirror.cm-s-custom {
+      background-color: darken(map-get($background, background), 5%);
+
+      //noinspection Stylelint
+      pre.CodeMirror-line {
+        color: map-get($foreground, text);
+      }
+
+      .cm-header {
+        color: mat-color($primary);
+      }
+
+      .cm-quote {
+        color: mat-color($accent);
+      }
+
+      .cm-negative {
+        color: #d44;
+      }
+
+      .cm-positive {
+        color: #292;
+      }
+
+      .cm-keyword {
+        color: #708;
+      }
+
+      .cm-atom {
+        color: #219;
+      }
+
+      .cm-number {
+        color: #164;
+      }
+
+      .cm-def {
+        color: mat-color($primary, 800);
+      }
+
+      .cm-variable-2 {
+        color: mat-color($primary, 700);
+      }
+
+      .cm-variable-3,
+      .cm-type {
+        color: #085;
+      }
+
+      .cm-comment {
+        color: mat-color($accent, 700);
+      }
+
+      .cm-string {
+        color: #a11;
+      }
+
+      .cm-string-2 {
+        color: #f50;
+      }
+
+      .cm-meta {
+        color: #555;
+      }
+
+      .cm-qualifier {
+        color: #555;
+      }
+
+      .cm-builtin {
+        color: mat-color($primary, 600);
+      }
+
+      .cm-bracket {
+        color: #997;
+      }
+
+      .cm-tag {
+        color: #170;
+      }
+
+      .cm-attribute {
+        color: mat-color($primary, 500);
+      }
+
+      .cm-hr {
+        color: #999;
+      }
+
+      .cm-link {
+        color: mat-color($primary, 400);
+      }
+
+      .cm-error {
+        color: #f00;
+      }
+    }
+  }
+
+  app-renderer {
+    background-color: map-get($background, background);
+  }
+
+  .editor-container .toolbar {
+    @if ($is-dark) {
+      background-color: darken(map-get($background, background), 5%);
+    } @else {
+      background-color: darken(map-get($background, background), 10%);
+    }
+  }
+}
+
+.cm-header-1 {
+  font-size: 150%;
+}
+
+.cm-header-2 {
+  font-size: 140%;
+}
+
+.cm-header-3 {
+  font-size: 130%;
+}
+
+.cm-header-4 {
+  font-size: 120%;
+}
+
+.cm-header-5 {
+  font-size: 110%;
+}
+
+.cm-header-6 {
+  font-size: 100%;
+}
+
+.mat-form-field-subscript-wrapper,
+.mat-form-field-infix {
+  display: none;
+}
+
+.mat-form-field-wrapper {
+  padding: 0;
+}
+
+.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+  transform: none !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  border-top: 0;
+  padding: 0.9em 0 0.6em;
+}
+
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 36px;
+  padding: 0 8px !important;
+}
+
+@include editor-theme($light-theme);
+
+@media (prefers-color-scheme: dark) {
+  @include editor-theme($dark-theme);
+}

@@ -47,6 +47,17 @@
   mat-form-field {
     width: 10rem;
   }
+
+  mat-slide-toggle {
+    margin-right: 1rem;
+    vertical-align: middle;
+  }
+
+  .fullscreen-btn {
+    border-left: solid 2px;
+    border-radius: 0;
+    margin-left: 0.5rem;
+  }
 }
 
 .inner-container {

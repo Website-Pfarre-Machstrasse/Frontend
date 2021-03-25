@@ -70,10 +70,10 @@ $dark-theme: mat-dark-theme((
 
   nav {
     background-color: mat-color($primary);
-  }
 
-  a {
-    color: mat-contrast($primary, 300);
+    a {
+      color: mat-contrast($primary, 300);
+    }
   }
 
   footer {

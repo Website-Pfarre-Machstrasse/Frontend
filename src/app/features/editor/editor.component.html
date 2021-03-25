@@ -1,5 +1,5 @@
 <main class="container">
-  <div class="editor-container" [class.fullscreen]="fullscreen">
+  <div class="editor-container" [class.fullscreen]="fullscreen" #editor_container>
     <div class="toolbar">
       <div *ngFor="let group of toolbar; index as i" class="group">
         <hr class="divider" *ngIf="i > 0"/>
@@ -27,6 +27,13 @@
       </div>
       <div class="spacer"></div>
       <div class="group">
+        <mat-slide-toggle
+          [(ngModel)]="scrollSync"
+          title="Sync Scrollbar"
+          aria-label="Sync Scrollbar"
+          color="primary"
+          [style.display]="viewMode === 1 ? '' : 'none'"
+        ></mat-slide-toggle>
         <mat-button-toggle-group name="viewMode" aria-label="View Mode" appearance="standard" [(value)]="viewMode">
           <mat-button-toggle [value]="0" title="Editor Only">
             <mat-icon>subject</mat-icon>
@@ -39,8 +46,9 @@
           </mat-button-toggle>
         </mat-button-toggle-group>
         <button (click)="fullscreen = !fullscreen"
-                [attr.title]="fullscreen ? 'Close preview' : 'Open preview'"
-                [attr.aria-label]="fullscreen ? 'Close preview' : 'Open preview'"
+                [attr.title]="fullscreen ? 'Exit fullscreen' : 'Open fullscreen'"
+                [attr.aria-label]="fullscreen ? 'Exit fullscreen' : 'Open fullscreen'"
+                class="fullscreen-btn"
                 mat-icon-button>
           <mat-icon>{{ fullscreen ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
         </button>
@@ -54,13 +62,16 @@
         [(ngModel)]="content"
         (drop)="onFileDropped($event)"
         (cursorActivity)="onCursorMoved($event)"
+        (scroll)="onEditorScrolled($event)"
         [options]="editorOptions"
-        #codemirrorComponent
+        #editor
       ></ngx-codemirror>
       <app-renderer
         [style.width.%]="viewMode < 2 ? 50 : 100"
         [text]="content"
         [style.display]="viewMode > 0 ? '' : 'none'"
+        (scroll)="onPreviewScrolled($event)"
+        #preview
       ></app-renderer>
     </div>
   </div>

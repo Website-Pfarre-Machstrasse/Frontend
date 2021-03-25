@@ -13,6 +13,7 @@ import {FooterComponent} from './core/footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from './shared/shared.module';
 import {AuthService} from './auth/auth.service';
+import {ShowdownModule} from 'ngx-showdown';
 
 export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
     appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
@@ -32,7 +33,8 @@ export const initializeApp = (appConfig: AppConfig, authService: AuthService) =>
     CoreModule,
     AuthModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    ShowdownModule.forRoot({emoji: true, noHeaderId: true, flavor: 'github'})
   ],
   providers: [
     {

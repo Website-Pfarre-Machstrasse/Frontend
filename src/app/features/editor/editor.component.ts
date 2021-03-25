@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {map, switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -70,19 +70,37 @@ class ComplexActionCallback implements ActionCallback {
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('codemirrorComponent') cm: CodemirrorComponent;
+  @ViewChild('editor') cm: CodemirrorComponent;
+  @ViewChild('preview', {read: ElementRef}) preview: ElementRef<HTMLElement>;
+  @ViewChild('editor_container') editorContainer: ElementRef<HTMLElement>;
 
+  get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+  set fullscreen(fullscreen: boolean) {
+    if (document.fullscreenEnabled) {
+      if (fullscreen) {
+        this.editorContainer.nativeElement.requestFullscreen();
+      } else if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    }
+    this._fullscreen = fullscreen;
+  }
   headingValue = 0;
   content: string;
-  fullscreen = false;
+  scrollSync = true;
   viewMode = 1;
   actions: { [name: string]: ActionCallback } = {};
   editorOptions: EditorConfiguration = {
     indentWithTabs: false,
-    lineWrapping: true,
+    lineWrapping: false,
     lineNumbers: false,
     theme: 'custom',
-    mode: 'gfm'
+    mode: {
+      gitHubSpice: false,
+      name: 'gfm'
+    }
   };
   toolbar: Toolbar = {
     groups: {},
@@ -92,7 +110,10 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   private _logger: Logger;
+  private _fullscreen = false;
   private _lastDropEvent = null;
+  private _syncingEditor = false;
+  private _syncingPreview = false;
 
   public get page$(): Observable<[string, string]> {
     return this._activatedRoute.queryParamMap.pipe(map(value => [value.get('cat'), value.get('page')]));
@@ -170,13 +191,19 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.content$.subscribe(value => this.content = value);
 
+    document.onfullscreenchange = () => {
+      if (!document.fullscreenElement) {
+        this.fullscreen = false;
+      }
+    };
+
     let themeStyle = document.getElementById('themeStyle') as HTMLLinkElement;
     if (!
       themeStyle
     ) {
       themeStyle = document.createElement('link');
     }
-    themeStyle.href = 'assets/codemirror/theme/darcula.css';
+    themeStyle.href = 'editor.css';
     themeStyle.rel = 'stylesheet';
     themeStyle.id = 'themeStyle';
     document.head.appendChild(themeStyle);
@@ -217,6 +244,27 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public registerAction(action: string, callback: ActionCallback): void {
     this.actions[action] = callback;
+  }
+
+  public onEditorScrolled(event: CodeMirror.ScrollInfo): void {
+    if (this.scrollSync && !this._syncingPreview) {
+      this._syncingEditor = true;
+      this.preview.nativeElement.scrollTo({top: this.preview.nativeElement.clientHeight * (event.top / event.height)});
+    } else {
+      this._syncingPreview = false;
+    }
+  }
+
+  public onPreviewScrolled(event: Event): void {
+    if (this.scrollSync && !this._syncingEditor) {
+      this._syncingPreview = true;
+      const target = event.target as HTMLElement;
+      this.cm.codeMirror.scrollTo(
+        undefined,
+        this.cm.codeMirror.getScrollInfo().height * (target.scrollTop / target.clientHeight));
+    } else {
+      this._syncingEditor = false;
+    }
   }
 
   public onFileDropped(event: [Editor, DragEvent] | DragEvent): void {

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, HostBinding} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'body',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'Pfarre-Machstrasse';
+  @HostBinding('class') class = 'mat-typography';
+  title = 'Pfarre Machstrasse - Hl. Klaus von Flüe';
 }

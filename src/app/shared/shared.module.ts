@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RxSubscribeDirective } from './directives/rx-subscribe.directive';
 import {ContentService} from './services/content.service';
 import { RendererComponent } from './components/renderer/renderer.component';
+import {ShowdownModule} from 'ngx-showdown';
 
 @NgModule({
   declarations: [RxSubscribeDirective, RendererComponent],
-  imports: [
-    CommonModule
-  ],
+    imports: [
+        CommonModule,
+        ShowdownModule
+    ],
   exports: [RxSubscribeDirective, RendererComponent],
   providers: [
     ContentService

@@ -20,7 +20,7 @@ for (let f of files) {
 
 console.log("Run PurgeCSS...");
 
-exec(`purgecss -css ${PATH}/*.css --content ${PATH}/index.html ${PATH}/*.js -o ${PATH}/`, function (error, stdout, stderr) {
+exec(`purgecss -css ${PATH}/*.css --content ${PATH}/index.html ${PATH}/*.js -o ${PATH}/ --config ./purgecss.config.js`, function (error, stdout, stderr) {
   console.log("PurgeCSS done");
   console.log();
 

@@ -35,7 +35,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "bundleName": "calendar",
+                "inject": false,
+                "input": "src/app/features/calendar/calendar.theme.scss"
+              }
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [

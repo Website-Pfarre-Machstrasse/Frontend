@@ -2,6 +2,7 @@
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/containers';
 @import '~@angular/material/theming';
 @import 'theme';
 
@@ -236,7 +237,7 @@ app-nav {
 
       img {
         height: 3.5rem;
-        margin: -1.2rem 0;
+        margin: -1.3rem 0;
       }
     }
 

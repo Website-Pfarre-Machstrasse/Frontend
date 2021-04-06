@@ -1,0 +1,22 @@
+:host {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  padding: 1rem;
+  position: relative;
+  width: calc(100% - 2rem);
+}
+
+full-calendar {
+  height: calc(84vmin - 3rem);
+}
+
+.calendar-event {
+  padding: 0 0.2rem;
+
+  .calendar-event-header {
+    margin: 0;
+  }
+}

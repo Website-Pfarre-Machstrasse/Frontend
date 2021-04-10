@@ -3,15 +3,7 @@ import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {EventInput} from '@fullcalendar/common';
 import {map} from 'rxjs/operators';
-
-interface EventDTO {
-  id: string;
-  name: string;
-  details: string;
-  start: Date;
-  end: Date;
-  owner: string;
-}
+import {Event} from '../../data/event';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +13,7 @@ export class EventService {
 
   constructor(private _http: HttpClient) {}
 
-  private static convertToFCEvent(event: EventDTO): EventInput {
+  private static convertToFCEvent(event: Event): EventInput {
     return {
       id: event.id,
       start: event.start,
@@ -36,6 +28,6 @@ export class EventService {
 
   public getEventsBetween(start: Date, end: Date): Observable<EventInput[]> {
     return of([{id: 'test', start: new Date(), end: new Date().setHours(12), title: 'Test', extendedProps: {details: 'lorem ipsum'}}]);
-    return this._http.get<EventDTO[]>(this._url.format(start, end)).pipe(map(value => value.map(EventService.convertToFCEvent)));
+    return this._http.get<Event[]>(this._url.format(start, end)).pipe(map(value => value.map(EventService.convertToFCEvent)));
   }
 }

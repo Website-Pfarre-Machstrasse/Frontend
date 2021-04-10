@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {EventInput} from '@fullcalendar/common';
-import {map} from 'rxjs/operators';
 import {Event} from '../../data/event';
 
 @Injectable({
@@ -13,21 +11,8 @@ export class EventService {
 
   constructor(private _http: HttpClient) {}
 
-  private static convertToFCEvent(event: Event): EventInput {
-    return {
-      id: event.id,
-      start: event.start,
-      end: event.end,
-      title: event.name,
-      extendedProps: {
-        details: event.details,
-        owner: event.owner
-      }
-    };
-  }
-
-  public getEventsBetween(start: Date, end: Date): Observable<EventInput[]> {
-    return of([{id: 'test', start: new Date(), end: new Date().setHours(12), title: 'Test', extendedProps: {details: 'lorem ipsum'}}]);
-    return this._http.get<Event[]>(this._url.format(start, end)).pipe(map(value => value.map(EventService.convertToFCEvent)));
+  public getEventsBetween(start: Date, end: Date): Observable<Event[]> {
+    return of([{id: 'test', start: new Date(), end: new Date(new Date().setHours(12)), name: 'Test', details: 'lorem ipsum', owner: ''}]);
+    return this._http.get<Event[]>(this._url.format(start, end));
   }
 }

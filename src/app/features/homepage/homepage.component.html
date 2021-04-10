@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="banner">
+    <a href="https://placeholder.com">
+      <img alt="Banner der Pfarre" class="img-fluid w-100" src="https://via.placeholder.com/900x70?text=Ein+schoenes+Banner">
+    </a>
+  </div>
+  <h1 class="title">Wilkommen in der Pfarre Machstraße</h1>
+  <hr class="title-rule"/>
+  <div class="title-image">
+    <a href="https://placeholder.com">
+      <img alt="Titelbild der Pfarre" class="img-fluid w-100" src="https://via.placeholder.com/900x250?text=Titelbild+der+Pfarre">
+    </a>
+  </div>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid aspernatur, autem consectetur consequatur
+    deleniti eligendi enim et modi molestias mollitia natus necessitatibus nobis nulla numquam, odit omnis pariatur
+    perferendis possimus quae qui quia quibusdam quo saepe sit voluptas voluptatem! Aliquam at aut consequatur culpa
+    dignissimos itaque libero minima, nemo nobis porro praesentium, quidem rem repudiandae sapiente sunt temporibus vel
+    veniam voluptates! Animi necessitatibus quaerat quisquam totam ullam voluptatibus. Adipisci, aliquid amet aperiam
+    atque consequatur distinctio dolore excepturi facilis incidunt laboriosam laborum maxime minus molestiae nesciunt
+    nihil optio pariatur quo similique! Ab aut dolor, labore nobis perspiciatis quaerat rem ullam!
+  </p>
+  <br>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, illum.
+  </p>
+  <br>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dolorum incidunt saepe voluptate.
+    Deserunt, facilis.<br>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus enim iure magni maxime
+    mollitia repellendus.<br>
+    Aperiam expedita explicabo molestias neque qui ut veniam. Blanditiis cumque doloribus
+    mollitia quas qui sequi.<br>
+    Accusantium, animi dolorum facere hic illum, ipsa iste laudantium nam nihil quisquam
+    quod vitae voluptate?
+  </p>
+  <br>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, soluta?
+  </p>
+  <div class="calendar">
+    <mat-card class="calendar-card" *ngFor="let event of events$ | async">
+      <mat-card-header>
+        <mat-card-title>{{ event.name }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image *ngIf="event.image" [src]="event.image.src" [alt]="event.image.alt">
+      <mat-card-content>
+        <p>
+          {{ event.details }}
+        </p>
+      </mat-card-content>
+      <mat-card-footer>
+        {{ getName(event.owner) }}
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

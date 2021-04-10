@@ -43,6 +43,11 @@
                 "bundleName": "page-renderer",
                 "inject": false,
                 "input": "src/app/features/page-renderer/page-renderer.theme.scss"
+              },
+              {
+                "bundleName": "homepage",
+                "inject": false,
+                "input": "src/app/features/homepage/homepage.theme.scss"
               }
             ],
             "scripts": [],

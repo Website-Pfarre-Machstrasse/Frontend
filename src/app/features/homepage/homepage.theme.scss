@@ -1,0 +1,26 @@
+@import 'src/theme';
+
+@mixin homepage-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is_dark);
+
+  app-homepage {
+    .container {
+      background-color: map-get($background, background);
+    }
+
+    .event {
+      color: mat-color($primary);
+    }
+  }
+}
+
+@include homepage-theme($light-theme);
+
+@media (prefers-color-scheme: dark) {
+  @include homepage-theme($dark-theme);
+}

@@ -1,0 +1,21 @@
+<svg height="128" width="128" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <path d="M0 0h128v128H0z" fill="#fff"/>
+    <g fill="#eaeaea" stroke="silver" stroke-width="4">
+      <path d="M0 32h128v24H0z" stroke="none"/>
+      <path d="M2 34h124v20H2z" fill="none"/>
+    </g>
+    <g fill="#eaeaea" stroke="silver" stroke-width="4">
+      <path d="M0 52h128v24H0z" stroke="none"/>
+      <path d="M2 54h124v20H2z" fill="none"/>
+    </g>
+    <g fill="#eaeaea" stroke="silver" stroke-width="4">
+      <path d="M0 72h128v24H0z" stroke="none"/>
+      <path d="M2 74h124v20H2z" fill="none"/>
+    </g>
+    <g fill="red" style="mix-blend-mode:multiply;isolation:isolate">
+      <path d="M5 34h118L64 93 5 34z"/>
+      <path d="M64 90l54-54H10l54 54m0 6L0 32h128L64 96z" fill="maroon"/>
+    </g>
+  </g>
+</svg>

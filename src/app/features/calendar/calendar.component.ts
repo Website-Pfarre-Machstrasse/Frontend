@@ -5,8 +5,10 @@ import {DateClickArg} from '@fullcalendar/interaction';
 import enLocale from '@fullcalendar/core/locales/en-gb';
 import deLocale from '@fullcalendar/core/locales/de';
 import deATLocale from '@fullcalendar/core/locales/de-at';
-import {EventService} from './event.service';
 import {AuthService} from '../../auth/auth.service';
+import {EventService} from '../../shared/services/event.service';
+import {Event} from "../../data/event";
+import {map} from "rxjs/operators";
 
 interface EventFetchInfo {
   start: Date;
@@ -47,6 +49,19 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly _contentRenderers = new Map<string, EmbeddedViewRef<any>>();
 
   constructor(private _eventService: EventService, private _authService: AuthService) {}
+
+  private static convertToFCEvent(event: Event): EventInput {
+    return {
+      id: event.id,
+      start: event.start,
+      end: event.end,
+      title: event.name,
+      extendedProps: {
+        details: event.details,
+        owner: event.owner
+      }
+    };
+  }
 
   ngAfterViewInit(): void {
     this._authService.user$.subscribe(user => this.calendar.getApi().setOption('editable', user?.role === 'admin'));
@@ -103,6 +118,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     successCallback: (events: EventInput[]) => void,
     failureCallback: (error: unknown) => void
   ): void {
-    this._eventService.getEventsBetween(start, end).toPromise().then(successCallback).catch(failureCallback);
+    this._eventService.getEventsBetween(start, end)
+      .pipe(map(value => value.map(CalendarComponent.convertToFCEvent)))
+      .toPromise()
+      .then(successCallback)
+      .catch(failureCallback);
   }
 }

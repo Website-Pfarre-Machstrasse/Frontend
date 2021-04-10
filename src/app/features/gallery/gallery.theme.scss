@@ -1,0 +1,20 @@
+@import 'src/theme';
+
+@mixin gallery-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is_dark);
+
+  app-gallery .container {
+    background-color: map-get($background, background);
+  }
+}
+
+@include gallery-theme($light-theme);
+
+@media (prefers-color-scheme: dark) {
+  @include gallery-theme($dark-theme);
+}

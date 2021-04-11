@@ -35,7 +35,7 @@ exec(`purgecss -css ${PATH}/*.css --content ${PATH}/index.html ${PATH}/*.js -o $
 console.log("Replace special variables...");
 
 for (const file of ['index.html', 'manifest.webmanifest']) {
-  replaceVariablesInFile(`${PATH}/${file}`, {'theme_color': '#3f51b5', 'bg_color': '#2e2e3c'});
+  replaceVariablesInFile(`${PATH}/${file}`, {'theme_color': '#3f51b5', 'bg_color': '#303030'});
 }
 
 function replaceVariablesInFile(filename, replacements) {

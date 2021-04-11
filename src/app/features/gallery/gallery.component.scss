@@ -1,34 +1,19 @@
-.gallery {
-  margin-bottom: 1.5em;
-  //display: flow;
-}
-
-
-.content {
-  //border: 1px solid white;
+.container {
   display: flex;
+  height: 100%;
   justify-content: center;
 }
 
-button {
-  color: #FFFFFF;
-  //font-family: Arial;
-  font-size: 40px;
-  font-weight: 100;
-  padding: 40px;
-  background-color: transparent;
-  text-decoration: underline;
-  //display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  border: none;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(255,255,255,0.2);
-}
+table {
+  width: 70%;
 
-button:active {
-  //background-color: #ff0000;
-  border: none;
-  border-color: transparent;
-}
+  .mat-header-cell {
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+  }
 
+  .mat-cell {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+}

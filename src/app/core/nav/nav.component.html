@@ -1,0 +1,21 @@
+<nav *rxSubscribe="user$; let user">
+  <ul class="menu" *rxSubscribe="categories$; let categories" [class.visible]="visible">
+    <li class="brand" tabindex="0"><a routerLink="/"><img src="assets/logo.svg" alt="Pfarre Machstrasse Logo"/>Pfarre Machstrasse</a></li>
+    <li class="item" tabindex="0" [class.visible]="visible" *ngFor="let category of categories; index as i" [class.open]="openCat === category.id" routerLinkActive="active">
+      <a (click)="openCat === category.id ? openCat = null : openCat = category.id">{{ category.title }}</a>
+      <ul [class.open]="openCat === category.id" *rxSubscribe="category.pages$; let pages">
+        <li *ngFor="let page of pages" tabindex="0">
+          <a [routerLink]="[category.id, page.id]" routerLinkActive="active">{{ page.title }}</a>
+        </li>
+      </ul>
+    </li>
+    <li class="item" tabindex="0" *ngIf="user"><a routerLink="/user">{{ user?.username }}</a></li>
+    <li class="item button" tabindex="0" [class.visible]="visible">
+      <a (click)="logout()" *ngIf="user">Logout</a>
+      <a (click)="openLogin()" *ngIf="!user">Login</a>
+    </li>
+    <li class="toggle" tabindex="0" (click)="visible = !visible">
+      <mat-icon>menu</mat-icon>
+    </li>
+  </ul>
+</nav>

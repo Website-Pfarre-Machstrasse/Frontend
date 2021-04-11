@@ -1,0 +1,3 @@
+{
+  "apiEndpoint": "{{env.API_ENDPOINT}}"
+}

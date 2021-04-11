@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../../../../../:\Users\georg\Documents\schule\SJ2021\ITP\Website-Pfarre-Machstrasse\Frontend\.idea/dataSources/
+/.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/

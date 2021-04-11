@@ -1,0 +1,117 @@
+@import '~@angular/material/theming';
+
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+$light-theme: mat-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  )
+));
+
+$dark-theme: mat-dark-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  )
+));
+
+@mixin theme-extension($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+
+  @include media-breakpoint-up(md) {
+    .menu {
+      li.button {
+        a {
+          background-color: mat-color($primary, 700);
+          border: 1px solid mat-color($primary, 800);
+
+          &:hover {
+            background-color: mat-color($primary, 800);
+            border: 1px solid mat-color($primary, 900);
+          }
+        }
+      }
+    }
+
+    .button.secondary a {
+      background-color: transparent;
+    }
+
+    .button:not(.secondary) a:hover {
+      background-color: mat-color($primary, 800);
+      border-color: mat-color($primary, 900);
+    }
+
+    .button.secondary a:hover {
+      color: mat-contrast($primary, 300);
+    }
+  }
+
+  nav {
+    background-color: mat-color($primary);
+  }
+
+  a {
+    color: mat-contrast($primary, 300);
+  }
+
+  footer {
+    background-color: mat-color($primary);
+
+    *,
+    a {
+      color: mat-contrast($primary, 300);
+    }
+
+    .mat-select-arrow {
+      color: mat-color($primary, default-contrast) !important;
+    }
+  }
+
+  .menu {
+    li {
+      color: mat-contrast($primary, 300);
+
+      &.item:not(.button) {
+        @include media-breakpoint-down(lg) {
+          &.open {
+            background-color: mat-color($primary, 600);
+
+            ul {
+              background-color: inherit;
+
+              li:hover {
+                background-color: mat-color($primary, 700);
+              }
+            }
+          }
+        }
+
+        &:hover,
+        &:focus,
+        &:focus-within {
+          background-color: mat-color($primary, 600);
+
+          ul {
+            background-color: inherit;
+
+            li:hover {
+              background-color: mat-color($primary, 700);
+            }
+          }
+        }
+      }
+    }
+
+    .button {
+      border-bottom: 1px mat-color($primary, 900) solid;
+    }
+  }
+}

@@ -48,17 +48,19 @@ jobs:
         run: npm run clean
 
       - name: Lint
-        run: npm run lint
+        run: npm run lint #:ci
 
       - name: Test
         run: npm run test:ci
 
 #      - name: e2e
 #        run: npm run e2e:ci
-        
+
 #      - name: Publish Results to Testspace
 #        run: |
-#          testspace results.xml
+#          testspace ./analysis/*-lint.xml
+#          testspace ./coverage/clover.xml
+#          testspace ./reports/TESTS-*.xml
 #        if: always()
 
       - name: Build

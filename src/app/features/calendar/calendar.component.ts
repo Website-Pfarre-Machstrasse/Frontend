@@ -7,8 +7,8 @@ import deLocale from '@fullcalendar/core/locales/de';
 import deATLocale from '@fullcalendar/core/locales/de-at';
 import {AuthService} from '../../auth/auth.service';
 import {EventService} from '../../shared/services/event.service';
-import {Event} from "../../data/event";
-import {map} from "rxjs/operators";
+import {Event} from '../../data/event';
+import {map} from 'rxjs/operators';
 
 interface EventFetchInfo {
   start: Date;

@@ -49,7 +49,7 @@ export class AuthService implements OnDestroy {
 
   public login(username: string, password: string): Observable<boolean> {
     if (!environment.production) {
-      this._user$.next({username, role: 'admin'});
+      this._user$.next({id: '', email: username, firstName: 'Demo', lastName: 'User', role: 'admin'});
       return of(true);
     }
     return this._http
@@ -83,8 +83,8 @@ export class AuthService implements OnDestroy {
   }
 
   public setLocalStorage(x: LoginResult): void {
-    localStorage.setItem(ACCESS_TOKEN, x.access_token);
-    localStorage.setItem(REFRESH_TOKEN, x.refresh_token ?? null);
+    localStorage.setItem(ACCESS_TOKEN, x.accessToken);
+    localStorage.setItem(REFRESH_TOKEN, x.refreshToken ?? null);
     localStorage.setItem('login-event', 'login' + Math.random());
   }
 

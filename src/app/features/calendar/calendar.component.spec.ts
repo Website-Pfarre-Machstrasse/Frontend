@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from './calendar.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AuthModule} from '../../auth/auth.module';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -9,7 +10,7 @@ describe('CalendarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
+      imports: [ HttpClientTestingModule, AuthModule ],
       declarations: [ CalendarComponent ]
     })
     .compileComponents();

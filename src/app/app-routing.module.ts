@@ -8,6 +8,10 @@ const routes: Routes = [
     component: HomePageComponent
   },*/
   {
+    path: 'galerie',
+    loadChildren: () => import('./features/gallery/gallery.module').then(m => m.GalleryModule)
+  },
+  {
     path: 'editor',
     //canActivate: [AuthGuard],
     loadChildren: () => import('./features/editor/editor.module').then(mod => mod.EditorModule)

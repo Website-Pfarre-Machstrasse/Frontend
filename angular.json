@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -46,6 +49,11 @@
             ],
             "styles": [
               "src/styles.scss",
+              {
+                "bundleName": "gallery",
+                "inject": false,
+                "input": "src/app/features/gallery/gallery.theme.scss"
+              },
               {
                 "bundleName": "editor",
                 "inject": false,

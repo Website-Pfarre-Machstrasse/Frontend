@@ -4,6 +4,7 @@ import { RxSubscribeDirective } from './directives/rx-subscribe.directive';
 import {ContentService} from './services/content.service';
 import { RendererComponent } from './components/renderer/renderer.component';
 import {ShowdownModule} from 'ngx-showdown';
+import {EventService} from './services/event.service';
 
 @NgModule({
   declarations: [RxSubscribeDirective, RendererComponent],
@@ -13,7 +14,8 @@ import {ShowdownModule} from 'ngx-showdown';
     ],
   exports: [RxSubscribeDirective, RendererComponent],
   providers: [
-    ContentService
+    ContentService,
+    EventService
   ]
 })
 export class SharedModule { }

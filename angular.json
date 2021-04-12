@@ -55,6 +55,11 @@
                 "input": "src/app/features/gallery/gallery.theme.scss"
               },
               {
+                "bundleName": "calendar",
+                "inject": false,
+                "input": "src/app/features/calendar/calendar.theme.scss"
+              },
+              {
                 "bundleName": "editor",
                 "inject": false,
                 "input": "src/app/features/editor/editor.theme.scss"

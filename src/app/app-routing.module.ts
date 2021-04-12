@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/gallery/gallery.module').then(m => m.GalleryModule)
   },
   {
+    path: 'kalender',
+    loadChildren: () => import('./features/calendar/calendar.module').then(m => m.CalendarModule)
+  },
+  {
     path: 'editor',
     //canActivate: [AuthGuard],
     loadChildren: () => import('./features/editor/editor.module').then(mod => mod.EditorModule)

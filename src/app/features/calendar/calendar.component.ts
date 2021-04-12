@@ -67,7 +67,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this._authService.user$.subscribe(user => this.calendar.getApi().setOption('editable', user?.role === 'admin'));
+    this._authService.user$.subscribe(user => this.calendar?.getApi?.()?.setOption?.('editable', user?.role === 'admin'));
   }
 
   ngOnInit(): void {

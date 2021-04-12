@@ -1,0 +1,22 @@
+@import 'src/theme';
+
+@mixin page-renderer-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is_dark);
+
+  app-page-renderer {
+    .container {
+      background-color: map-get($background, background);
+    }
+  }
+}
+
+@include page-renderer-theme($light-theme);
+
+@media (prefers-color-scheme: dark) {
+  @include page-renderer-theme($dark-theme);
+}

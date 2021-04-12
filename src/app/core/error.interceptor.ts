@@ -30,6 +30,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           this._router.navigate(['']);
           this._logger.error('Authentication error {0}', err?.message ?? err?.error?.message ?? err?.statusText);
         }
+        if (err.status === 404) {
+          this._router.navigate(['']);
+          this._logger.error('Not found error {0}', err?.message ?? err?.error?.message ?? err?.statusText);
+        }
         const error = err?.message ?? err?.error?.message ?? err?.statusText;
         return throwError(error);
       })

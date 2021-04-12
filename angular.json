@@ -38,7 +38,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "bundleName": "gallery",
+                "inject": false,
+                "input": "src/app/features/gallery/gallery.theme.scss"
+              }
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [

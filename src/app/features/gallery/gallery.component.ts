@@ -1,8 +1,6 @@
-//import { Component, OnInit } from '@angular/core';
-//import {Gallery, GalleryConfig, GalleryItem, ImageItem} from 'ng-gallery';
-
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Gallery as NgGallery, GalleryItem, ImageItem, VideoItem} from 'ng-gallery';
+import {VideoItemData} from 'ng-gallery/lib/components/templates/items.model';
 import {Lightbox} from 'ng-gallery/lightbox';
 import {Observable} from 'rxjs';
 import {Gallery, GalleryService, Media} from './gallery.service';
@@ -49,12 +47,15 @@ export class GalleryComponent implements OnInit, OnDestroy {
         }));
       } else if (type === 'video') {
         out.push(new VideoItem({
-          src: o._links.file,
+          src: [{
+            url: o._links.file,
+            type: o.mimetype
+          }],
           thumb: o._links.thumbnail,
           type: 'video',
           autoplay: false,
           controls: true
-        }));
+        } as VideoItemData));
       }
     }
     return out;

@@ -11,7 +11,7 @@ describe('CalendarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule, RouterTestingModule, LoggingModule ],
+      imports: [ HttpClientTestingModule, RouterTestingModule, LoggingModule.forRoot() ],
       declarations: [ CalendarComponent ]
     })
     .compileComponents();

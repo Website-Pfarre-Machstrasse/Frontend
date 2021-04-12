@@ -1,0 +1,48 @@
+:host {
+  height: 100%;
+}
+
+.banner {
+  margin-bottom: 2rem;
+}
+
+.calendar {
+  align-items: stretch;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: 1rem;
+  width: 100%;
+
+  .calendar-card {
+    flex: 1 0.5 auto;
+    margin: 0.5rem;
+    width: 10%;
+  }
+}
+
+.container {
+  height: 100%;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.title-rule {
+  border-style: none;
+  border-top: solid 4px;
+  height: 0;
+  width: 70%;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1em;
+  text-align: center;
+}
+
+.title-image {
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}

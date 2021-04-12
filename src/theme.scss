@@ -24,6 +24,8 @@ $dark-theme: mat-dark-theme((
   $config: mat-get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
+  $background: map-get($config, background);
+  $is-dark: map-get($config, is_dark);
 
   @include media-breakpoint-up(md) {
     .menu {
@@ -54,12 +56,24 @@ $dark-theme: mat-dark-theme((
     }
   }
 
-  nav {
-    background-color: mat-color($primary);
+  body {
+    @if($is-dark) {
+      background-color: darken(map-get($background, background), 5%);
+    } @else {
+      background-color: darken(map-get($background, background), 10%);
+    }
   }
 
-  a {
-    color: mat-contrast($primary, 300);
+  main.container {
+    background-color: map-get($background, background);
+  }
+
+  nav {
+    background-color: mat-color($primary);
+
+    a {
+      color: mat-contrast($primary, 300);
+    }
   }
 
   footer {

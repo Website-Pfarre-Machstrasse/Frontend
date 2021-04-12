@@ -1,3 +1,5 @@
-# Menu
+# Admin Interface - Editor
 
-- [ ] Two-layered navigation menu
+- [ ] Implement markdown editor
+- [ ] Combine it with the backend
+- [ ] Styling

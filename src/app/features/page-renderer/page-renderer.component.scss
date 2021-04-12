@@ -1,0 +1,13 @@
+:host {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  app-renderer {
+    width: 60rem;
+  }
+}

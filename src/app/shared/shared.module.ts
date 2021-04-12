@@ -8,10 +8,10 @@ import {EventService} from './services/event.service';
 
 @NgModule({
   declarations: [RxSubscribeDirective, RendererComponent],
-    imports: [
-        CommonModule,
-        ShowdownModule
-    ],
+  imports: [
+      CommonModule,
+      ShowdownModule
+  ],
   exports: [RxSubscribeDirective, RendererComponent],
   providers: [
     ContentService,

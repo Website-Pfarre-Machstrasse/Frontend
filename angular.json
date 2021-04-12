@@ -55,6 +55,11 @@
                 "input": "src/app/features/homepage/homepage.theme.scss"
               },
               {
+                "bundleName": "page-renderer",
+                "inject": false,
+                "input": "src/app/features/page-renderer/page-renderer.theme.scss"
+              },
+              {
                 "bundleName": "gallery",
                 "inject": false,
                 "input": "src/app/features/gallery/gallery.theme.scss"

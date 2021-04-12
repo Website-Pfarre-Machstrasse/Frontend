@@ -1,11 +1,17 @@
+:host {
+  height: 100%;
+}
+
 .container {
   display: flex;
   height: 100%;
   justify-content: center;
+  position: relative;
 }
 
 table {
-  width: 70%;
+  margin: 2rem;
+  width: 100%;
 
   .mat-header-cell {
     font-size: 1.3rem;
@@ -13,7 +19,13 @@ table {
   }
 
   .mat-cell {
+    cursor: pointer;
     font-size: 1.2rem;
     line-height: 1.3rem;
+  }
+
+  .mat-row:hover {
+    opacity: 100%;
+    transform: scale(1.02);
   }
 }

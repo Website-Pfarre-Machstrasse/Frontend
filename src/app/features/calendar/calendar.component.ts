@@ -32,6 +32,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     locale: 'de-at',
     initialView: 'dayGridMonth',
     dateClick: this.onDateClicked.bind(this),
+    dayHeaderFormat: {
+      weekday: 'long'
+    },
     eventClick: this.onEventClicked.bind(this),
     eventChange: this.onEventChanged.bind(this),
     events: this.getEvents.bind(this),

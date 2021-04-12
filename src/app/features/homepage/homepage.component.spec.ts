@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomepageComponent } from './homepage.component';
+import {HomepageModule} from './homepage.module';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('HomepageComponent', () => {
   let component: HomepageComponent;
@@ -8,6 +10,7 @@ describe('HomepageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ HomepageModule, HttpClientTestingModule ],
       declarations: [ HomepageComponent ]
     })
     .compileComponents();

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ContentService} from '../../shared/services/content.service';
-import {Observable} from 'rxjs';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
+import {catchError, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-page-renderer',
@@ -14,7 +14,10 @@ export class PageRendererComponent implements OnInit, OnDestroy {
 
   constructor(private _route: ActivatedRoute, private _contentService: ContentService) {
     this.content$ = this._route.params
-      .pipe(switchMap(({cat, page}) => this._contentService.getPageContent(cat, page)));
+      .pipe(
+        switchMap(({cat, page}) => (this._contentService.getPageContent(cat, page) ?? throwError(new Error()))),
+        catchError(() => of(''))
+      );
   }
 
   ngOnInit(): void {

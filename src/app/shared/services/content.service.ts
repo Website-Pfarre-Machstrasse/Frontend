@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {Category, CategoryDTO} from '../../data/category';
 import {Page, PageDTO} from '../../data/page';
 import {HttpClient} from '@angular/common/http';
@@ -41,20 +41,20 @@ export class ContentService {
   public getPages(categoryId: string): Observable<Page[]> {
     // return this._http.get<PageDTO[]>(`${this._url}/category/${categoryId}/page`)
     //   .pipe(map(this.dtoToPage.bind(this)));
-    return MOCK.find(value => value.id === categoryId).pages$;
+    return MOCK.find(value => value.id === categoryId)?.pages$;
   }
 
   public getPage(categoryId: string, pageId: string): Observable<Page> {
     // return this._http.get<PageDTO>(`${this._url}/category/${categoryId}/page/${pageId}`)
     //   .pipe(map(this.dtoToPage.bind(this)));
-    return MOCK.find(value => value.id === categoryId).pages$
-      .pipe(map(value => value.find(value1 => value1.id === pageId)));
+    return MOCK.find(value => value.id === categoryId)?.pages$
+      ?.pipe?.(map(value => value.find(value1 => value1.id === pageId)));
   }
 
   public getPageContent(categoryId: string, pageId: string): Observable<string> {
     // return this._http.get<string>(`${this._url}/category/${categoryId}/page/${pageId}/content`);
-    return MOCK.find(value => value.id === categoryId).pages$
-      .pipe(switchMap(value => value.find(value1 => value1.id === pageId).content$));
+    return MOCK.find(value => value.id === categoryId)?.pages$
+      ?.pipe?.(switchMap(value => (value.find(value1 => value1.id === pageId)?.content$ ?? throwError(new Error()))));
   }
 
   private dtoToCategory(dto: (CategoryDTO | CategoryDTO[])): (Category | Category[]) {

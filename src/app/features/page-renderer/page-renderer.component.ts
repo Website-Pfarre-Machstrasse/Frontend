@@ -16,7 +16,7 @@ export class PageRendererComponent implements OnInit, OnDestroy {
     this.content$ = this._route.params
       .pipe(
         switchMap(({cat, page}) => (this._contentService.getPageContent(cat, page) ?? throwError(new Error()))),
-        catchError(() => of(''))
+        catchError(() => of(''))//fixme
       );
   }
 

@@ -4,6 +4,7 @@ import { EditorComponent } from './editor.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {LoggingModule} from '../../core/logging/logging.module';
 import {CodemirrorModule} from '@ctrl/ngx-codemirror';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('EditorComponent', () => {
   let component: EditorComponent;
@@ -11,7 +12,7 @@ describe('EditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, LoggingModule.forRoot(), CodemirrorModule ],
+      imports: [ RouterTestingModule, LoggingModule.forRoot(), CodemirrorModule, HttpClientTestingModule ],
       declarations: [ EditorComponent ]
     })
     .compileComponents();

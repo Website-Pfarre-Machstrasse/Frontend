@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - prototype
   pull_request:
     types:
       - opened

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 
 import {EventService} from '../../shared/services/event.service';
 import {Event} from '../../data/event';
+import {ContentService} from '../../shared/services/content.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,6 +11,7 @@ import {Event} from '../../data/event';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit, OnDestroy {
+  text$: Observable<string>;
 
   get events$(): Observable<Event[]> {
     const start = new Date();
@@ -18,7 +20,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
     return this._eventService.getEventsBetween(start, end);
   }
 
-  constructor(private _eventService: EventService) {
+  constructor(private _eventService: EventService, contentService: ContentService) {
+    this.text$ = contentService.getHomeContent();
   }
 
   ngOnDestroy(): void {

@@ -8,10 +8,11 @@
   $foreground: map-get($config, foreground);
   $is-dark: map-get($config, is_dark);
 
-  app-calendar .container {
-    background-color: map-get($background, background);
+  app-calendar {
+    .container {
+      background-color: map-get($background, background);
+    }
   }
-  // TODO finish coloring
 }
 
 @include calendar-theme($light-theme);

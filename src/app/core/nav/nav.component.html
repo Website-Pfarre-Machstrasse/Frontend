@@ -16,6 +16,11 @@
         <span class="alt-name">Kalender</span>
       </a>
     </li>
+    <li class="item icon">
+      <a mat-icon-button title="Galerie" routerLink="galerie" routerLinkActive="active">
+        <mat-icon>collections</mat-icon>
+      </a>
+    </li>
     <li class="item" tabindex="0" *ngIf="user"><a routerLink="user">{{ user?.firstName + ' ' + user?.lastName }}</a></li>
     <li class="item button" tabindex="0" [class.visible]="visible">
       <a (click)="logout()" *ngIf="user">Logout</a>

@@ -4,12 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     loadChildren: () => import('./features/homepage/homepage.module').then(m => m.HomepageModule)
   },
   {
     path: ':cat/:page',
     loadChildren: () => import('./features/page-renderer/page-renderer.module').then(m => m.PageRendererModule)
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

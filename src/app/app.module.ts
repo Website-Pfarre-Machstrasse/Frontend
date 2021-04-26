@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from './shared/shared.module';
 import {AuthService} from './auth/auth.service';
 import {ShowdownModule} from 'ngx-showdown';
+import {MatButtonModule} from '@angular/material/button';
 
 export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
     appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
@@ -34,7 +35,8 @@ export const initializeApp = (appConfig: AppConfig, authService: AuthService) =>
     AuthModule,
     MatIconModule,
     SharedModule,
-    ShowdownModule.forRoot({emoji: true, noHeaderId: true, flavor: 'github'})
+    ShowdownModule.forRoot({emoji: true, noHeaderId: true, flavor: 'github'}),
+    MatButtonModule
   ],
   providers: [
     {

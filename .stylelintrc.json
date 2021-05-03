@@ -11,7 +11,7 @@
       }
     ],
     "selector-class-pattern": ["[a-zA-Z0-9-_]+"],
-    "selector-max-compound-selectors": [4],
+    "selector-max-compound-selectors": [5],
     "max-nesting-depth": [6]
   }
 }

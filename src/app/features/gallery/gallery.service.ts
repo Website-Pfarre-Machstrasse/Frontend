@@ -1,23 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
-
-export interface Media {
-  _links: {
-    file: string;
-    thumbnail: string;
-  };
-  id: string;
-  name: string;
-  mimetype: string;
-  owner: string;
-}
-
-export interface Gallery {
-  id: string;
-  title: string;
-  owner: string;
-  media: Media[];
-}
+import {HttpClient} from '@angular/common/http';
+import {AppConfig} from '../../core/config/app-config';
+import {Gallery} from '../../data/gallery';
 
 const TEST = {
   id: 'test',
@@ -207,21 +192,30 @@ const TEST4 = {
   providedIn: 'root'
 })
 export class GalleryService {
+  private readonly _url: string;
+  constructor(private _http: HttpClient) {
+    this._url = AppConfig.INSTANCE.apiEndpoint;
+  }
+
+  public addMediaToGallery(galleryId: string, mediaId: string): Observable<Gallery> {
+    if (galleryId === null || galleryId === undefined) {
+      throw new Error('Required parameter galleryId was null or undefined when calling addMediaToGallery.');
+    }
+    if (mediaId === null || mediaId === undefined) {
+      throw new Error('Required parameter mediaId was null or undefined when calling addMediaToGallery.');
+    }
+
+    return this._http.post<Gallery>(`${this._url}/galleries/${encodeURIComponent(String(galleryId))}`, {mediaId});
+  }
 
   public getGallery(id: string): Observable<Gallery> {
-    switch(id) {
-      case TEST.id:
-        return of(TEST);
-      case TEST2.id:
-        return of(TEST2);
-      case TEST3.id:
-        return of(TEST3);
-      case TEST4.id:
-        return of(TEST4);
+    if (id === null || id === undefined) {
+      throw new Error('Required parameter id was null or undefined when calling getGallery.');
     }
+    return this._http.get<Gallery>(`${this._url}/gallery/${encodeURIComponent(String(id))}`);
   }
 
   public getGalleries(): Observable<Gallery[]> {
-    return of([TEST, TEST2, TEST3, TEST4]);
+    return this._http.get<Gallery[]>(`${this._url}/gallery`);
   }
 }

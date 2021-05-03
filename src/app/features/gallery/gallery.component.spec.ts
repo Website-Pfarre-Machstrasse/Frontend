@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GalleryComponent } from './gallery.component';
 import { LightboxModule } from 'ng-gallery/lightbox';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
 
 describe('GalleryComponent', () => {
   let component: GalleryComponent;
@@ -9,10 +11,10 @@ describe('GalleryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LightboxModule],
-      declarations: [ GalleryComponent ]
+      imports: [LightboxModule, HttpClientTestingModule],
+      declarations: [GalleryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -120,7 +120,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public get content$(): Observable<string> {
-    return this.page$.pipe(switchMap(value => this._contentService.getContent(value[0], value[1])));
+    return this.page$.pipe(switchMap(value => this._contentService.getPageContent(value[0], value[1])));
   }
 
   constructor(private _activatedRoute: ActivatedRoute,

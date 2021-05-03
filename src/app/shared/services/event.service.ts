@@ -18,9 +18,9 @@ export class EventService {
   }
 
   public getEvents(start?: Date, endOrN?: Date | number): Observable<Event[]> {
-    let opts: { params: HttpParams; observe: 'body' };
+    let opts: { params?: HttpParams; observe: 'body'; responseType: 'json' };
     if ((start === null || start === undefined) && (endOrN === null || endOrN === undefined)) {
-      opts = undefined;
+      opts = {observe: 'body', responseType: 'json'};
     } else {
       const params = new HttpParams();
       if (start !== null && start !== undefined) {
@@ -35,7 +35,7 @@ export class EventService {
       } else if (endOrN !== null && endOrN !== undefined && !(endOrN instanceof Date)) {
         params.set('next', endOrN.toString());
       }
-      opts = {params, observe: 'body'};
+      opts = {params, observe: 'body', responseType: 'json'};
     }
     return this._http.get<EventDTO[]>(`${this._url}/event`, opts).pipe(map(value => value.map(value1 => {
       const ref = this;

@@ -96,7 +96,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
       renderer.markForCheck();
     }
     renderer.detectChanges();
-    console.log(renderer);
     return { domNodes: renderer.rootNodes };
   }
 
@@ -109,11 +108,17 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private onEventClicked(arg: EventClickArg): void {
-    // TODO implement
+    const event = arg.event;
+    // TODO open event details dialog
   }
 
   private onDateClicked(arg: DateClickArg): void {
-    // TODO implement
+    this._authService.user$.subscribe(user => {
+      if (user) {
+        const {date, allDay} = arg;
+        // TODO open create event dialog
+      }
+    });
   }
 
   private getEvents(
@@ -121,7 +126,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
     successCallback: (events: EventInput[]) => void,
     failureCallback: (error: unknown) => void
   ): void {
-    this._eventService.getEventsBetween(start, end)
+    this._eventService.getEvents(start, end)
       .pipe(map(value => value.map(CalendarComponent.convertToFCEvent)))
       .toPromise()
       .then(successCallback)

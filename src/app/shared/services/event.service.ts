@@ -37,10 +37,15 @@ export class EventService {
       }
       opts = {params, observe: 'body', responseType: 'json'};
     }
-    return this._http.get<EventDTO[]>(`${this._url}/event`, opts).pipe(map(value => value.map(value1 => {
+    return this._http.get<EventDTO[]>(`${this._url}/event`, opts).pipe(map(this.dtoToEvent.bind(this)));
+  }
+
+  private dtoToEvent(dto: (EventDTO | EventDTO[])): Event | Event[] {
+    if (Array.isArray(dto)) {
+      return dto.map(this.dtoToEvent.bind(this));
+    } else {
       const ref = this;
-      return {
-        ...value1,
+      const event = {
         get media$(): Observable<Media> {
           if (this.media) {
             return ref._media.getMedia(this.media);
@@ -48,7 +53,9 @@ export class EventService {
             return of(null);
           }
         }
-      } as Event;
-    })));
+      };
+      Object.keys(dto).forEach(key => event[key] = dto[key]);
+      return event as Event;
+    }
   }
 }

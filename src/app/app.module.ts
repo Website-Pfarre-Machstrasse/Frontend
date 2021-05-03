@@ -12,6 +12,7 @@ import {HeaderComponent} from './core/header/header.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from './shared/shared.module';
+import {MatButtonModule} from '@angular/material/button';
 
 export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appConfig.load();
 
@@ -29,7 +30,8 @@ export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appC
     CoreModule,
     AuthModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    MatButtonModule
   ],
   providers: [
     {

@@ -37,6 +37,7 @@ body {
   flex-grow: 1;
   max-width: 60rem;
   overflow-y: auto;
+  position: relative;
   width: 100%;
 }
 
@@ -270,6 +271,12 @@ app-nav {
   .button {
     padding: 10px 5px;
   }
+}
+
+.print-button {
+  bottom: 3rem;
+  left: 3rem;
+  position: absolute;
 }
 
 @include media-breakpoint-down(lg) {

@@ -1,4 +1,7 @@
-export interface Event {
+import {Observable} from 'rxjs';
+import {Media} from './media';
+
+export interface EventDTO {
   id: string;
   name: string;
   details: string;

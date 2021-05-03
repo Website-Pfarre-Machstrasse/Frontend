@@ -3,7 +3,9 @@ import {Gallery as NgGallery, GalleryItem, ImageItem, VideoItem} from 'ng-galler
 import {VideoItemData} from 'ng-gallery/lib/components/templates/items.model';
 import {Lightbox} from 'ng-gallery/lightbox';
 import {Observable} from 'rxjs';
-import {Gallery, GalleryService, Media} from './gallery.service';
+import {GalleryService} from './gallery.service';
+import {Gallery} from '../../data/gallery';
+import {Media} from '../../data/media';
 
 
 @Component({

@@ -1,17 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GalleryComponent } from './gallery.component';
+import {LightboxModule} from 'ng-gallery/lightbox';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+
 
 describe('GalleryComponent', () => {
   let component: GalleryComponent;
   let fixture: ComponentFixture<GalleryComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ GalleryComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [LightboxModule, HttpClientTestingModule],
+      declarations: [GalleryComponent]
     })
-    .compileComponents();
-  }));
+      .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GalleryComponent);

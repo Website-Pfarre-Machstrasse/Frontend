@@ -138,3 +138,5 @@ fabric.properties
 
 .idea/discord.xml
 .idea/vcs.xml
+/gen/
+/swagger.json

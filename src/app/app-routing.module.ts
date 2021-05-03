@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/editor/editor.module').then(mod => mod.EditorModule)
   },
   {
+    path: ':cat/:page',
+    loadChildren: () => import('./features/page-renderer/page-renderer.module').then(m => m.PageRendererModule)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

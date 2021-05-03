@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoggingModule } from './logging/logging.module';
 import {ErrorInterceptor} from './error.interceptor';
 import {AppConfig} from './config/app-config';
+import {JsonInterceptor} from './json.interceptor';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {AppConfig} from './config/app-config';
   ],
   providers: [
     AppConfig,
-    ErrorInterceptor
+    ErrorInterceptor,
+    JsonInterceptor
   ]
 })
 export class CoreModule {

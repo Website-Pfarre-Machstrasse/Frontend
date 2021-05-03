@@ -50,6 +50,11 @@
                 "bundleName": "editor",
                 "inject": false,
                 "input": "src/app/features/editor/editor.theme.scss"
+              },
+              {
+                "bundleName": "page-renderer",
+                "inject": false,
+                "input": "src/app/features/page-renderer/page-renderer.theme.scss"
               }
             ],
             "scripts": [],

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {catchError, map, switchMap} from 'rxjs/operators';
-import {Observable, of, throwError} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {ContentService} from '../../shared/services/content.service';
 import {CodemirrorComponent} from '@ctrl/ngx-codemirror';
 import * as CodeMirror from 'codemirror';
@@ -120,10 +120,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public get content$(): Observable<string> {
-    return this.page$.pipe(
-      switchMap(value => (this._contentService.getPageContent(value[0], value[1]) ?? throwError(new Error()))),
-      catchError(() => of(''))//fixme
-    );
+    return this.page$.pipe(switchMap(value => this._contentService.getPageContent(value[0], value[1])));
   }
 
   constructor(private _activatedRoute: ActivatedRoute,

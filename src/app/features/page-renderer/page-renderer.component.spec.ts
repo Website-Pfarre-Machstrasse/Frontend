@@ -11,7 +11,7 @@ describe('PageRendererComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, HttpClientTestingModule, LoggingModule ],
+      imports: [ RouterTestingModule, HttpClientTestingModule, LoggingModule.forRoot() ],
       declarations: [ PageRendererComponent ]
     })
     .compileComponents();

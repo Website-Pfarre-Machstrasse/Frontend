@@ -14,6 +14,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from './shared/shared.module';
 import {AuthService} from './auth/auth.service';
 import {ShowdownModule} from 'ngx-showdown';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import {MatButtonModule} from '@angular/material/button';
 
 export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
@@ -35,8 +37,14 @@ export const initializeApp = (appConfig: AppConfig, authService: AuthService) =>
     AuthModule,
     MatIconModule,
     SharedModule,
+    MatButtonModule,
     ShowdownModule.forRoot({emoji: true, noHeaderId: true, flavor: 'github'}),
-    MatButtonModule
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     {

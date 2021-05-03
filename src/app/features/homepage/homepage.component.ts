@@ -17,7 +17,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     const start = new Date();
     const end = new Date();
     end.setDate(end.getDate()+8);
-    return this._eventService.getEventsBetween(start, end);
+    return this._eventService.getEvents(start, end);
   }
 
   constructor(private _eventService: EventService, contentService: ContentService) {

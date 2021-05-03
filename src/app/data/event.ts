@@ -6,3 +6,7 @@ export interface Event {
   end: Date;
   owner: string;
 }
+
+export interface Event extends EventDTO {
+  media$: Observable<Media>;
+}

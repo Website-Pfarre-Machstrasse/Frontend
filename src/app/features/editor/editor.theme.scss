@@ -120,6 +120,10 @@
     background-color: map-get($background, background);
   }
 
+  app-editor .spinner-container {
+    background-color: mat-color($primary);
+  }
+
   .editor-container .toolbar {
     @if ($is-dark) {
       background-color: darken(map-get($background, background), 5%);

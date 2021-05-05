@@ -75,5 +75,8 @@
       ></app-renderer>
     </div>
   </div>
+  <div class="spinner-container" *ngIf="saving$ | async">
+    <mat-spinner mode="indeterminate" color="accent"></mat-spinner>
+  </div>
   <button mat-fab class="save-btn" (click)="save()"><mat-icon>save</mat-icon></button>
 </main>

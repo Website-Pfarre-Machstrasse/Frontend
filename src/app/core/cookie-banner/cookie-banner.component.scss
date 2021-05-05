@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.cookie-banner {
+  background-color: inherit;
+  bottom: 0;
+  display: inline-block;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  width: 100vw;
+}
+
+.cookie-text {
+  font-size: 1rem;
+  margin: 1.2em;
+  overflow-wrap: normal;
+}
+
+.cookie-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+}

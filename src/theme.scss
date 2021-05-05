@@ -25,6 +25,7 @@ $dark-theme: mat-dark-theme((
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
   $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
   $is-dark: map-get($config, is_dark);
 
   @include media-breakpoint-up(md) {
@@ -53,6 +54,14 @@ $dark-theme: mat-dark-theme((
 
     .button.secondary a:hover {
       color: mat-contrast($primary, 300);
+    }
+  }
+
+  app-cookie-banner {
+    background-color: map-get($background, background);
+
+    .cookie-text {
+      color: map-get($foreground, base);
     }
   }
 

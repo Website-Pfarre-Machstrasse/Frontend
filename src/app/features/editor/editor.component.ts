@@ -317,4 +317,10 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       editor.focus();
     }
   }
+
+  public save(): void {
+    this.page$.pipe(
+      switchMap(([cat, page]) => this._contentService.saveContent(cat, page, this.cm.codeMirror.getValue()))
+    ).subscribe(this.cm.codeMirror.setValue.bind(this.cm.codeMirror));
+  }
 }

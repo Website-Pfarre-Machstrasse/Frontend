@@ -78,6 +78,10 @@ export class ContentService {
     });
   }
 
+  public saveContent(categoryId: string, pageId: string, content: string): Observable<string> {
+    return this._http.put<string>(`${this._url}/category/${categoryId}/page/${pageId}/content`, content);
+  }
+
   private dtoToCategory(dto: (CategoryDTO | CategoryDTO[])): (Category | Category[]) {
     if (Array.isArray(dto)) {
       return dto.map(this.dtoToCategory.bind(this));

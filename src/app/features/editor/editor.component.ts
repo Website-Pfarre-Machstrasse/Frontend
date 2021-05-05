@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {map, switchMap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { catchError, delay, map, switchMap, tap, timeout } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {ContentService} from '../../shared/services/content.service';
 import {CodemirrorComponent} from '@ctrl/ngx-codemirror';
 import * as CodeMirror from 'codemirror';
@@ -114,6 +114,11 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   private _lastDropEvent = null;
   private _syncingEditor = false;
   private _syncingPreview = false;
+  private _saving$ = new BehaviorSubject(false);
+
+  public get saving$(): Observable<boolean> {
+    return this._saving$.asObservable();
+  }
 
   public get page$(): Observable<[string, string]> {
     return this._activatedRoute.queryParamMap.pipe(map(value => [value.get('cat'), value.get('page')]));
@@ -320,7 +325,13 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public save(): void {
     this.page$.pipe(
-      switchMap(([cat, page]) => this._contentService.saveContent(cat, page, this.cm.codeMirror.getValue()))
-    ).subscribe(this.cm.codeMirror.setValue.bind(this.cm.codeMirror));
+      tap(() => this._saving$.next(true)),
+      switchMap(([cat, page]) => this._contentService.saveContent(cat, page, this.cm.codeMirror.getValue())),
+      tap(value => this.cm.codeMirror.setValue(value)),
+      tap(() => this._saving$.next(false))
+    ).subscribe(undefined, (error: unknown) => {
+      this._logger.error(error as Error);
+      this._saving$.next(false);
+    });
   }
 }

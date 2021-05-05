@@ -13,24 +13,26 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
   declarations: [EditorComponent],
-    imports: [
-        CommonModule,
-        EditorRoutingModule,
-        CodemirrorModule,
-        SharedModule,
-        FormsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonToggleModule,
-        MatSlideToggleModule
-    ],
+  imports: [
+    CommonModule,
+    EditorRoutingModule,
+    CodemirrorModule,
+    SharedModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
+  ],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class EditorModule { }

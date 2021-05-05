@@ -60,12 +60,13 @@ export class ContentService {
       return dto.map(this.dtoToCategory.bind(this));
     } else {
       const ref = this;
-      return {
-        ...dto,
+      const cat = {
         get pages$(): Observable<Page[]> {
           return ref.getPages(this.id);
         }
-      } as Category;
+      };
+      Object.keys(dto).forEach(key => cat[key] = dto[key]);
+      return cat as Category;
     }
   }
 
@@ -74,12 +75,13 @@ export class ContentService {
       return dto.map(this.dtoToPage.bind(this));
     } else {
       const ref = this;
-      return {
-        ...dto,
+      const page = {
         get content$(): Observable<string> {
           return ref.getPageContent(this.category, this.id);
         }
-      } as Page;
+      };
+      Object.keys(dto).forEach(key => page[key] = dto[key]);
+      return page as Page;
     }
   }
 }

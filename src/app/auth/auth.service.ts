@@ -94,16 +94,6 @@ export class AuthService implements OnDestroy {
     localStorage.setItem('logout-event', 'logout' + Math.random());
   }
 
-  private getTokenRemainingTime(): number {
-    const accessToken = this.getAccessToken();
-    if (!accessToken) {
-      return 0;
-    }
-    const jwtToken = JSON.parse(atob(accessToken.split('.')[1]));
-    const expires = new Date(jwtToken.exp * 1000);
-    return expires.getTime() - Date.now();
-  }
-
   public refreshToken(): Observable<LoginResult> {
     const refreshToken = this.getRefreshToken();
     if (!refreshToken) {
@@ -121,6 +111,16 @@ export class AuthService implements OnDestroy {
         }),
         catchError(() => of(null))
       );
+  }
+
+  private getTokenRemainingTime(): number {
+    const accessToken = this.getAccessToken();
+    if (!accessToken) {
+      return 0;
+    }
+    const jwtToken = JSON.parse(atob(accessToken.split('.')[1]));
+    const expires = new Date(jwtToken.exp * 1000);
+    return expires.getTime() - Date.now();
   }
 
   private updateUser(): void {

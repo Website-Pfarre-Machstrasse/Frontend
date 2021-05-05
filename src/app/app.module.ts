@@ -1,19 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from './core/core.module';
 import {AuthModule} from './auth/auth.module';
+import {AuthService} from './auth/auth.service';
 import {AppConfig} from './core/config/app-config';
 import {NavComponent} from './core/nav/nav.component';
 import {HeaderComponent} from './core/header/header.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from './shared/shared.module';
+import {ShowdownConfig, ShowdownModule} from 'ngx-showdown';
 
-export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appConfig.load();
+export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
+  appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
+});
+
+const classMap = {img: 'img-fluid center', h1: 'center'};
+const bindings = Object.keys(classMap)
+  .map(key => ({
+    type: 'output',
+    regex: new RegExp(`<${key}([^>]*)>`, 'g'),
+    replace: `<${key} class="${classMap[key]}" $1>`
+  }));
 
 @NgModule({
   declarations: [
@@ -29,7 +41,8 @@ export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appC
     CoreModule,
     AuthModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    ShowdownModule
   ],
   providers: [
     {
@@ -37,8 +50,67 @@ export const initializeApp = (appConfig: AppConfig) => (): Promise<void> => appC
       useFactory: initializeApp,
       deps: [AppConfig],
       multi: true
+    },
+    {
+      provide: ShowdownConfig,
+      useValue: {
+        emoji: true,
+        noHeaderId: true,
+        flavor: 'github',
+        strikethrough: true,
+        tables: true,
+        simplifiedAutoLink: true,
+        simpleLineBreaks: true,
+        extensions: [{
+          type: 'output',
+          regex: /<li[^>]*><input (?=.*disabled(?:="")?)(?=.*type="checkbox")(?!.*checked)[^>]*>\s*(.*)<\/li>/g,
+          replace: '<li style="list-style-type: none;">' +
+            '<i class="material-icons">check_box_outline_blank</i> <span style="vertical-align: super">$1</span>' +
+            '</li>'
+        }, {
+          type: 'output',
+          regex: /<li[^>]*><input (?=.*disabled(?:="")?)(?=.*type="checkbox")(?=.*checked)[^>]*>\s*(.*)<\/li>/g,
+          replace: '<li style="list-style-type: none;">' +
+            '<i class="material-icons">check_box</i> <span style="vertical-align: super">$1</span>' +
+            '</li>'
+        }, {
+          type: 'output',
+          regex: /<p><img src="(.+(mp4|ogg|webm).*?)"(.+?)\/>/g,
+          replace: (match, url, format, other) => {
+            if (url === ('.' + format)) {
+              return match;
+            } else {
+              return `<video ${other} controls>`+
+                `<source src="${url}" type="video/${format}">`+
+                'I am sorry, Your browser does not support the HTML5 <code>video</code> element.'+
+                '</video>';
+            }
+          }
+        }, {
+          type: 'output',
+          regex: /<p><img src="(.+(mp3|ogg|wav).*?)"(.+?)\/>/g,
+          replace: (match, url, format, other) => {
+            if (url === ('.' + format)) {
+              return match;
+            } else {
+              if ('mp3' === format) {
+                format = 'mpeg';
+              }
+              return `<audio ${other} controls>` +
+                `<source src="${url}" type="audio/${format}" />` +
+                'I am sorry, Your browser does not support the HTML5 <code>audio</code> element.' +
+                '</audio>';
+            }
+          }
+        }, {
+          type: 'lang',
+          regex: /(?:^|\n)~ ([^\n]*)(?:$|\n)/g,
+          replace: '<span class="quote">$1</span>'
+        }, bindings
+        ]
+      } as ShowdownConfig
     }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

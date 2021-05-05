@@ -182,6 +182,10 @@
   padding: 0 8px !important;
 }
 
+.center-container {
+  max-width: unset;
+}
+
 @include editor-theme($light-theme);
 
 @media (prefers-color-scheme: dark) {

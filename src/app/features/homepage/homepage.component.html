@@ -8,8 +8,8 @@
     <img alt="Titelbild der Pfarre" class="img-fluid w-100" src="https://via.placeholder.com/900x250?text=Titelbild+der+Pfarre"/>
   </div>
   <app-renderer [text]="text$ | async"></app-renderer>
-  <div class="calendar">
-    <mat-card class="calendar-card" *ngFor="let event of events$ | async">
+  <div class="calendar" *ngIf="events$ | async as events">
+    <mat-card class="calendar-card" *ngFor="let event of events">
       <mat-card-header>
         <mat-card-title>{{ event.name }}</mat-card-title>
       </mat-card-header>

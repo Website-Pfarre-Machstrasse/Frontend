@@ -85,32 +85,39 @@ const bindings = Object.keys(classMap)
             '</li>'
         }, {
           type: 'output',
-          regex: /<p><img src="(.+(mp4|ogg|webm).*?)"(.+?)\/>/g,
-          replace: (match, url, format, other) => {
+          regex: /<p><img(.+?) src="(.+(mp4|ogg|webm).*?)"(.+?)\/><\/p>/g,
+          replace: (match, other1, url, format, other2) => {
             if (url === ('.' + format)) {
               return match;
             } else {
-              return `<video ${other} controls>`+
+              return `<p><video ${other1} ${other2} controls>`+
                 `<source src="${url}" type="video/${format}">`+
                 'I am sorry, Your browser does not support the HTML5 <code>video</code> element.'+
-                '</video>';
+                '</video></p>';
             }
           }
         }, {
           type: 'output',
-          regex: /<p><img src="(.+(mp3|ogg|wav).*?)"(.+?)\/>/g,
-          replace: (match, url, format, other) => {
+          regex: /<p><img(.+?) src="(.+(mp3|ogg|wav).*?)"(.+?)\/><\/p>/g,
+          replace: (match, other1, url, format, other2) => {
             if (url === ('.' + format)) {
               return match;
             } else {
               if ('mp3' === format) {
                 format = 'mpeg';
               }
-              return `<audio ${other} controls>` +
+              return `<p><audio ${other1} ${other2} controls>` +
                 `<source src="${url}" type="audio/${format}" />` +
                 'I am sorry, Your browser does not support the HTML5 <code>audio</code> element.' +
-                '</audio>';
+                '</audio></p>';
             }
+          }
+        }, {
+          type: 'output',
+          regex: /<p><img(.+?)\/><\/p>/g,
+          replace: (match: string, other: string) => {
+            other = other.format({server: AppConfig.INSTANCE.apiEndpoint});
+            return `<p><img${other}/></p>`;
           }
         }, {
           type: 'lang',

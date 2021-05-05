@@ -13,7 +13,10 @@ import {AuthService} from '../../auth/auth.service';
 export class PageRendererComponent implements OnInit, OnDestroy {
   content$: Observable<string>;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _contentService: ContentService, private _auth: AuthService) {
+  constructor(private _route: ActivatedRoute,
+              private _router: Router,
+              private _contentService: ContentService,
+              private _auth: AuthService) {
     this.content$ = this._route.params
       .pipe(
         switchMap(({cat, page}) => (this._contentService.getPageContent(cat, page) ?? throwError(new Error()))),

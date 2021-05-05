@@ -104,7 +104,7 @@ export class AuthService implements OnDestroy {
     return expires.getTime() - Date.now();
   }
 
-  private refreshToken(): Observable<LoginResult> {
+  public refreshToken(): Observable<LoginResult> {
     const refreshToken = this.getRefreshToken();
     if (!refreshToken) {
       this.doLogout();

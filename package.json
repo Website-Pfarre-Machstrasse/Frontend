@@ -37,7 +37,10 @@
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
     "bootstrap": "^5.0.0-beta2",
+    "ngx-showdown": "^6.0.0",
     "rxjs": "~6.6.6",
+    "showdown": "^1.9.1",
+    "tslib": "^2.0.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.10.2"
   },

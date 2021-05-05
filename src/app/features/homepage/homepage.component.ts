@@ -12,16 +12,14 @@ import {ContentService} from '../../shared/services/content.service';
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   text$: Observable<string>;
-
-  get events$(): Observable<Event[]> {
-    const start = new Date();
-    const end = new Date();
-    end.setDate(end.getDate()+8);
-    return this._eventService.getEvents(start, end);
-  }
+  events$: Observable<Event[]>;
 
   constructor(private _eventService: EventService, contentService: ContentService) {
     this.text$ = contentService.getHomeContent();
+    const start = new Date();
+    const end = new Date();
+    end.setDate(end.getDate()+8);
+    this.events$ = this._eventService.getEvents(start, end);
   }
 
   ngOnDestroy(): void {

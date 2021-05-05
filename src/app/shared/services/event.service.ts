@@ -1,54 +1,51 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Event, EventDTO} from '../../data/event';
+import {MediaService} from './media.service';
+import {AppConfig} from '../../core/config/app-config';
 import {map} from 'rxjs/operators';
 import {Media} from '../../data/media';
-import {MediaService} from './media.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private _url = ''; //TODO implement
+  private _url: string;
 
-  constructor(private _http: HttpClient, private _media: MediaService) {}
+  constructor(private _http: HttpClient, private _media: MediaService) {
+    this._url = AppConfig.INSTANCE.apiEndpoint;
+  }
 
-  public getEventsBetween(start: Date, end: Date): Observable<Event[]> {
-    return of([
-      {
-        id: 'test',
-        name: 'Test',
-        details: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est laboriosam necessitatibus perferendis possimus
-          vero? Accusantium architecto assumenda atque aut commodi cumque cupiditate dignissimos dolores, ducimus eos
-          esse excepturi inventore laboriosam maxime modi natus nihil nulla odit officia, perferendis possimus, quae
-          quibusdam quisquam quos sit totam ut vel velit vero voluptatibus? Ab, ad delectus, eius eos ex inventore
-          itaque, iusto labore magni nihil odio officiis quas quibusdam reprehenderit velit voluptatem voluptatibus!`,
-        start: new Date(new Date().setHours(10)),
-        end: new Date(new Date().setHours(12)),
-        owner: '',
-        media: null,
-        media$: of(null)
-      },
-      {
-        id: 'test2',
-        name: 'Test2',
-        details: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est laboriosam necessitatibus perferendis possimus
-          vero? Accusantium architecto assumenda atque aut commodi cumque cupiditate dignissimos dolores, ducimus eos
-          esse excepturi inventore laboriosam maxime modi natus nihil nulla odit officia, perferendis possimus, quae
-          quibusdam quisquam quos sit totam ut vel velit vero voluptatibus? Ab, ad delectus, eius eos ex inventore
-          itaque, iusto labore magni nihil odio officiis quas quibusdam reprehenderit velit voluptatem voluptatibus!`,
-        start: new Date(new Date().setHours(10)),
-        end: new Date(new Date().setHours(12)),
-        owner: '',
-        media: null,
-        media$: of(null)
+  public getEvents(start?: Date, endOrN?: Date | number): Observable<Event[]> {
+    let opts: { params?: HttpParams; observe: 'body'; responseType: 'json' };
+    if ((start === null || start === undefined) && (endOrN === null || endOrN === undefined)) {
+      opts = {observe: 'body', responseType: 'json'};
+    } else {
+      const params = new HttpParams();
+      if (start !== null && start !== undefined) {
+        params.set('start', start.toISOString());
+        if (endOrN !== null && endOrN !== undefined) {
+          if (endOrN instanceof Date) {
+            params.set('end', endOrN.toISOString());
+          } else {
+            params.set('next', endOrN.toString());
+          }
+        }
+      } else if (endOrN !== null && endOrN !== undefined && !(endOrN instanceof Date)) {
+        params.set('next', endOrN.toString());
       }
-    ]);
-    return this._http.get<EventDTO[]>(this._url.format(start, end)).pipe(map(value => value.map(value1 => {
+      opts = {params, observe: 'body', responseType: 'json'};
+    }
+    return this._http.get<EventDTO[]>(`${this._url}/event`, opts).pipe(map(this.dtoToEvent.bind(this)));
+  }
+
+  private dtoToEvent(dto: (EventDTO | EventDTO[])): Event | Event[] {
+    if (Array.isArray(dto)) {
+      return dto.map(this.dtoToEvent.bind(this));
+    } else {
       const ref = this;
-      return {
-        ...value1,
+      const event = {
         get media$(): Observable<Media> {
           if (this.media) {
             return ref._media.getMedia(this.media);
@@ -56,7 +53,9 @@ export class EventService {
             return of(null);
           }
         }
-      } as Event;
-    })));
+      };
+      Object.keys(dto).forEach(key => event[key] = dto[key]);
+      return event as Event;
+    }
   }
 }

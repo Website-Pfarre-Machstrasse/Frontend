@@ -39,7 +39,11 @@ body {
 }
 
 .center-container {
+  align-self: center;
   flex-grow: 1;
+  max-width: 60rem;
+  overflow-y: auto;
+  width: 100%;
 }
 
 app-nav {

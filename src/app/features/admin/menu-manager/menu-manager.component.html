@@ -1,0 +1,25 @@
+<div cdkDropListGroup class="dlg">
+  <!--fixme-->
+  <div *ngFor="let cat of categories; index as i"
+       (cdkDropListDropped)="dropCategory($event)"
+       [cdkDropListData]="categories"
+       cdkDropList
+       cdkDropListOrientation="horizontal">
+    <mat-card *cdkDragPlaceholder><mat-card-title>HI</mat-card-title></mat-card>
+    <mat-card [cdkDragData]="cat" cdkDrag>
+      <mat-card-title cdkDragHandle>{{ cat.title }}</mat-card-title>
+      <mat-card-content>
+        <mat-list (cdkDropListDropped)="dropPage($event)"
+                  [cdkDropListData]="pages[i]"
+                  cdkDropList>
+          <mat-list-item *cdkDragPlaceholder></mat-list-item>
+          <mat-list-item *ngFor="let page of pages[i]"
+                         [cdkDragData]="page"
+                         cdkDrag>
+            {{ page.title }}
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

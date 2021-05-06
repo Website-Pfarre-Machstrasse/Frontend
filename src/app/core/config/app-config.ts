@@ -6,11 +6,15 @@ export interface IConfig {
   apiEndpoint: string;
 }
 
+const NULL_CONFIG: IConfig = {
+  apiEndpoint: null
+};
+
 @Injectable()
 export class AppConfig {
   private static _config: IConfig;
   public static get INSTANCE(): IConfig {
-    return AppConfig._config;
+    return AppConfig._config ?? NULL_CONFIG;
   }
   constructor(private _http: HttpClient) {}
   load(): Promise<void> {

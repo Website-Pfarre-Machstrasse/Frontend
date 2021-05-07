@@ -29,7 +29,7 @@
             "aot": true,
             "assets": [
               "src/assets",
-              "src/manifest.webmanifest",
+              "src/manifest.json",
               "src/browserconfig.xml",
               "src/robots.txt",
               {

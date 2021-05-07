@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -26,7 +29,7 @@
             "aot": true,
             "assets": [
               "src/assets",
-              "src/manifest.webmanifest",
+              "src/manifest.json",
               "src/browserconfig.xml",
               "src/robots.txt",
               {
@@ -47,6 +50,26 @@
             ],
             "styles": [
               "src/styles.scss",
+              {
+                "bundleName": "homepage",
+                "inject": false,
+                "input": "src/app/features/homepage/homepage.theme.scss"
+              },
+              {
+                "bundleName": "page-renderer",
+                "inject": false,
+                "input": "src/app/features/page-renderer/page-renderer.theme.scss"
+              },
+              {
+                "bundleName": "gallery",
+                "inject": false,
+                "input": "src/app/features/gallery/gallery.theme.scss"
+              },
+              {
+                "bundleName": "calendar",
+                "inject": false,
+                "input": "src/app/features/calendar/calendar.theme.scss"
+              },
               {
                 "bundleName": "editor",
                 "inject": false,

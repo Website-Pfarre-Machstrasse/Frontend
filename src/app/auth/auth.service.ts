@@ -8,7 +8,6 @@ import {Logger} from '../core/logging/logger';
 import {User} from '../data/user';
 import {LoginResult} from '../data/login-result';
 import {AppConfig} from '../core/config/app-config';
-import {environment} from '../../environments/environment';
 
 
 const REFRESH_TOKEN = 'refresh_token';
@@ -36,7 +35,7 @@ export class AuthService implements OnDestroy {
   }
 
   private get userUrl(): string {
-    return `${AppConfig.INSTANCE.apiEndpoint}/user`;
+    return `${AppConfig.INSTANCE.apiEndpoint}/self`;
   }
 
   constructor(private _router: Router, private _http: HttpClient, loggerService: LoggerService) {
@@ -48,10 +47,6 @@ export class AuthService implements OnDestroy {
   }
 
   public login(username: string, password: string): Observable<boolean> {
-    if (!environment.production) {
-      this._user$.next({id: '', email: username, firstName: 'Demo', lastName: 'User', role: 'admin'});
-      return of(true);
-    }
     return this._http
       .post<LoginResult>(this.loginUrl, { username, password })
       .pipe(
@@ -75,11 +70,19 @@ export class AuthService implements OnDestroy {
   }
 
   public getRefreshToken(): string | null {
-    return localStorage.getItem(REFRESH_TOKEN);
+    const token = localStorage.getItem(REFRESH_TOKEN);
+    if (token === undefined || token === 'undefined' || token === null || token === 'null') {
+      return null;
+    }
+    return token;
   }
 
   public getAccessToken(): string | null {
-    return localStorage.getItem(ACCESS_TOKEN);
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    if (token === undefined || token === 'undefined' || token === null || token === 'null') {
+      return null;
+    }
+    return token;
   }
 
   public setLocalStorage(x: LoginResult): void {

@@ -6,6 +6,7 @@ import {AppConfig} from './config/app-config';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 import {MatButtonModule} from '@angular/material/button';
 import {JsonInterceptor} from './json.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -21,8 +22,8 @@ import {JsonInterceptor} from './json.interceptor';
   ],
   providers: [
     AppConfig,
-    ErrorInterceptor,
-    JsonInterceptor
+    { provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class CoreModule {

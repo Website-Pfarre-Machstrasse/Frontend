@@ -2,26 +2,28 @@
   <div class="banner">
     <img alt="Banner der Pfarre" class="img-fluid w-100" src="https://via.placeholder.com/900x70?text=Ein+schoenes+Banner"/>
   </div>
-  <h1 class="title">Wilkommen in der Pfarre Machstraße</h1>
+  <h1 class="title">Willkommen in der Pfarre Machstraße</h1>
   <hr class="title-rule"/>
-  <div class="title-image">
-    <img alt="Titelbild der Pfarre" class="img-fluid w-100" src="https://via.placeholder.com/900x250?text=Titelbild+der+Pfarre"/>
-  </div>
-  <app-renderer [text]="text$ | async"></app-renderer>
-  <div class="calendar" *ngIf="events$ | async as events">
-    <mat-card class="calendar-card" *ngFor="let event of events">
-      <mat-card-header>
-        <mat-card-title>{{ event.name }}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image *ngIf="event.media$ | async as media" [src]="media._links.file" [alt]="media.name">
-      <mat-card-content>
-        <p>
-          {{ event.details }}
-        </p>
-      </mat-card-content>
-      <mat-card-footer>
-        {{ getName(event.owner) }}
-      </mat-card-footer>
-    </mat-card>
+  <div class="home-content">
+    <div class="title-image">
+      <img alt="Titelbild der Pfarre" class="img-fluid w-100" src="assets/home.jpg"/>
+    </div>
+    <app-renderer [text]="text$ | async"></app-renderer>
+    <div class="calendar" *ngIf="events$ | async as events">
+      <mat-card class="calendar-card" *ngFor="let event of events">
+        <mat-card-header>
+          <mat-card-title>{{ event.name }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image *ngIf="event.media$ | async as media" [src]="media._links.file" [alt]="media.name">
+        <mat-card-content>
+          <p>
+            {{ event.details }}
+          </p>
+        </mat-card-content>
+        <mat-card-footer>
+          {{ getName(event.owner) }}
+        </mat-card-footer>
+      </mat-card>
+    </div>
   </div>
 </div>

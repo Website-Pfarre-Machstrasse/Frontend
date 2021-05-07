@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoggingModule } from './logging/logging.module';
 import {ErrorInterceptor} from './error.interceptor';
 import {AppConfig} from './config/app-config';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import {AppConfig} from './config/app-config';
   ],
   providers: [
     AppConfig,
-    ErrorInterceptor
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class CoreModule {

@@ -60,7 +60,8 @@ const bindings = Object.keys(classMap)
         strikethrough: true,
         tables: true,
         simplifiedAutoLink: true,
-        simpleLineBreaks: true,
+        simpleLineBreaks: false,
+        requireSpaceBeforeHeadingText: true,
         extensions: [{
           type: 'output',
           regex: /<li[^>]*><input (?=.*disabled(?:="")?)(?=.*type="checkbox")(?!.*checked)[^>]*>\s*(.*)<\/li>/g,

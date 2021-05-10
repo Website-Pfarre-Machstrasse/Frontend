@@ -34,7 +34,7 @@
     "@angular/forms": "~11.2.3",
     "@angular/material": "^11.2.2",
     "@angular/platform-browser": "~11.2.3",
-    "@angular/platform-browser-dynamic": "~11.2.3",
+    "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.3",
     "bootstrap": "^5.0.0-beta2",
     "rxjs": "~6.6.6",

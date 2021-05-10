@@ -1,25 +1,73 @@
-<div cdkDropListGroup class="dlg">
-  <!--fixme-->
-  <div *ngFor="let cat of categories; index as i"
-       (cdkDropListDropped)="dropCategory($event)"
-       [cdkDropListData]="categories"
-       cdkDropList
-       cdkDropListOrientation="horizontal">
-    <mat-card *cdkDragPlaceholder><mat-card-title>HI</mat-card-title></mat-card>
-    <mat-card [cdkDragData]="cat" cdkDrag>
-      <mat-card-title cdkDragHandle>{{ cat.title }}</mat-card-title>
-      <mat-card-content>
-        <mat-list (cdkDropListDropped)="dropPage($event)"
-                  [cdkDropListData]="pages[i]"
-                  cdkDropList>
-          <mat-list-item *cdkDragPlaceholder></mat-list-item>
-          <mat-list-item *ngFor="let page of pages[i]"
-                         [cdkDragData]="page"
-                         cdkDrag>
-            {{ page.title }}
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-  </div>
+<div class="toolbar">
+  <button mat-flat-button (click)="addCategory(categories.length)">Kategorie hinzufügen</button>
+  <button mat-flat-button (click)="save()">Änderungen übernehmen</button>
+  <button mat-flat-button (click)="openTrash()">Gelöschte Seiten</button>
 </div>
+<div (cdkDropListDropped)="dropCategory($event)"
+     [cdkDropListData]="{categories:categories, pages:pages}"
+     cdkDropList
+     cdkDropListGroup
+     cdkDropListOrientation="vertical"
+     class="dlg">
+  <mat-card [cdkDragData]="cat" cdkDrag *ngFor="let cat of categories; index as i">
+    <mat-divider *cdkDragPlaceholder></mat-divider>
+    <mat-card-header>
+      <mat-card-title cdkDragHandle>{{ cat.title }}</mat-card-title>
+      <button mat-flat-button (click)="addPage(cat, i, pages[i].length)" style="margin-left: auto;" color="accent">Seite hinzufügen</button>
+      <button mat-mini-fab (click)="deleteCategory(cat)" style="margin-left: 1rem;" color="warn"><mat-icon>delete</mat-icon></button>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-list (cdkDropListDropped)="dropPage($event)"
+                [cdkDropListData]="{category:cat,pages:pages[i]}"
+                cdkDropList>
+        <mat-list-item *ngFor="let page of pages[i]"
+                       [cdkDragData]="page"
+                       cdkDrag>
+          <mat-list-item *cdkDragPlaceholder class="placeholder"></mat-list-item>
+          <span style="flex-grow: 1;">{{ page.title }}<sub>{{page.order}}</sub></span>
+          <h3 *cdkDragPreview>{{ page.title }}<sub>{{page.order}}</sub></h3>
+          <button mat-mini-fab (click)="editPage(page)"><mat-icon>edit</mat-icon></button>
+          <button mat-mini-fab (click)="deletePage(page, i)" style="margin-left: 1rem;" color="warn"><mat-icon>delete</mat-icon></button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #dialog let-data>
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content>
+    <form>
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>ID</mat-label>
+        <input matInput [(ngModel)]="data.obj.id" name="id" />
+      </mat-form-field>
+      <br/>
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Titel</mat-label>
+        <input matInput [(ngModel)]="data.obj.title" name="title" />
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button *ngIf="data.isPage" (click)="editPageContent(data.obj)">Bearbeiten</button>
+    <button mat-button mat-dialog-close>Abbrechen</button>
+    <button mat-button [mat-dialog-close]="data.obj" cdkFocusInitial>Speichern</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #trash let-data let-dialogRef="dialogRef">
+  <h2 mat-dialog-title>Gelöschte Seiten</h2>
+  <mat-dialog-content>
+    <mat-list>
+      <mat-list-item *ngFor="let page of data">
+        <span>{{page.title}}</span>
+        <button mat-button (click)="restore(page)">Wiederherstellen</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="dialogRef.close()">Schließen</button>
+  </mat-dialog-actions>
+</ng-template>

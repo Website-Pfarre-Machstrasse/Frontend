@@ -6,7 +6,7 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
-import './string';
+import './utilities/index';
 
 declare const require: {
   context(path: string, deep?: boolean, filter?: RegExp): {

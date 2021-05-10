@@ -207,13 +207,9 @@ if (!String.format) {
 }
 
 if (!String.prototype.isWhitespaceOrEmpty) {
-  String.prototype.isWhitespaceOrEmpty = function() {
-    return String.isWhitespaceOrEmpty(this);
-  };
+  String.prototype.isWhitespaceOrEmpty = () => String.isWhitespaceOrEmpty(this);
 }
 
 if (!String.prototype.format) {
-  String.prototype.format = function(...replacements: any[]) {
-    return String.format(this, ...replacements);
-  };
+  String.prototype.format = (...replacements: any[]) => String.format(this, ...replacements);
 }

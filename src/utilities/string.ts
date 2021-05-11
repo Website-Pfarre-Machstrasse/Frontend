@@ -150,6 +150,7 @@ if (!String.isWhitespaceOrEmpty) {
 }
 
 if (!String.format) {
+  // eslint-disable-next-line no-shadow
   String.format = (format: string, ...replacements: any[]) => {
     try {
       if (format.match(regexNumber)) {

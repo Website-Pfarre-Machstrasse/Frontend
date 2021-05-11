@@ -157,27 +157,28 @@
   font-size: 100%;
 }
 
-.mat-form-field-subscript-wrapper,
-.mat-form-field-infix {
-  display: none;
-}
-
-.mat-form-field-wrapper {
-  padding: 0;
-}
-
-.toolbar .mat-form-field-appearance-outline {
-  .mat-select-arrow-wrapper {
-    transform: none !important;
-  }
-
-  .mat-form-field-infix {
-    border-top: 0;
-    padding: 0.9em 0 0.6em;
+.toolbar {
+  .mat-form-field-subscript-wrapper {
+    display: none;
   }
 
   .mat-form-field-wrapper {
-    margin: 0.2em 0;
+    padding: 0;
+  }
+
+  .mat-form-field-appearance-outline {
+    .mat-select-arrow-wrapper {
+      transform: none !important;
+    }
+
+    .mat-form-field-infix {
+      border-top: 0;
+      padding: 0.9em 0 0.6em;
+    }
+
+    .mat-form-field-wrapper {
+      margin: 0.2em 0;
+    }
   }
 }
 

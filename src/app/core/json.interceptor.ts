@@ -22,7 +22,12 @@ const keysToCamel = (o) => {
 
     Object.keys(o)
       .forEach((k) => {
-        n[toCamel(k)] = keysToCamel(o[k]);
+        const preserve = k.startsWith('_');
+        let key: string = toCamel(k);
+        if (preserve) {
+          key = '_'+key.charAt(0).toLowerCase()+key.slice(1);
+        }
+        n[key] = keysToCamel(o[k]);
       });
 
     return n;

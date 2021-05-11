@@ -1,0 +1,67 @@
+@import '../../../../theme';
+
+:host {
+  display: block;
+}
+
+mat-dialog-content {
+  align-content: space-between;
+  column-gap: 1rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  row-gap: 1rem;
+}
+
+img.fallback {
+  height: 150px;
+  width: 150px;
+}
+
+div {
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 0.2rem;
+  display: flex;
+  flex-basis: auto;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  img {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+  }
+
+  span {
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@mixin media-browser-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $background: map-get($config, background);
+
+  div {
+    background-color: map-get($background, unselected-chip);
+    border-color: map-get($background, unselected-chip);
+
+    span {
+      background-color: inherit;
+    }
+
+    &.selected {
+      border-color: mat-color($primary);
+    }
+  }
+}
+
+@include media-browser-theme($light-theme);
+
+
+@media (prefers-color-scheme: dark) {
+  @include media-browser-theme($dark-theme);
+}

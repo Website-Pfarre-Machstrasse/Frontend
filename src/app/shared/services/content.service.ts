@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import { UploadResult } from 'src/app/data/upload-result';
 import {Category, CategoryDTO} from '../../data/category';
 import {Page, PageDTO} from '../../data/page';
 import {HttpClient} from '@angular/common/http';
@@ -39,16 +38,6 @@ export class ContentService {
 
   public getPageContent(categoryId: string, pageId: string): Observable<string> {
     return this._http.get<string>(`${this._url}/category/${categoryId}/page/${pageId}/content`);
-  }
-
-  public uploadFile(file: File): Promise<UploadResult> {
-    return new Promise<UploadResult>(resolve => {
-      resolve({
-        name: file.name,
-        url: '',
-        media: file.type.startsWith('image') || file.type.startsWith('video') || file.type.startsWith('audio')
-      });
-    });
   }
 
   public saveContent(categoryId: string, pageId: string, content: string): Observable<string> {

@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import { catchError, delay, map, switchMap, tap, timeout } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {ContentService} from '../../shared/services/content.service';
+import { MediaService } from '../../shared/services/media.service';
 import {CodemirrorComponent} from '@ctrl/ngx-codemirror';
 import * as CodeMirror from 'codemirror';
 import {Editor, EditorConfiguration} from 'codemirror';
@@ -13,6 +14,9 @@ import {UploadResult} from '../../data/upload-result';
 import 'codemirror/lib/codemirror';
 import 'codemirror/mode/gfm/gfm';
 import 'codemirror/addon/display/fullscreen';
+import { MatDialog } from '@angular/material/dialog';
+import { MediaBrowserComponent } from './media-browser/media-browser.component';
+import { ComponentType } from '@angular/cdk/overlay';
 
 interface ToolbarAction {
   type: string;
@@ -52,6 +56,22 @@ class SimpleActionCallback implements ActionCallback {
   }
 }
 
+class DialogActionCallback implements ActionCallback {
+  call: (value: {text: string; data: any}) => string | { text: string; select: any };
+  type: ComponentType<any>;
+  data: any;
+
+  constructor(type: ComponentType<any>, callback: (value: any) => string, data?: any) {
+    this.data = data ?? {};
+    this.type = type;
+    this.call = callback;
+  }
+
+  public static of(type: ComponentType<any>, callback: (value: any) => string, data?: any): DialogActionCallback {
+    return new DialogActionCallback(type, callback, data);
+  }
+}
+
 class ComplexActionCallback implements ActionCallback {
   call: (doc: CodeMirror.Doc, ...params: any[]) => void | Promise<void>;
 
@@ -72,7 +92,6 @@ class ComplexActionCallback implements ActionCallback {
 export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('editor') cm: CodemirrorComponent;
   @ViewChild('preview', {read: ElementRef}) preview: ElementRef<HTMLElement>;
-  @ViewChild('editor_container') editorContainer: ElementRef<HTMLElement>;
 
   get fullscreen(): boolean {
     return this._fullscreen;
@@ -80,7 +99,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   set fullscreen(fullscreen: boolean) {
     if (document.fullscreenEnabled) {
       if (fullscreen) {
-        this.editorContainer.nativeElement.requestFullscreen();
+        document.body.requestFullscreen();
       } else if (document.fullscreenElement) {
         document.exitFullscreen();
       }
@@ -130,15 +149,17 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _contentService: ContentService,
+              private _mediaService: MediaService,
+              private _dialog: MatDialog,
               _loggerService: LoggerService) {
     this._logger = _loggerService.getLogger('Editor');
-    this.registerAction('fileUploaded', (doc: CodeMirror.Doc, result: UploadResult) => {
+    this.registerAction('fileUploaded', ComplexActionCallback.of((doc: CodeMirror.Doc, result: UploadResult) => {
       let rep = `[${result.name}](${result.url})`;
       if (result.media) {
         rep = '!' + rep;
       }
       doc.replaceSelection(rep, 'end');
-    });
+    }));
 
     this.registerToolbarAction(
       'font', {type: 'button', title: 'Bold', icon: 'format_bold', action: 'bold'},
@@ -166,10 +187,22 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
         doc.replaceSelection(line);
       }));
 
-    this.registerToolbarAction('media', {type: 'button', title: 'Link', icon: 'insert_link', action: 'link'});
-    this.registerToolbarAction('media', {type: 'button', title: 'Image', icon: 'insert_photo', action: 'image'});
-    this.registerToolbarAction('media', {type: 'button', title: 'Video', icon: 'movie_creation', action: 'video'});
-    this.registerToolbarAction('media', {type: 'button', title: 'Audio', icon: 'audiotrack', action: 'audio'});
+    const mediaCallback = value => {
+      let rep = `[${value.text || value.data.name}](${value.data._links.file.replace('/api', '{server}')})`;
+      if (value.data.mimetype.startsWith('image') || value.data.mimetype.startsWith('video') || value.data.mimetype.startsWith('audio')) {
+        rep = '!' + rep;
+      }
+      return rep;
+    };
+    const linkCallback = value => `[${value.text || value.data.name}](${value.data._links.file.replace('/api', '{server}')})`;
+    this.registerToolbarAction('media', {type: 'button', title: 'Link', icon: 'insert_link', action: 'link'},
+      DialogActionCallback.of(MediaBrowserComponent, linkCallback, {data: {title: 'Link einfügen'}}));
+    this.registerToolbarAction('media', {type: 'button', title: 'Image', icon: 'insert_photo', action: 'image'},
+      DialogActionCallback.of(MediaBrowserComponent, mediaCallback, {data: {filter: 'image', title: 'Bild einfügen'}}));
+    this.registerToolbarAction('media', {type: 'button', title: 'Video', icon: 'movie_creation', action: 'video'},
+      DialogActionCallback.of(MediaBrowserComponent, mediaCallback, {data: {filter: 'video', title: 'Video einfügen'}}));
+    this.registerToolbarAction('media', {type: 'button', title: 'Audio', icon: 'audiotrack', action: 'audio'},
+      DialogActionCallback.of(MediaBrowserComponent, mediaCallback, {data: {filter: 'audio', title: 'Audio einfügen'}}));
 
     this.registerToolbarAction(
       'blocks', {type: 'button', title: 'Bullet Point List', icon: 'format_list_bulleted', action: 'ul'},
@@ -285,7 +318,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     for (let i = 0; i < files.length; i++) {
       const file = files.item(i);
       this._logger.debug('File dropped: {0}', file.name);
-      this._contentService.uploadFile(file).then(result => this.executeAction('fileUploaded', result));
+      this._mediaService.uploadFile(file).subscribe(result => this.executeAction('fileUploaded', result));
     }
   }
 
@@ -320,6 +353,22 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       doc.replaceSelection(ret);
       editor.focus();
+    } else if (callback instanceof DialogActionCallback) {
+      const ref = this._dialog.open(callback.type, {data: callback.data});
+      ref.afterClosed().pipe(
+        filter(value => !!value),
+        switchMap(value => Array.isArray(value) ? value : [value]),
+        map(value => callback.call({data: value, text: doc.getSelection()}))
+      ).subscribe(ret => {
+        if (typeof ret !== 'string') {
+          const {select, text} = ret;
+          doc.replaceSelection(text);
+          doc.setCursor({line: doc.getCursor().line, ch: select});
+        } else {
+          doc.replaceSelection(ret);
+        }
+        editor.focus();
+      });
     }
   }
 
@@ -327,9 +376,11 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     this.page$.pipe(
       tap(() => this._saving$.next(true)),
       switchMap(([cat, page]) => this._contentService.saveContent(cat, page, this.cm.codeMirror.getValue())),
-      tap(value => this.cm.codeMirror.setValue(value)),
-      tap(() => this._saving$.next(false))
-    ).subscribe(undefined, (error: unknown) => {
+      tap(value => this.cm.codeMirror.setValue(value))
+    ).subscribe(() => {
+      this._logger.info('Successfully saved!');
+      this._saving$.next(false);
+    }, (error: unknown) => {
       this._logger.error(error as Error);
       this._saving$.next(false);
     });

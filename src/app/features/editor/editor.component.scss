@@ -8,6 +8,7 @@
   bottom: 4rem;
   position: absolute;
   right: 2rem;
+  z-index: 101;
 }
 
 .container {
@@ -33,7 +34,7 @@
     position: absolute;
     top: 0;
     width: 100vw;
-    z-index: 1000;
+    z-index: 100;
   }
 }
 

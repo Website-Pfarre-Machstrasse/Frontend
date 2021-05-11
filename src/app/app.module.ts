@@ -123,6 +123,7 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
         }, {
           type: 'listener',
           listeners: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             'blockGamut.before': (event, text, converter, options, glob: any) => {
               if (!glob.blockLevels) {
                 glob.blockLevels = {};

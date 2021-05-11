@@ -19,7 +19,7 @@ export const initializeApp = (appConfig: AppConfig, authService: AuthService) =>
   appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
 });
 
-const classMap = {img: 'img-fluid center', h1: 'center'};
+const classMap = {img: 'img-fluid center'};
 const bindings = Object.keys(classMap)
   .map(key => ({
     type: 'output',
@@ -48,7 +48,7 @@ const bindings = Object.keys(classMap)
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [AppConfig],
+      deps: [AppConfig, AuthService],
       multi: true
     },
     {
@@ -62,6 +62,7 @@ const bindings = Object.keys(classMap)
         simplifiedAutoLink: true,
         simpleLineBreaks: false,
         requireSpaceBeforeHeadingText: true,
+        underline: true,
         extensions: [{
           type: 'output',
           regex: /<li[^>]*><input (?=.*disabled(?:="")?)(?=.*type="checkbox")(?!.*checked)[^>]*>\s*(.*)<\/li>/g,

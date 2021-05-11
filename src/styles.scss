@@ -46,6 +46,19 @@ body {
   width: 100%;
 }
 
+$aligns: 'left', 'center', 'right', 'justify';
+@each $align in $aligns {
+  .text-#{$align} {
+    text-align: #{$align};
+  }
+}
+
+@for $i from 1 to 5 {
+  .indent-#{$i} {
+    margin-inline-start: #{$i}rem;
+  }
+}
+
 app-nav {
   .item {
     align-items: center;
@@ -273,10 +286,10 @@ app-nav {
       }
 
       ul {
-        margin-left: -10px;
-        margin-right: -10px;
-        margin-top: calc(4.6rem + 40px);
+        margin-left: -12px;
+        margin-right: -12px;
         position: absolute;
+        top: -13rem;
       }
     }
   }

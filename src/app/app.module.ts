@@ -17,18 +17,27 @@ import {ShowdownConfig, ShowdownModule} from 'ngx-showdown';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatButtonModule} from '@angular/material/button';
+import * as showdown from 'showdown';
 
 export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
   appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
 });
 
-const classMap = {img: 'img-fluid center', h1: 'center'};
+const classMap = {img: 'img-fluid center'};
 const bindings = Object.keys(classMap)
   .map(key => ({
     type: 'output',
     regex: new RegExp(`<${key}([^>]*)>`, 'g'),
     replace: `<${key} class="${classMap[key]}" $1>`
   }));
+
+const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] = [
+  {start: ':--', attrs: 'class="text-left"'},
+  {start: '-:-', attrs: 'class="text-center"'},
+  {start: '--:', attrs: 'class="text-right"'},
+  {start: ':-:', attrs: 'class="text-justify"'},
+  {start: '-->', end: '<--', attrs: 'class="indent-{i}"'}
+];
 
 @NgModule({
   declarations: [
@@ -72,6 +81,7 @@ const bindings = Object.keys(classMap)
         simplifiedAutoLink: true,
         simpleLineBreaks: false,
         requireSpaceBeforeHeadingText: true,
+        underline: true,
         extensions: [{
           type: 'output',
           regex: /<li[^>]*><input (?=.*disabled(?:="")?)(?=.*type="checkbox")(?!.*checked)[^>]*>\s*(.*)<\/li>/g,
@@ -119,6 +129,42 @@ const bindings = Object.keys(classMap)
           replace: (match: string, other: string) => {
             other = other.format({server: AppConfig.INSTANCE.apiEndpoint});
             return `<p><img${other}/></p>`;
+          }
+        }, {
+          type: 'listener',
+          listeners: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            'blockGamut.before': (event, text, converter, options, glob: any) => {
+              if (!glob.blockLevels) {
+                glob.blockLevels = {};
+              }
+              for (const block of blocks) {
+                const start = block.start;
+                const nested = !!block.end || block.nested;
+                const end = block.end || block.start;
+                const regex = nested
+                  ? new RegExp(`^${start}([\\s\\S]*)${end}$`, 'gm')
+                  : new RegExp(`^${start}([\\s\\S]+?)${end}$`, 'gm');
+                let attrs;
+                if (nested) {
+                  if (!(block.start in glob.blockLevels)) {
+                    glob.blockLevels[block.start] = 0;
+                  }
+                  glob.blockLevels[block.start]++;
+                  attrs = block.attrs.format({i: glob.blockLevels[block.start]});
+                } else {
+                  attrs = block.attrs;
+                }
+                text = text.replace(regex, (wm, txt) => {
+                  txt = showdown.subParser('blockGamut')(txt, options, glob);
+                  return `<div ${attrs}>${txt}</div>`;
+                });
+                if (nested) {
+                  glob.blockLevels[block.start]--;
+                }
+              }
+              return text;
+            }
           }
         }, {
           type: 'lang',

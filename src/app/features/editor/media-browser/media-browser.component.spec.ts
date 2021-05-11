@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MediaBrowserComponent } from './media-browser.component';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MediaBrowserComponent', () => {
   let component: MediaBrowserComponent;
@@ -8,7 +10,14 @@ describe('MediaBrowserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MediaBrowserComponent ]
+      imports: [MatDialogModule, HttpClientTestingModule],
+      declarations: [ MediaBrowserComponent ],
+      providers: [
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {data: {title: 'Test'}}
+        }
+      ]
     })
     .compileComponents();
   });

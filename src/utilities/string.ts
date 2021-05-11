@@ -206,18 +206,18 @@ if (!String.format) {
   };
 }
 
-if (!String.prototype.isWhitespaceOrEmpty) {
-  function isWhitespaceOrEmpty() {
-    return String.isWhitespaceOrEmpty(this);
-  }
+function isWhitespaceOrEmpty() {
+  return String.isWhitespaceOrEmpty(this);
+}
 
+if (!String.prototype.isWhitespaceOrEmpty) {
   String.prototype.isWhitespaceOrEmpty = isWhitespaceOrEmpty;
 }
 
-if (!String.prototype.format) {
-  function format(...replacements: any[]) {
-    return String.format(this, ...replacements);
-  }
+function format(...replacements: any[]) {
+  return String.format(this, ...replacements);
+}
 
+if (!String.prototype.format) {
   String.prototype.format = format;
 }

@@ -6,14 +6,15 @@ import {ShowdownModule} from 'ngx-showdown';
 import {ContentService} from './services/content.service';
 import {EventService} from './services/event.service';
 import {MediaService} from './services/media.service';
+import { ImageFallbackDirective } from './directives/image-fallback.directive';
 
 @NgModule({
-  declarations: [RxSubscribeDirective, RendererComponent],
+  declarations: [RxSubscribeDirective, RendererComponent, ImageFallbackDirective],
   imports: [
       CommonModule,
       ShowdownModule
   ],
-  exports: [RxSubscribeDirective, RendererComponent],
+  exports: [RxSubscribeDirective, RendererComponent, ImageFallbackDirective],
   providers: [
     ContentService,
     EventService,

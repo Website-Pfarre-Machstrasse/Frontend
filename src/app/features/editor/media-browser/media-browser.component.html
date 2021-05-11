@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{title || 'Inhalt einfügen'}}</h2>
+<mat-dialog-content>
+  <ng-template #alt><h3>Nix da</h3></ng-template>
+  <ng-container *rxSubscribe="media$; let medias">
+    <ng-container *ngIf="medias.length > 0 else alt">
+      <div *ngFor="let media of medias" [class.selected]="selected.includes(media)" (click)="selected.includes(media) ? selected.splice(selected.indexOf(media), 1) : selected.push(media)">
+        <img [src]="fixURL(media._links.thumbnail)" [fallback]="fixURL(media._links.file)" [alt]="media.name" />
+        <span>{{ media.name }}</span>
+      </div>
+    </ng-container>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Abbrechen</button>
+  <button mat-flat-button [mat-dialog-close]="selected" [disabled]="selected.length <= 0" color="primary">Einfügen</button>
+</mat-dialog-actions>

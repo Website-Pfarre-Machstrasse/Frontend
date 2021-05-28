@@ -9,6 +9,7 @@ import {AuthService} from '../../auth/auth.service';
 import {EventService} from '../../shared/services/event.service';
 import {Event} from '../../data/event';
 import {map} from 'rxjs/operators';
+import {MatDialog} from "@angular/material/dialog";
 
 interface EventFetchInfo {
   start: Date;
@@ -26,6 +27,7 @@ interface EventFetchInfo {
 export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('fcEventContent') eventContent: TemplateRef<any>;
   @ViewChild('calendar') calendar: FullCalendarComponent;
+  @ViewChild('edit') editDialog: TemplateRef<any>;
 
   options: CalendarOptions = {
     locales: [enLocale, deLocale, deATLocale],
@@ -51,7 +53,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private readonly _contentRenderers = new Map<string, EmbeddedViewRef<any>>();
 
-  constructor(private _eventService: EventService, private _authService: AuthService) {}
+  constructor(private _eventService: EventService, private _authService: AuthService, private _dialog: MatDialog) {}
 
   private static convertToFCEvent(event: Event): EventInput {
     return {
@@ -109,14 +111,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private onEventClicked(arg: EventClickArg): void {
     const event = arg.event;
-    // TODO open event details dialog
+    let dialogRef = this._dialog.open(this.editDialog);
   }
 
   private onDateClicked(arg: DateClickArg): void {
     this._authService.user$.subscribe(user => {
       if (user) {
         const {date, allDay} = arg;
-        // TODO open create event dialog
+        let dialogRef = this._dialog.open(this.editDialog);
       }
     });
   }

@@ -11,6 +11,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from '../../shared/shared.module';
+import {MatDialogModule} from "@angular/material/dialog";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -21,13 +22,14 @@ FullCalendarModule.registerPlugins([
 
 @NgModule({
   declarations: [CalendarComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CalendarRoutingModule,
-    FullCalendarModule,
-    MatButtonModule,
-    MatIconModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        CalendarRoutingModule,
+        FullCalendarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule
+    ]
 })
 export class CalendarModule { }

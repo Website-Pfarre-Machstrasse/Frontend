@@ -9,3 +9,6 @@
     </div>
   </ng-template>
 </main>
+<ng-template #edit let-data let-dialogRef="dialogRef">
+  <mat-dialog-actions><button mat-button mat-dialog-close (click)="dialogRef.close()">Abbrechen</button></mat-dialog-actions>
+</ng-template>

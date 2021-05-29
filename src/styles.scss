@@ -2,12 +2,19 @@
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/containers';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/utilities/api';
 @import '~@angular/material/theming';
 @import 'theme';
 
 html,
 body {
   height: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -32,7 +39,11 @@ body {
 }
 
 .center-container {
+  align-self: center;
   flex-grow: 1;
+  max-width: 60rem;
+  overflow-y: auto;
+  width: 100%;
 }
 
 app-nav {

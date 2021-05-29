@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  height: 100%;
+  padding: 1rem;
+}
+
+.toolbar {
+  display: flex;
+  margin-bottom: 1rem;
+
+  button:first-child {
+    margin-right: auto;
+  }
+}
+
+.dlg {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+
+  .cdk-drag {
+    flex-grow: 1;
+  }
+
+  mat-card {
+    height: 100%;
+
+    table {
+      width: 100%;
+    }
+  }
+
+  mat-list-item {
+    cursor: move;
+
+    &.placeholder {
+      border-style: dashed;
+    }
+  }
+
+  mat-card-header {
+    align-items: center;
+    padding-bottom: 0.8rem;
+  }
+
+  mat-card-title {
+    cursor: move;
+    margin: 0;
+  }
+}

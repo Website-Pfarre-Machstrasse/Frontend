@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ContentService } from './content.service';
+import { MediaService } from './media.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-describe('ContentService', () => {
-  let service: ContentService;
+describe('MediaService', () => {
+  let service: MediaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    service = TestBed.inject(ContentService);
+    service = TestBed.inject(MediaService);
   });
 
   it('should be created', () => {

@@ -36,7 +36,7 @@ export class AuthService implements OnDestroy {
   }
 
   private get userUrl(): string {
-    return `${AppConfig.INSTANCE.apiEndpoint}/user`;
+    return `${AppConfig.INSTANCE.apiEndpoint}/self`;
   }
 
   constructor(private _router: Router, private _http: HttpClient, loggerService: LoggerService) {
@@ -48,10 +48,10 @@ export class AuthService implements OnDestroy {
   }
 
   public login(username: string, password: string): Observable<boolean> {
-    if (!environment.production) {
+    /*if (!environment.production) {
       this._user$.next({id: '', email: username, firstName: 'Demo', lastName: 'User', role: 'admin'});
       return of(true);
-    }
+    }*/
     return this._http
       .post<LoginResult>(this.loginUrl, { username, password })
       .pipe(

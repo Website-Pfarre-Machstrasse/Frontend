@@ -6,7 +6,10 @@ import { Page } from '../../../data/page';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
+import { Logger } from '../../../core/logging/logger';
+import { LoggerService } from '../../../core/logging/logger.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-menu-manager',
@@ -18,11 +21,16 @@ export class MenuManagerComponent {
   @ViewChild('trash', {static: true}) private _trashDialog: TemplateRef<{ data: Page[] }>;
   categories: Category[];
   pages: Page[][];
-  deletedPages: Page[] = [];
+  trashedPages: Page[] = [];
   private _categories: readonly Category[];
   private _pages: readonly Page[][];
+  private _logger: Logger;
 
-  constructor(private _content: ContentService, private _dialogService: MatDialog, private _router: Router) {
+  constructor(private _content: ContentService,
+              private _dialogService: MatDialog,
+              private _router: Router,
+              private _auth: AuthService,
+              _loggerService: LoggerService) {
     this._content.getCategories().pipe(mergeMap((categories) => {
       this.categories = categories;
       this.pages = [];
@@ -31,6 +39,7 @@ export class MenuManagerComponent {
       this._categories = Object.freeze(Object.clone(this.categories));
       this._pages = Object.freeze(Object.clone(this.pages));
     });
+    this._logger = _loggerService.getLogger('MenuManager');
   }
 
   dropPage(event: CdkDragDrop<{ category: Category; pages: Page[] }>): void {
@@ -69,7 +78,7 @@ export class MenuManagerComponent {
   }
 
   deletePage(page: Page, i: number): void {
-    this.deletedPages.push(page);
+    this.trashedPages.push(page);
     const index = this.pages[i].indexOf(page, 0);
     if (index > -1) {
       this.pages[i].splice(index, 1);
@@ -108,21 +117,36 @@ export class MenuManagerComponent {
   }
 
   openTrash(): void {
-    this._dialogService.open(this._trashDialog, {data: this.deletedPages, disableClose: false});
+    this._dialogService.open(this._trashDialog, {data: this.trashedPages, disableClose: false});
   }
 
   restore(page: Page): void {
     const i = this.categories.findIndex(value => value.id === page.category);
     this.pages[i].splice(page.order, 0, page);
     this.pages[i].forEach((value, index) => value.order = index);
-    const insert = this.deletedPages.indexOf(page, 0);
+    const insert = this.trashedPages.indexOf(page, 0);
     if (insert > -1) {
-      this.deletedPages.splice(insert, 1);
+      this.trashedPages.splice(insert, 1);
+    }
+  }
+
+  confirmDelete(page: Page): void {
+    if (confirm(`Wollen Sie die Seite ${page.title} wirklich unwiderruflich löschen?`)) {
+      const index = this.trashedPages.indexOf(page, 0);
+      if (index > -1) {
+        this.trashedPages.splice(index, 1);
+      }
+      this._content.deletePage(page.category, page.id).subscribe(() => this._logger.info(`Deleted page ${page.category}/${page.id}`));
     }
   }
 
   save(): void {
     console.log(Object.diff(this.pages, this._pages));
     console.log(Object.diff(this.categories, this._categories));
+    this.trashedPages.forEach(value => value.category = 'trash');
+  }
+
+  isAdmin(): Observable<boolean> {
+    return this._auth.user$.pipe(filter(value => !!value), map(value => value.role === 'admin'));
   }
 }

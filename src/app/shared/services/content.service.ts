@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UploadResult } from 'src/app/data/upload-result';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Category, CategoryDTO} from '../../data/category';
 import {Page, PageDTO} from '../../data/page';
 import {HttpClient} from '@angular/common/http';
@@ -80,6 +80,10 @@ export class ContentService {
 
   public saveContent(categoryId: string, pageId: string, content: string): Observable<string> {
     return this._http.put<string>(`${this._url}/category/${categoryId}/page/${pageId}/content`, content);
+  }
+
+  public deletePage(categoryId: string, pageId: string): Observable<void> {
+    return this._http.delete<Record<string, never>>(`${this._url}/category/${categoryId}/page/${pageId}`).pipe(map(() => undefined));
   }
 
   private dtoToCategory(dto: (CategoryDTO | CategoryDTO[])): (Category | Category[]) {

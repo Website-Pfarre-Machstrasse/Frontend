@@ -6,6 +6,8 @@
 <div (cdkDropListDropped)="dropCategory($event)"
      [cdkDropListData]="{categories:categories, pages:pages}"
      cdkDropList
+     [cdkDropListGroupDisabled]="(isAdmin() | async) === false"
+     [cdkDropListDisabled]="(isAdmin() | async) === false"
      cdkDropListGroup
      cdkDropListOrientation="vertical"
      class="dlg">
@@ -51,7 +53,13 @@
     </form>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button *ngIf="data.isPage" (click)="editPageContent(data.obj)">Bearbeiten</button>
+    <button mat-button *ngIf="data.isPage" (click)="editPageContent(data.obj)">
+      <span style="display: flex;
+      flex-direction: column;">
+        <span style="height: 1rem;">Inhalt Bearbeiten</span>
+        <sub>(Aktuelle änderungen gehen verloren)</sub>
+      </span>
+    </button>
     <button mat-button mat-dialog-close>Abbrechen</button>
     <button mat-button [mat-dialog-close]="data.obj" cdkFocusInitial>Speichern</button>
   </mat-dialog-actions>
@@ -64,6 +72,7 @@
       <mat-list-item *ngFor="let page of data">
         <span>{{page.title}}</span>
         <button mat-button (click)="restore(page)">Wiederherstellen</button>
+        <button mat-icon-button (click)="confirmDelete(page)" *ngIf="isAdmin() | async"><mat-icon>trash</mat-icon></button>
       </mat-list-item>
     </mat-list>
   </mat-dialog-content>

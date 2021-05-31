@@ -266,6 +266,7 @@ app-nav {
     .item {
       display: flex;
       flex-basis: auto;
+      height: 4.3rem;
       order: 1;
 
       &:hover ul,
@@ -286,10 +287,10 @@ app-nav {
       }
 
       ul {
-        margin-left: -12px;
-        margin-right: -12px;
+        margin-left: -10px;
+        margin-top: 4.3rem;
         position: absolute;
-        top: -13rem;
+        transform: translate(0%, 50%);
       }
     }
   }

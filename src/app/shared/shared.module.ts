@@ -7,18 +7,24 @@ import {ContentService} from './services/content.service';
 import {EventService} from './services/event.service';
 import {MediaService} from './services/media.service';
 import { ImageFallbackDirective } from './directives/image-fallback.directive';
+import { MediaBrowserComponent } from './components/media-browser/media-browser.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [RxSubscribeDirective, RendererComponent, ImageFallbackDirective],
+  declarations: [RxSubscribeDirective, RendererComponent, MediaBrowserComponent, ImageFallbackDirective],
   imports: [
-      CommonModule,
-      ShowdownModule
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    ShowdownModule
   ],
-  exports: [RxSubscribeDirective, RendererComponent, ImageFallbackDirective],
+  exports: [RxSubscribeDirective, RendererComponent, MediaBrowserComponent, ImageFallbackDirective],
   providers: [
     ContentService,
     EventService,
     MediaService
-  ]
+  ],
+  entryComponents: [MediaBrowserComponent]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
 import './object.d';
-import { transform, isEqual, isObject, cloneDeep } from 'lodash';
+import { transform, isEqual, isObject } from 'lodash';
 import { isObservable } from 'rxjs';
 
 /**

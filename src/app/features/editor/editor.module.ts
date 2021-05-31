@@ -14,12 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MediaBrowserComponent } from './media-browser/media-browser.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [EditorComponent, MediaBrowserComponent],
+  declarations: [EditorComponent],
   imports: [
     CommonModule,
     EditorRoutingModule,
@@ -36,7 +35,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressSpinnerModule,
     MatDialogModule
   ],
-  schemas: [NO_ERRORS_SCHEMA],
-  entryComponents: [MediaBrowserComponent]
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class EditorModule { }

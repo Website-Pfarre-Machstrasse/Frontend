@@ -59,6 +59,78 @@ $aligns: 'left', 'center', 'right', 'justify';
   }
 }
 
+.container-ie-fallback {
+  margin: 0;
+  padding: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  h1,
+  h2 {
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .links {
+    color: #000;
+  }
+
+  .supported-browser {
+    display: block;
+    margin: 0 auto;
+    width: 75%;
+  }
+
+  .browser {
+    float: left;
+    text-align: center;
+    width: 33%;
+  }
+
+  .browser-icon {
+    height: auto;
+    max-width: 100%;
+    width: 10rem;
+  }
+
+  .clearfix::before,
+  .clearfix::after {
+    content: ' ';
+    display: table;
+  }
+
+  .clearfix::after {
+    clear: both;
+  }
+}
+
+
+.container-noscript {
+  margin: 0;
+  padding: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  h1 {
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+
+
 app-nav {
   .item {
     align-items: center;

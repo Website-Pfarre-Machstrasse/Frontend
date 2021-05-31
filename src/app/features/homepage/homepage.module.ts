@@ -6,6 +6,8 @@ import { HomepageComponent } from './homepage.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {SharedModule} from '../../shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {SharedModule} from '../../shared/shared.module';
     SharedModule,
     HomepageRoutingModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class HomepageModule { }

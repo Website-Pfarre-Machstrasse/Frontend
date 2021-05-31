@@ -20,7 +20,7 @@ export const initializeApp = (appConfig: AppConfig, authService: AuthService) =>
   appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
 });
 
-const classMap = {img: 'img-fluid center'};
+const classMap = {img: 'img-fluid'};
 const bindings = Object.keys(classMap)
   .map(key => ({
     type: 'output',

@@ -15,7 +15,7 @@ import 'codemirror/lib/codemirror';
 import 'codemirror/mode/gfm/gfm';
 import 'codemirror/addon/display/fullscreen';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MediaBrowserComponent } from './media-browser/media-browser.component';
+import { MediaBrowserComponent } from '../../shared/components/media-browser/media-browser.component';
 import { ComponentType } from '@angular/cdk/overlay';
 
 interface ToolbarAction {

@@ -8,7 +8,14 @@
       <th mat-header-cell *matHeaderCellDef>Bilder</th>
       <td mat-cell *matCellDef="let gallery">{{ gallery.media.length }}</td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="['title', 'size']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['title', 'size'];" (click)="showGallery(row.id)"></tr>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Edit</th>
+      <td mat-cell *matCellDef="let gallery">
+        <button mat-fab (click)='openDialog(gallery)'><mat-icon>edit</mat-icon></button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="(auth.isAuthenticated() | async) ? ['title', 'size', 'edit'] : ['title', 'size']"></tr>
+    <tr mat-row *matRowDef="let row; columns: (auth.isAuthenticated() | async) ? ['title', 'size', 'edit'] : ['title', 'size'];" (click)="showGallery(row.id)"></tr>
   </table>
+  <button mat-fab class="edit-btn" (click)='openDialog()'><mat-icon>edit</mat-icon></button>
 </div>

@@ -29,3 +29,10 @@ table {
     transform: scale(1.02);
   }
 }
+
+.edit-btn {
+  bottom: 4rem;
+  position: absolute;
+  right: 2rem;
+  z-index: 101;
+}

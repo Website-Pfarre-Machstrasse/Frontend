@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Gallery as NgGallery, GalleryItem, ImageItem, VideoItem} from 'ng-gallery';
 import {VideoItemData} from 'ng-gallery/lib/components/templates/items.model';
 import {Lightbox} from 'ng-gallery/lightbox';
@@ -6,6 +6,9 @@ import {Observable} from 'rxjs';
 import {GalleryService} from './gallery.service';
 import {Gallery} from '../../data/gallery';
 import {Media} from '../../data/media';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from './dialog/dialog.component';
+import {AuthService} from '../../auth/auth.service';
 
 
 @Component({
@@ -20,7 +23,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   constructor(private _gallery: NgGallery,
               private _lightbox: Lightbox,
-              private _galleryService: GalleryService) {}
+              private _galleryService: GalleryService,
+              private _dialog: MatDialog,
+              public auth: AuthService) {}
 
   ngOnInit(): void {
     let themeStyle = document.getElementById('themeStyle') as HTMLLinkElement;
@@ -67,6 +72,20 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this._galleryService.getGallery(id).subscribe(gallery => {
       this._gallery.ref(id).load(this.parse(gallery.media));
       this._lightbox.open(undefined, id);
+    });
+  }
+
+  openDialog(gallery?: Gallery): void {
+    const media = gallery?.media ?? [];
+    const dialogRef = this._dialog.open(DialogComponent, {data: {media}});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if (gallery) {
+          this._galleryService.addMediaToGallery(gallery.id, result);
+        } else {
+          this._galleryService.createGallery(result);
+        }
+      }
     });
   }
 }

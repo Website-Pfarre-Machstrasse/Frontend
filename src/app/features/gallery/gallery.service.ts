@@ -3,6 +3,7 @@ import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {AppConfig} from '../../core/config/app-config';
 import {Gallery} from '../../data/gallery';
+import {map} from 'rxjs/operators';
 
 const TEST = {
   id: 'test',
@@ -217,5 +218,17 @@ export class GalleryService {
 
   public getGalleries(): Observable<Gallery[]> {
     return this._http.get<Gallery[]>(`${this._url}/gallery`);
+  }
+
+  public createGallery(title: string): Observable<Gallery> {
+    return this._http.post<Gallery>(`${this._url}/gallery`, {title});
+  }
+
+  public setGalleryName(id: string, title: string): Observable<Gallery> {
+    return this._http.patch<Gallery>(`${this._url}/gallery/${encodeURIComponent(String(id))}`, {title});
+  }
+
+  public deleteGallery(id: string): Observable<void> {
+    return this._http.delete(`${this._url}/gallery/${encodeURIComponent(String(id))}`).pipe(map(() => undefined));
   }
 }

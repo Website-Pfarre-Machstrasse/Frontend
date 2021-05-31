@@ -6,13 +6,16 @@ import { GalleryComponent} from './gallery.component';
 import { GalleryModule as _GalleryModule } from 'ng-gallery';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {LightboxModule} from 'ng-gallery/lightbox';
-import {MatTableModule} from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { LightboxModule } from 'ng-gallery/lightbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [GalleryComponent],
+  declarations: [GalleryComponent, DialogComponent],
   imports: [
     CommonModule,
     GalleryRoutingModule,
@@ -21,7 +24,9 @@ import {MatTableModule} from '@angular/material/table';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    FormsModule
   ]
 })
 export class GalleryModule { }

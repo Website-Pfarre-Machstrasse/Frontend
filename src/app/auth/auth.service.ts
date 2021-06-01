@@ -8,7 +8,6 @@ import {Logger} from '../core/logging/logger';
 import {User} from '../data/user';
 import {LoginResult} from '../data/login-result';
 import {AppConfig} from '../core/config/app-config';
-import {environment} from '../../environments/environment';
 
 
 const REFRESH_TOKEN = 'refresh_token';
@@ -36,7 +35,7 @@ export class AuthService implements OnDestroy {
   }
 
   private get userUrl(): string {
-    return `${AppConfig.INSTANCE.apiEndpoint}/user`;
+    return `${AppConfig.INSTANCE.apiEndpoint}/self`;
   }
 
   constructor(private _router: Router, private _http: HttpClient, loggerService: LoggerService) {
@@ -48,10 +47,6 @@ export class AuthService implements OnDestroy {
   }
 
   public login(username: string, password: string): Observable<boolean> {
-    if (!environment.production) {
-      this._user$.next({username, role: 'admin'});
-      return of(true);
-    }
     return this._http
       .post<LoginResult>(this.loginUrl, { username, password })
       .pipe(
@@ -75,16 +70,24 @@ export class AuthService implements OnDestroy {
   }
 
   public getRefreshToken(): string | null {
-    return localStorage.getItem(REFRESH_TOKEN);
+    const token = localStorage.getItem(REFRESH_TOKEN);
+    if (token === undefined || token === 'undefined' || token === null || token === 'null') {
+      return null;
+    }
+    return token;
   }
 
   public getAccessToken(): string | null {
-    return localStorage.getItem(ACCESS_TOKEN);
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    if (token === undefined || token === 'undefined' || token === null || token === 'null') {
+      return null;
+    }
+    return token;
   }
 
   public setLocalStorage(x: LoginResult): void {
-    localStorage.setItem(ACCESS_TOKEN, x.access_token);
-    localStorage.setItem(REFRESH_TOKEN, x.refresh_token ?? null);
+    localStorage.setItem(ACCESS_TOKEN, x.accessToken);
+    localStorage.setItem(REFRESH_TOKEN, x.refreshToken ?? null);
     localStorage.setItem('login-event', 'login' + Math.random());
   }
 
@@ -94,17 +97,7 @@ export class AuthService implements OnDestroy {
     localStorage.setItem('logout-event', 'logout' + Math.random());
   }
 
-  private getTokenRemainingTime(): number {
-    const accessToken = this.getAccessToken();
-    if (!accessToken) {
-      return 0;
-    }
-    const jwtToken = JSON.parse(atob(accessToken.split('.')[1]));
-    const expires = new Date(jwtToken.exp * 1000);
-    return expires.getTime() - Date.now();
-  }
-
-  private refreshToken(): Observable<LoginResult> {
+  public refreshToken(): Observable<LoginResult> {
     const refreshToken = this.getRefreshToken();
     if (!refreshToken) {
       this.doLogout();
@@ -121,6 +114,16 @@ export class AuthService implements OnDestroy {
         }),
         catchError(() => of(null))
       );
+  }
+
+  private getTokenRemainingTime(): number {
+    const accessToken = this.getAccessToken();
+    if (!accessToken) {
+      return 0;
+    }
+    const jwtToken = JSON.parse(atob(accessToken.split('.')[1]));
+    const expires = new Date(jwtToken.exp * 1000);
+    return expires.getTime() - Date.now();
   }
 
   private updateUser(): void {

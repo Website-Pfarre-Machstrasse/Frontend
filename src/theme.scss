@@ -79,7 +79,7 @@ $dark-theme: mat-dark-theme((
     li {
       color: mat-contrast($primary, 300);
 
-      &.item:not(.button) {
+      &.item:not(.button):not(.icon) {
         @include media-breakpoint-down(lg) {
           &.open {
             background-color: mat-color($primary, 600);

@@ -8,4 +8,8 @@ import {Component, HostBinding} from '@angular/core';
 export class AppComponent {
   @HostBinding('class') class = 'mat-typography';
   title = 'Pfarre Machstrasse - Hl. Klaus von Flüe';
+
+  public print(): void {
+    window.print();
+  }
 }

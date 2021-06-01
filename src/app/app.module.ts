@@ -12,8 +12,9 @@ import {NavComponent} from './core/nav/nav.component';
 import {HeaderComponent} from './core/header/header.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from './shared/shared.module';
-import {ShowdownConfig, ShowdownModule} from 'ngx-showdown';
+import {ShowdownConfig} from 'ngx-showdown';
 import * as showdown from 'showdown';
 
 export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
@@ -51,7 +52,7 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
     AuthModule,
     MatIconModule,
     SharedModule,
-    ShowdownModule
+    MatButtonModule
   ],
   providers: [
     {

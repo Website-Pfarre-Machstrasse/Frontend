@@ -6,6 +6,7 @@ import {LoginFormComponent} from '../../auth/login-form/login-form.component';
 import {Category} from '../../data/category';
 import {ContentService} from '../../shared/services/content.service';
 import {User} from '../../data/user';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +17,7 @@ export class NavComponent {
   public openCat: string;
 
   public get categories$(): Observable<Category[]> {
-    return this._contentService.getCategories();
+    return this._contentService.getCategories().pipe(map(v=>v.filter(value => value.id !== '_')));
   }
 
   public get user$(): Observable<User> {

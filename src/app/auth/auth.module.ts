@@ -9,7 +9,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
   providers: [
     AuthGuard,
     AuthService,
-    AuthInterceptor
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   exports: [LoginFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

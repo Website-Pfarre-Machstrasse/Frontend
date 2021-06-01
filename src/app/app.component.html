@@ -3,7 +3,7 @@
   <div class="center-container">
     <router-outlet></router-outlet>
     <div class="print-button">
-      <button mat-fab><mat-icon>print</mat-icon></button>
+      <button mat-fab (click)="print()"><mat-icon>print</mat-icon></button>
     </div>
   </div>
   <app-footer></app-footer>

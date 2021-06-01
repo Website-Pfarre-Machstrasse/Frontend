@@ -18,53 +18,60 @@
   <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png" sizes="180x180"/>
   <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" type="text/css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+        type="text/css"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css"/>
 
 </head>
-<body class="mat-typography">
-<app-root>
-  <div id="ie-fallback" style="display: none;">
-    <div class="container-ie-fallback">
-      <h1>Internet Explorer wird nicht unterstützt!</h1>
-      <p>Internet Explorer verwendet veraltete und unsichere Technologie. Nutzen Sie einen der untenstehenden Browser. Alternativ können Sie Chrome Frame installieren</p>
-      <h2>Unterstützete Browser</h2>
-      <div class="supported-browser">
-        <div class="browser">
-          <a href="https://www.google.com/intl/de/chrome/" target="_blank"><img class="browser-icon" src="https://www.google.com/chrome/static/images/chrome-logo.svg"></a><br>
-          <span><a class="links" href="https://www.google.com/intl/de/chrome/" target="_blank">Google Chrome</a></span><br>
-          <span><a class="links" href="https://praxistipps.chip.de/google-chrome-installieren-so-gehts_117290" target="_blank">Anleitung</a></span>
-        </div>
-
-        <div class="browser">
-          <a href="https://www.mozilla.org/de/firefox/new/" target="_blank"><img class="browser-icon" src="https://user-media-prod-cdn.itsre-sumo.mozilla.net/uploads/products/2020-04-14-08-36-42-8dda6f.png"></a><br>
-          <span><a class="links" href="https://www.mozilla.org/de/firefox/new/" target="_blank">Firefox</a></span><br>
-          <span><a class="links" href="https://support.mozilla.org/de/kb/Firefox-unter-Windows-installieren" target="_blank">Anleitung</a></span>
-        </div>
-
-        <div class="browser">
-          <a href="https://www.microsoft.com/de-de/edge" target="_blank"><img class="browser-icon" src="https://edgewelcomecdn.microsoft.com/site/img/launch-logo.553dafc.png"></a><br>
-          <span><a class="links" href="https://www.microsoft.com/de-de/edge" target="_blank">Microsoft Edge</a></span><br>
-          <span><a class="links" href="https://www.drwindows.de/news/windows-anleitungen-faq/microsoft-edge-die-installation-schritt-fuer-schritt" target="_blank">Anleitung</a></span>
-        </div>
-        <div class="clearfix"></div>
+<body>
+<div id="ie-fallback" style="display: none;">
+  <div class="container-ie-fallback">
+    <h1>Internet Explorer wird nicht unterstützt!</h1>
+    <p>Internet Explorer verwendet veraltete und unsichere Technologie. Nutzen Sie einen der untenstehenden Browser.
+       Alternativ können Sie Chrome Frame installieren</p>
+    <h2>Unterstützete Browser</h2>
+    <div class="supported-browser">
+      <div class="browser">
+        <a href="https://www.google.com/intl/de/chrome/" target="_blank"><img class="browser-icon"
+                                                                              src="https://www.google.com/chrome/static/images/chrome-logo.svg"></a><br>
+        <span><a class="links" href="https://www.google.com/intl/de/chrome/"
+                 target="_blank">Google Chrome</a></span><br>
+        <span><a class="links" href="https://praxistipps.chip.de/google-chrome-installieren-so-gehts_117290"
+                 target="_blank">Anleitung</a></span>
       </div>
-      <h2>Probleme?</h2>
-      <p>Sollten Sie Probleme haben, wenden Sie sich an <b>randomMail@email.com</b> oder <b>+43 555 555</b></p>
+
+      <div class="browser">
+        <a href="https://www.mozilla.org/de/firefox/new/" target="_blank"><img class="browser-icon"
+                                                                               src="https://user-media-prod-cdn.itsre-sumo.mozilla.net/uploads/products/2020-04-14-08-36-42-8dda6f.png"></a><br>
+        <span><a class="links" href="https://www.mozilla.org/de/firefox/new/" target="_blank">Firefox</a></span><br>
+        <span><a class="links" href="https://support.mozilla.org/de/kb/Firefox-unter-Windows-installieren"
+                 target="_blank">Anleitung</a></span>
+      </div>
+
+      <div class="browser">
+        <a href="https://www.microsoft.com/de-de/edge" target="_blank"><img class="browser-icon"
+                                                                            src="https://edgewelcomecdn.microsoft.com/site/img/launch-logo.553dafc.png"></a><br>
+        <span><a class="links" href="https://www.microsoft.com/de-de/edge" target="_blank">Microsoft Edge</a></span><br>
+        <span><a class="links"
+                 href="https://www.drwindows.de/news/windows-anleitungen-faq/microsoft-edge-die-installation-schritt-fuer-schritt"
+                 target="_blank">Anleitung</a></span>
+      </div>
+      <div class="clearfix"></div>
     </div>
+    <h2>Probleme?</h2>
+    <p>Sollten Sie Probleme haben, wenden Sie sich an <b>randomMail@email.com</b> oder <b>+43 555 555</b></p>
   </div>
-
-  <noscript>
-    <div class="container-noscript">
-      <h1>Javascript wurde blockiert!</h1>
-      <p>Diese Seite verwendet JavaScript! Bitte erlauben Sie die Ausführung von Scripts um diese Website zu verwenden.</p>
-    </div>
-  </noscript>
-</app-root>
-
+</div>
+<noscript>
+  <div class="container-noscript">
+    <h1>Javascript wurde blockiert!</h1>
+    <p>Diese Seite verwendet JavaScript! Bitte erlauben Sie die Ausführung von Scripts um diese Website zu
+       verwenden.</p>
+  </div>
+</noscript>
 <script>
-  if(window.navigator.userAgent.match(/(MSIE|Trident)/)) {
-    document.getElementById("ie-fallback").style.display = 'block';
+  if (window.navigator.userAgent.match(/(MSIE|Trident)/)) {
+    document.getElementById('ie-fallback').style.display = 'block';
   }
 </script>
 </body>

@@ -15,7 +15,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   events$: Observable<Event[]>;
 
   constructor(private _eventService: EventService, contentService: ContentService) {
-    this.text$ = contentService.getHomeContent();
+    this.text$ = contentService.getPageContent('_', 'home');
     const start = new Date();
     const end = new Date();
     end.setDate(end.getDate()+8);

@@ -74,26 +74,6 @@
                 "bundleName": "editor",
                 "inject": false,
                 "input": "src/app/features/editor/editor.theme.scss"
-              },
-              {
-                "bundleName": "page-renderer",
-                "inject": false,
-                "input": "src/app/features/page-renderer/page-renderer.theme.scss"
-              },
-              {
-                "bundleName": "homepage",
-                "inject": false,
-                "input": "src/app/features/homepage/homepage.theme.scss"
-              },
-              {
-                "bundleName": "calendar",
-                "inject": false,
-                "input": "src/app/features/calendar/calendar.theme.scss"
-              },
-              {
-                "bundleName": "gallery",
-                "inject": false,
-                "input": "src/app/features/gallery/gallery.theme.scss"
               }
             ],
             "scripts": [],

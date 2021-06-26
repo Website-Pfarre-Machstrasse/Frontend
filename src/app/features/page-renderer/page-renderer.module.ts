@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PageRendererRoutingModule } from './page-renderer-routing.module';
 import { PageRendererComponent } from './page-renderer.component';
 import {SharedModule} from '../../shared/shared.module';
+import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import {SharedModule} from '../../shared/shared.module';
     imports: [
       CommonModule,
       PageRendererRoutingModule,
-      SharedModule
+      SharedModule,
+      MatIconModule,
+      MatButtonModule
     ]
 })
 export class PageRendererModule { }

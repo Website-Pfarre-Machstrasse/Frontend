@@ -32,13 +32,28 @@
               "src/assets",
               "src/site.webmanifest",
               {
-                "glob": "**/*",
-                "input": "node_modules/ace-builds/src-min",
-                "output": "./assets/ace-builds/"
+                "glob": "**/*.css",
+                "input": "node_modules/codemirror/theme",
+                "output": "./assets/codemirror/theme/"
+              },
+              {
+                "glob": "**/*.css",
+                "input": "node_modules/codemirror/lib",
+                "output": "./assets/codemirror/lib/"
+              },
+              {
+                "glob": "**/*.js",
+                "input": "node_modules/codemirror",
+                "output": "./assets/codemirror/"
               }
             ],
             "styles": [
               "src/styles.scss",
+              {
+                "bundleName": "editor",
+                "inject": false,
+                "input": "src/app/features/editor/editor.theme.scss"
+              },
               {
                 "bundleName": "page-renderer",
                 "inject": false,
@@ -59,7 +74,9 @@
             "allowedCommonJsDependencies": [
               "showdown",
               "ace-builds/webpack-resolver",
-              "lodash"
+              "lodash",
+              "codemirror",
+              "@ctrl/ngx-codemirror"
             ]
           },
           "configurations": {

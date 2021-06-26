@@ -24,3 +24,34 @@
 @media (prefers-color-scheme: dark) {
   @include homepage-theme($dark-theme);
 }
+
+
+
+.title-rule {
+  border-style: none;
+  border-top: solid 4px;
+  height: 0;
+  width: 70%;
+}
+
+h1.title {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1em;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.title-image {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+
+  img {
+    height: 20rem;
+    object-fit: cover;
+    object-position: top;
+    width: 100%;
+  }
+}

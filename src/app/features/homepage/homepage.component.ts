@@ -5,8 +5,9 @@ import {EventService} from '../../shared/services/event.service';
 import { Event, isFullDay, isSameDay } from '../../data/event';
 import {ContentService} from '../../shared/services/content.service';
 import { UserService } from '../../shared/services/user.service';
-import { map } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -17,8 +18,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
   text$: Observable<string>;
   events$: Observable<Event[]>;
 
-  constructor(private _eventService: EventService, private _userService: UserService, contentService: ContentService) {
-    this.text$ = contentService.getPageContent('_', 'home');
+  constructor(private _eventService: EventService,
+              private _userService: UserService,
+              private _contentService: ContentService,
+              private _auth: AuthService,
+              private _router: Router) {
+    this.text$ = this._contentService.getPageContent('_', 'home');
     const start = new Date();
     const end = new Date();
     end.setDate(end.getDate()+8);
@@ -40,10 +45,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
     document.head.appendChild(themeStyle);
   }
 
-  public getName(ownerId: string): Observable<string> {
-    return this._userService.getUser(ownerId).pipe(map(value => `${value.firstName} ${value.lastName}`));
-  }
-
   public formatEventDate(event: Event): string {
     if (isFullDay(event)) {
       return formatDate(event.start, 'E d.M.y', 'de-AT');
@@ -51,5 +52,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
     const start = formatDate(event.start, 'E d.M.y h:m', 'de-AT');
     const end = formatDate(event.end, isSameDay(event)?'h:m':'E d.M.y h:m', 'de-AT');
     return start + ' — ' + end;
+  }
+
+  canEdit(): Observable<boolean> {
+    return this._auth.isAuthenticated();
+  }
+
+  edit(): void {
+    this._router.navigate(['editor'], {queryParams: {cat: '_', page: 'home'}});
   }
 }

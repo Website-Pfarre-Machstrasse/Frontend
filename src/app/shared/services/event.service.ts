@@ -48,7 +48,7 @@ export class EventService {
       const event = {
         get media$(): Observable<Media> {
           if (this.media) {
-            return ref._media.getMedia(this.media);
+            return ref._media.getSingleMedia(this.media);
           } else {
             return of(null);
           }

@@ -14,7 +14,7 @@ import {FooterComponent} from './core/footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from './shared/shared.module';
-import {ShowdownConfig} from 'ngx-showdown';
+import {ShowdownConfig, ShowdownModule} from 'ngx-showdown';
 import * as showdown from 'showdown';
 
 import localeDeAt from '@angular/common/locales/de-AT';
@@ -27,7 +27,7 @@ export const initializeApp = (appConfig: AppConfig, authService: AuthService) =>
   appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
 });
 
-const classMap = {img: 'img-fluid center'};
+const classMap = {img: 'img-fluid'};
 const bindings = Object.keys(classMap)
   .map(key => ({
     type: 'output',
@@ -58,7 +58,8 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
     AuthModule,
     MatIconModule,
     SharedModule,
-    MatButtonModule
+    MatButtonModule,
+    ShowdownModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-AT' },
@@ -123,8 +124,11 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
           }
         }, {
           type: 'output',
-          regex: /<p><img(.+?)\/><\/p>/g,
+          regex: /(<p>)?\w?<img(.*)\/>\w?(<\/p>)?/g,
           replace: (match: string, other: string) => {
+            if (!other) {
+              return match;
+            }
             other = other.format({server: AppConfig.INSTANCE.apiEndpoint});
             return `<p><img${other}/></p>`;
           }

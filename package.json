@@ -47,7 +47,7 @@
     "codemirror": "^5.60.0",
     "ng-gallery": "^5.0.0",
     "ngx-showdown": "^6.0.0",
-    "rxjs": "~6.6.6",
+    "rxjs": "~6.6.7",
     "showdown": "^1.9.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

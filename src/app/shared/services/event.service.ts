@@ -54,7 +54,11 @@ export class EventService {
           }
         }
       };
-      Object.keys(dto).forEach(key => event[key] = dto[key]);
+      const converters = {
+        start: x => new Date(x),
+        end: x => new Date(x)
+      };
+      Object.keys(dto).forEach(key => event[key] = (converters[key] ?? (x => x))(dto[key]));
       return event as Event;
     }
   }

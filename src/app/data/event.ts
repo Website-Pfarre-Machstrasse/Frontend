@@ -14,3 +14,8 @@ export interface EventDTO {
 export interface Event extends EventDTO {
   media$: Observable<Media>;
 }
+
+export const isFullDay = (event: Event): boolean => false;
+export const isSameDay = (event: Event): boolean => event.start.getDate() === event.end.getDate() &&
+    event.start.getMonth() === event.end.getMonth() &&
+    event.start.getFullYear() === event.end.getFullYear();

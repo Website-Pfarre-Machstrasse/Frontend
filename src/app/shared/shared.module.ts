@@ -6,6 +6,7 @@ import {ShowdownModule} from 'ngx-showdown';
 import {ContentService} from './services/content.service';
 import {EventService} from './services/event.service';
 import {MediaService} from './services/media.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [RxSubscribeDirective, RendererComponent],
@@ -17,7 +18,8 @@ import {MediaService} from './services/media.service';
   providers: [
     ContentService,
     EventService,
-    MediaService
+    MediaService,
+    UserService
   ]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -16,6 +16,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from './shared/shared.module';
 import {ShowdownConfig} from 'ngx-showdown';
 import * as showdown from 'showdown';
+
+import localeDeAt from '@angular/common/locales/de-AT';
+import localeDeAtExtra from '@angular/common/locales/extra/de-AT';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeDeAt, 'de-AT', localeDeAtExtra);
 
 export const initializeApp = (appConfig: AppConfig, authService: AuthService) => (): Promise<void> => new Promise<void>(resolve => {
   appConfig.load().then(() => authService.refreshToken().subscribe().add(resolve));
@@ -55,6 +61,7 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
     MatButtonModule
   ],
   providers: [
+    {provide: LOCALE_ID, useValue: 'de-AT' },
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,

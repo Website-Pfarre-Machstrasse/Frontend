@@ -53,7 +53,8 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "showdown",
-              "ace-builds/webpack-resolver"
+              "ace-builds/webpack-resolver",
+              "lodash"
             ]
           },
           "configurations": {

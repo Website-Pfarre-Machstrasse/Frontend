@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/calendar/calendar.module').then(m => m.CalendarModule)
   },
   {
+    path: 'galerie',
+    loadChildren: () => import('./features/gallery/gallery.module').then(m => m.GalleryModule)
+  },
+  {
     path: ':cat/:page',
     loadChildren: () => import('./features/page-renderer/page-renderer.module').then(m => m.PageRendererModule)
   },

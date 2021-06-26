@@ -1,0 +1,47 @@
+@import 'src/theme';
+
+@mixin gallery-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is_dark);
+
+  app-gallery {
+    .container {
+      background-color: map-get($background, background);
+    }
+
+    table {
+      //-webkit-box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 500);
+      box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 500);
+    }
+
+    .mat-header-cell {
+      background-color: mat-color($primary, 700);
+      color: mat-contrast($primary, 700);
+    }
+
+    .mat-row {
+      background-color: darken(map-get($background, background), 3%);
+
+      &:nth-of-type(odd) {
+        background-color: darken(map-get($background, background), 5%);
+      }
+
+      &:hover {
+        //-webkit-box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 200);
+        box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 200);
+      }
+    }
+  }
+
+
+}
+
+@include gallery-theme($light-theme);
+
+@media (prefers-color-scheme: dark) {
+  @include gallery-theme($dark-theme);
+}

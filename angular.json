@@ -68,6 +68,11 @@
                 "bundleName": "calendar",
                 "inject": false,
                 "input": "src/app/features/calendar/calendar.theme.scss"
+              },
+              {
+                "bundleName": "gallery",
+                "inject": false,
+                "input": "src/app/features/gallery/gallery.theme.scss"
               }
             ],
             "scripts": [],

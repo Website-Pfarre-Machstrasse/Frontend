@@ -4,7 +4,7 @@ import { LoggingModule } from './logging/logging.module';
 import {ErrorInterceptor} from './error.interceptor';
 import {AppConfig} from './config/app-config';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
-import {MatButtonModule} from "@angular/material/button";
+import {MatButtonModule} from '@angular/material/button';
 import {JsonInterceptor} from './json.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 

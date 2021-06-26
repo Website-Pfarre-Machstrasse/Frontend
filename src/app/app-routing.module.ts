@@ -1,11 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./features/homepage/homepage.module').then(m => m.HomepageModule)
+  },
+  {
+    path: 'editor',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./features/editor/editor.module').then(mod => mod.EditorModule)
   },
   {
     path: 'kalender',

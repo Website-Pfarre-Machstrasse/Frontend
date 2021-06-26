@@ -14,7 +14,7 @@ import {FooterComponent} from './core/footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from './shared/shared.module';
-import {ShowdownConfig} from 'ngx-showdown';
+import {ShowdownConfig, ShowdownModule} from 'ngx-showdown';
 import * as showdown from 'showdown';
 
 import localeDeAt from '@angular/common/locales/de-AT';
@@ -58,7 +58,8 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
     AuthModule,
     MatIconModule,
     SharedModule,
-    MatButtonModule
+    MatButtonModule,
+    ShowdownModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-AT' },

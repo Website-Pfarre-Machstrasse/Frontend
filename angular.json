@@ -48,6 +48,11 @@
                 "bundleName": "homepage",
                 "inject": false,
                 "input": "src/app/features/homepage/homepage.theme.scss"
+              },
+              {
+                "bundleName": "calendar",
+                "inject": false,
+                "input": "src/app/features/calendar/calendar.theme.scss"
               }
             ],
             "scripts": [],

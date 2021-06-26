@@ -1,0 +1,14 @@
+<main class="container">
+  <full-calendar #calendar [options]="options"></full-calendar>
+  <ng-template #fcEventContent let-arg='arg'>
+    <div class="calendar-event">
+      <h5 class="calendar-event-header">
+        <b class="calendar-time">{{ arg.timeText }}</b>&nbsp;
+        <span class="calendar-title">{{ arg.event.title }}</span>
+      </h5>
+    </div>
+  </ng-template>
+</main>
+<ng-template #edit let-data let-dialogRef="dialogRef">
+  <mat-dialog-actions><button mat-button mat-dialog-close (click)="dialogRef.close()">Abbrechen</button></mat-dialog-actions>
+</ng-template>

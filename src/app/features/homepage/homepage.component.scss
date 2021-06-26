@@ -1,0 +1,34 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.banner {
+  display: none;
+  margin-bottom: 2rem;
+}
+
+.calendar {
+  align-items: stretch;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  width: 100%;
+
+  .calendar-card {
+    flex: 1 0.5 auto;
+    margin: 0.5rem;
+    width: 10%;
+  }
+}
+
+.container {
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

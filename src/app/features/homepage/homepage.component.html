@@ -9,3 +9,4 @@
     </mat-card>
   </div>
 </div>
+<button *ngIf="canEdit() | async" (click)="edit()" mat-fab class="edit-btn"><mat-icon>edit</mat-icon></button>

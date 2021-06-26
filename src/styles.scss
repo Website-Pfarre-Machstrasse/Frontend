@@ -294,89 +294,6 @@ app-nav {
   }
 }
 
-@include media-breakpoint-up(lg) {
-  app-nav {
-    .brand {
-      order: 0;
-      position: unset;
-    }
-
-    ul.visible {
-      padding-bottom: 0;
-    }
-
-    .visible {
-      height: unset;
-      width: unset;
-    }
-
-    .text {
-      display: block !important;
-      margin-left: auto;
-      padding: 8px 10px;
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-    }
-
-    .menu {
-      flex-grow: 1;
-      justify-content: flex-start;
-      padding: 0;
-      width: auto;
-
-      li {
-        padding: 0.8rem;
-      }
-
-      .toggle {
-        display: none;
-      }
-
-      .button {
-        margin-left: 0.5em;
-        margin-right: 0;
-        order: 2;
-        padding: 8px 0 8px 10px;
-      }
-    }
-
-    .item {
-      display: flex;
-      flex-basis: auto;
-      height: 4.3rem;
-      order: 1;
-
-
-      &:hover ul,
-      ul:hover,
-      &:focus ul,
-      ul:focus,
-      &:focus-within ul,
-      ul:focus-within {
-        display: block !important;
-      }
-
-      &:not(.button) {
-        height: 100%;
-      }
-
-      &.text + &.button {
-        margin-left: 0;
-      }
-
-      ul {
-        margin-left: -10px;
-        margin-top: 4.3rem;
-        position: absolute;
-        top: 68px;
-      }
-    }
-  }
-}
-
 @include media-breakpoint-up(md) {
   app-nav {
     .brand {
@@ -446,6 +363,89 @@ app-nav {
       flex-basis: auto;
       order: 1;
       padding: 7px 5px;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  app-nav {
+    .brand {
+      order: 0;
+      position: unset;
+    }
+
+    ul.visible {
+      padding-bottom: 0;
+    }
+
+    .visible {
+      height: unset;
+      width: unset;
+    }
+
+    .text {
+      display: block !important;
+      margin-left: auto;
+      padding: 8px 10px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+    }
+
+    .menu {
+      flex-grow: 1;
+      justify-content: flex-end;
+      padding: 0;
+      width: auto;
+
+      li {
+        padding: 0.8rem;
+      }
+
+      .toggle {
+        display: none;
+      }
+
+      .button {
+        display: flex;
+        margin-left: 0.5em;
+        margin-right: 0;
+        order: 2;
+        padding: 8px 0 8px 10px;
+      }
+    }
+
+    .item {
+      display: flex;
+      flex-basis: auto;
+      height: 4.3rem;
+      order: 1;
+
+
+      &:hover ul,
+      ul:hover,
+      &:focus ul,
+      ul:focus,
+      &:focus-within ul,
+      ul:focus-within {
+        display: block !important;
+      }
+
+      &:not(.button) {
+        height: 100%;
+      }
+
+      &.text + &.button {
+        margin-left: 0;
+      }
+
+      ul {
+        margin-left: -10px;
+        position: absolute;
+        top: 68px;
+      }
     }
   }
 }

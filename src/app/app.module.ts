@@ -124,8 +124,11 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
           }
         }, {
           type: 'output',
-          regex: /<p><img(.+?)\/><\/p>/g,
+          regex: /(<p>)?\w?<img(.*)\/>\w?(<\/p>)?/g,
           replace: (match: string, other: string) => {
+            if (!other) {
+              return match;
+            }
             other = other.format({server: AppConfig.INSTANCE.apiEndpoint});
             return `<p><img${other}/></p>`;
           }

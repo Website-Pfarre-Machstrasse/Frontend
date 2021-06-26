@@ -3,18 +3,22 @@ import { CommonModule } from '@angular/common';
 import { LoggingModule } from './logging/logging.module';
 import {ErrorInterceptor} from './error.interceptor';
 import {AppConfig} from './config/app-config';
+import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
+import {MatButtonModule} from '@angular/material/button';
 import {JsonInterceptor} from './json.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [CookieBannerComponent],
   imports: [
     CommonModule,
-    LoggingModule.forRoot()
+    LoggingModule.forRoot(),
+    MatButtonModule
   ],
   exports: [
-    LoggingModule
+    LoggingModule,
+    CookieBannerComponent
   ],
   providers: [
     AppConfig,

@@ -9,7 +9,7 @@ import {AuthService} from '../../auth/auth.service';
 import {EventService} from '../../shared/services/event.service';
 import {Event} from '../../data/event';
 import {map} from 'rxjs/operators';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 
 interface EventFetchInfo {
   start: Date;
@@ -111,14 +111,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private onEventClicked(arg: EventClickArg): void {
     const event = arg.event;
-    let dialogRef = this._dialog.open(this.editDialog);
+    const dialogRef = this._dialog.open(this.editDialog);
   }
 
   private onDateClicked(arg: DateClickArg): void {
     this._authService.user$.subscribe(user => {
       if (user) {
         const {date, allDay} = arg;
-        let dialogRef = this._dialog.open(this.editDialog);
+        const dialogRef = this._dialog.open(this.editDialog);
       }
     });
   }

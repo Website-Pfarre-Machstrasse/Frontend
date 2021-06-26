@@ -61,9 +61,7 @@ $aligns: 'left', 'center', 'right', 'justify';
 
 .container-ie-fallback {
   margin: 0;
-  padding: 0;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 0 2rem;
 
   h1,
   h2 {
@@ -113,9 +111,7 @@ $aligns: 'left', 'center', 'right', 'justify';
 
 .container-noscript {
   margin: 0;
-  padding: 0;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 0 2rem;
 
   h1 {
     font-weight: bolder;
@@ -146,7 +142,6 @@ app-nav {
     ul {
       display: none;
       line-height: 1em;
-      margin-top: 17.25rem;
     }
 
     &.icon + .icon {
@@ -204,11 +199,13 @@ app-nav {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+    height: 68px;
     justify-content: space-between;
     width: 100%;
 
     li {
       font-size: 16px;
+      position: relative;
       white-space: nowrap;
 
       a {
@@ -217,7 +214,7 @@ app-nav {
     }
 
     li:not(.toggle, .brand) {
-      padding: 15px 10px;
+      padding: 10px;
     }
 
     .button {
@@ -304,8 +301,13 @@ app-nav {
       position: unset;
     }
 
-    .visible {
+    ul.visible {
       padding-bottom: 0;
+    }
+
+    .visible {
+      height: unset;
+      width: unset;
     }
 
     .text {
@@ -364,10 +366,10 @@ app-nav {
       }
 
       ul {
-        margin-left: -12px;
-        margin-right: -12px;
+        margin-left: -10px;
+        margin-right: -10px;
         position: absolute;
-        top: -13rem;
+        top: 68px;
       }
     }
   }
@@ -421,11 +423,15 @@ app-nav {
         display: flex;
         flex-basis: auto;
         order: 1;
+
+        &.visible {
+          width: unset;
+        }
       }
 
       .toggle {
         margin-left: 1rem;
-        order: 2;
+        order: 1;
       }
     }
 

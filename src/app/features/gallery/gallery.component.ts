@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Gallery as NgGallery, GalleryItem, ImageItem, VideoItem} from 'ng-gallery';
 import {VideoItemData} from 'ng-gallery/lib/components/templates/items.model';
 import {Lightbox} from 'ng-gallery/lightbox';
@@ -7,7 +7,6 @@ import {GalleryService} from './gallery.service';
 import {Gallery} from '../../data/gallery';
 import {Media} from '../../data/media';
 import {MatDialog} from '@angular/material/dialog';
-import {DialogComponent} from './dialog/dialog.component';
 import {AuthService} from '../../auth/auth.service';
 
 
@@ -77,7 +76,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   openDialog(gallery?: Gallery): void {
     const media = gallery?.media ?? [];
-    const dialogRef = this._dialog.open(DialogComponent, {data: {media}});
+    /*const dialogRef = this._dialog.open(DialogComponent, {data: {media}});
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (gallery) {
@@ -86,6 +85,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
           this._galleryService.createGallery(result);
         }
       }
-    });
+    });*/
   }
 }

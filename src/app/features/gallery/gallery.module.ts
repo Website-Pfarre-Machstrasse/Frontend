@@ -10,12 +10,11 @@ import { MatListModule } from '@angular/material/list';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
-  declarations: [GalleryComponent, DialogComponent],
+  declarations: [GalleryComponent],
   imports: [
     CommonModule,
     GalleryRoutingModule,

@@ -1,6 +1,6 @@
 module.exports = {
   safelist: {
     standard: [/^cm-header-.*/],
-    deep: [/^CodeMirror.*/]
+    deep: [/^CodeMirror.*/, 'title-image', 'title-rule']
   }
 }

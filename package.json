@@ -36,6 +36,7 @@
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
+    "@angular/service-worker": "~11.2.14",
     "@ctrl/ngx-codemirror": "^4.1.0",
     "@fullcalendar/angular": "^5.5.0",
     "@fullcalendar/core": "^5.5.0",

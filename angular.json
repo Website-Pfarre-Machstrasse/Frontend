@@ -28,9 +28,10 @@
             "extractCss": true,
             "aot": true,
             "assets": [
-              "src/favicon",
               "src/assets",
-              "src/site.webmanifest",
+              "src/manifest.json",
+              "src/browserconfig.xml",
+              "src/robots.txt",
               {
                 "glob": "**/*.css",
                 "input": "node_modules/codemirror/theme",
@@ -50,9 +51,9 @@
             "styles": [
               "src/styles.scss",
               {
-                "bundleName": "editor",
+                "bundleName": "homepage",
                 "inject": false,
-                "input": "src/app/features/editor/editor.theme.scss"
+                "input": "src/app/features/homepage/homepage.theme.scss"
               },
               {
                 "bundleName": "page-renderer",
@@ -60,9 +61,9 @@
                 "input": "src/app/features/page-renderer/page-renderer.theme.scss"
               },
               {
-                "bundleName": "homepage",
+                "bundleName": "gallery",
                 "inject": false,
-                "input": "src/app/features/homepage/homepage.theme.scss"
+                "input": "src/app/features/gallery/gallery.theme.scss"
               },
               {
                 "bundleName": "calendar",
@@ -70,9 +71,9 @@
                 "input": "src/app/features/calendar/calendar.theme.scss"
               },
               {
-                "bundleName": "gallery",
+                "bundleName": "editor",
                 "inject": false,
-                "input": "src/app/features/gallery/gallery.theme.scss"
+                "input": "src/app/features/editor/editor.theme.scss"
               }
             ],
             "scripts": [],
@@ -116,7 +117,9 @@
                   "maximumWarning": "1kb",
                   "maximumError": "2kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             },
             "es5": {
               "tsConfig": "./tsconfig-es5.app.json"
@@ -151,8 +154,8 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"

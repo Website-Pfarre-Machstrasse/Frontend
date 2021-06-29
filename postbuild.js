@@ -20,7 +20,7 @@ for (let f of files) {
 
 console.log("Run PurgeCSS...");
 
-exec(`purgecss -css ${PATH}/*.css --content ${PATH}/index.html ${PATH}/*.js -o ${PATH}/ --config ./purgecss.config.js`, function (error, stdout, stderr) {
+exec(`purgecss -css ${PATH}/*.css --content ${PATH}/index.html ${PATH}/*.js -o ${PATH}/ --config ./purgecss.config.js`, (error, stdout, stderr) => {
   console.log("PurgeCSS done");
   console.log();
 
@@ -31,6 +31,29 @@ exec(`purgecss -css ${PATH}/*.css --content ${PATH}/index.html ${PATH}/*.js -o $
 
   console.table(data);
 });
+
+console.log("Replace special variables...");
+
+for (const file of ['index.html', 'manifest.json']) {
+  replaceVariablesInFile(`${PATH}/${file}`, {'theme_color': '#3f51b5', 'bg_color': '#303030'});
+}
+
+function replaceVariablesInFile(filename, replacements) {
+  fs.readFile(filename, 'utf8', (err,data) => {
+    if (err) {
+      return console.error(err);
+    }
+    let result = data.replace(/"@([^@]+)@"/g, (substring, variableName) => {
+      return `"${replacements[variableName]}"`;
+    });
+
+    fs.writeFile(filename, result, 'utf8', (err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });
+  });
+}
 
 function getFilesizeInKiloBytes(filename) {
   return (fs.statSync(filename).size / 1024).toFixed(2);

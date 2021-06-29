@@ -124,7 +124,7 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
           }
         }, {
           type: 'output',
-          regex: /(<p>)?\w?<img(.*)\/>\w?(<\/p>)?/g,
+          regex: /<p><img(.*)\/><\/p>/g,
           replace: (match: string, other: string) => {
             if (!other) {
               return match;

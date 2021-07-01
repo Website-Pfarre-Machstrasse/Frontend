@@ -33,19 +33,24 @@
               "src/browserconfig.xml",
               "src/robots.txt",
               {
-                "glob": "**/*.css",
-                "input": "node_modules/codemirror/theme",
-                "output": "./assets/codemirror/theme/"
-              },
-              {
-                "glob": "**/*.css",
+                "glob": "**/*",
                 "input": "node_modules/codemirror/lib",
                 "output": "./assets/codemirror/lib/"
               },
               {
                 "glob": "**/*.js",
-                "input": "node_modules/codemirror",
-                "output": "./assets/codemirror/"
+                "input": "node_modules/codemirror/mode",
+                "output": "./assets/codemirror/mode/"
+              },
+              {
+                "glob": "**/*.js",
+                "input": "node_modules/codemirror/addon",
+                "output": "./assets/codemirror/addon/"
+              },
+              {
+                "glob": "**/*.js",
+                "input": "node_modules/codemirror/keymap",
+                "output": "./assets/codemirror/keymap/"
               }
             ],
             "styles": [

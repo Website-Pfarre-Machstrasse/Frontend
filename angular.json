@@ -80,7 +80,6 @@
             "allowedCommonJsDependencies": [
               "showdown",
               "ace-builds/webpack-resolver",
-              "lodash",
               "codemirror",
               "@ctrl/ngx-codemirror"
             ]

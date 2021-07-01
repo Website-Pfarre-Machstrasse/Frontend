@@ -20,6 +20,8 @@ import * as showdown from 'showdown';
 import localeDeAt from '@angular/common/locales/de-AT';
 import localeDeAtExtra from '@angular/common/locales/extra/de-AT';
 import { registerLocaleData } from '@angular/common';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 registerLocaleData(localeDeAt, 'de-AT', localeDeAtExtra);
 
@@ -59,7 +61,11 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
     MatIconModule,
     SharedModule,
     MatButtonModule,
-    ShowdownModule
+    ShowdownModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-AT' },

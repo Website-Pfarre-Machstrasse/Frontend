@@ -91,14 +91,12 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
           type: 'output',
           regex: /<li[^>]*><input (?=.*disabled(?:="")?)(?=.*type="checkbox")(?!.*checked)[^>]*>\s*(.*)<\/li>/g,
           replace: '<li style="list-style-type: none;">' +
-            '<i class="material-icons">check_box_outline_blank</i> <span style="vertical-align: super">$1</span>' +
-            '</li>'
+            '<i class="material-icons">check_box_outline_blank</i> <span style="vertical-align: super">$1</span></li>'
         }, {
           type: 'output',
           regex: /<li[^>]*><input (?=.*disabled(?:="")?)(?=.*type="checkbox")(?=.*checked)[^>]*>\s*(.*)<\/li>/g,
           replace: '<li style="list-style-type: none;">' +
-            '<i class="material-icons">check_box</i> <span style="vertical-align: super">$1</span>' +
-            '</li>'
+            '<i class="material-icons">check_box</i> <span style="vertical-align: super">$1</span></li>'
         }, {
           type: 'output',
           regex: /<p><img(.+?) src="(.+(mp4|ogg|webm).*?)"(.+?)\/><\/p>/g,
@@ -106,10 +104,12 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
             if (url === ('.' + format)) {
               return match;
             } else {
-              return `<p><video ${other1} ${other2} controls>`+
-                `<source src="${url}" type="video/${format}">`+
-                'I am sorry, Your browser does not support the HTML5 <code>video</code> element.'+
-                '</video></p>';
+              return `<p>
+  <video ${other1} ${other2} controls>
+    <source src="${url}" type="video/${format}" />
+    I am sorry, Your browser does not support the HTML5 <code>video</code> element.
+  </video>
+</p>`;
             }
           }
         }, {
@@ -122,10 +122,12 @@ const blocks: {start: string; end?: string; attrs: string; nested?: boolean}[] =
               if ('mp3' === format) {
                 format = 'mpeg';
               }
-              return `<p><audio ${other1} ${other2} controls>` +
-                `<source src="${url}" type="audio/${format}" />` +
-                'I am sorry, Your browser does not support the HTML5 <code>audio</code> element.' +
-                '</audio></p>';
+              return `<p>
+  <audio ${other1} ${other2} controls>
+    <source src="${url}" type="audio/${format}" />
+    I am sorry, Your browser does not support the HTML5 <code>audio</code> element.
+  </audio>
+</p>`;
             }
           }
         }, {

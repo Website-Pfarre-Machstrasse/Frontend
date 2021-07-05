@@ -1,4 +1,5 @@
-@import '../../../../theme';
+@use '~@angular/material' as mat;
+@use 'src/theme' as theme;
 
 :host {
   display: block;
@@ -41,7 +42,7 @@ div {
 }
 
 @mixin media-browser-theme($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $background: map-get($config, background);
 
@@ -54,14 +55,14 @@ div {
     }
 
     &.selected {
-      border-color: mat-color($primary);
+      border-color: mat.get-color-from-palette($primary);
     }
   }
 }
 
-@include media-browser-theme($light-theme);
+@include media-browser-theme(theme.$light-theme);
 
 
 @media (prefers-color-scheme: dark) {
-  @include media-browser-theme($dark-theme);
+  @include media-browser-theme(theme.$dark-theme);
 }

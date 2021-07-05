@@ -26,7 +26,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "extractCss": true,
-            "aot": true,
             "assets": [
               "src/assets",
               "src/manifest.json",
@@ -87,7 +86,13 @@
               "ace-builds/webpack-resolver",
               "codemirror",
               "@ctrl/ngx-codemirror"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -128,7 +133,8 @@
             "es5": {
               "tsConfig": "./tsconfig-es5.app.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

@@ -11,6 +11,7 @@ import { LightboxModule } from 'ng-gallery/lightbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {FormsModule} from '@angular/forms';
     MatListModule,
     MatTableModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class GalleryModule { }

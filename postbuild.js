@@ -35,7 +35,11 @@ exec(`purgecss -css ${PATH}/*.css --content ${PATH}/index.html ${PATH}/*.js -o $
 console.log("Replace special variables...");
 
 for (const file of ['index.html', 'manifest.json']) {
-  replaceVariablesInFile(`${PATH}/${file}`, {'theme_color': '#3f51b5', 'bg_color': '#303030'});
+  replaceVariablesInFile(`${PATH}/${file}`, {
+    'theme_color': '#3f51b5',
+    'bg_color': '#303030',
+    'base_url': 'https://minecraftschurli.ddns.net/pfarre-machstrasse'
+  });
 }
 
 function replaceVariablesInFile(filename, replacements) {

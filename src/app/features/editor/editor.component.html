@@ -13,7 +13,7 @@
               <mat-option *ngFor="let option of action.options; index as value" [value]="value">{{option}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <button *ngIf="action.type == 'button'"
+          <button *ngIf="action.type === 'button'"
                   (click)="executeAction(action.action)"
                   [attr.title]="action.title"
                   [attr.aria-label]="action.title"

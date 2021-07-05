@@ -1,12 +1,20 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "name": "Pfarre Machstrasse - Hl. Klaus von Flüe",
   "short_name": "Pfarre Machstrasse",
   "theme_color": "@theme_color@",
   "background_color": "@bg_color@",
   "display": "standalone",
   "lang": "de-AT",
-  "scope": "./",
-  "start_url": "./",
+  "start_url": "/",
+  "scope": "/**",
+  "categories": [
+    "Basisgemeinde",
+    "Kirche",
+    "katholisch",
+    "Pfarre"
+  ],
+  "dir": "ltr",
   "icons": [
     {
       "src": "assets/icons/favicon-16x16.png",

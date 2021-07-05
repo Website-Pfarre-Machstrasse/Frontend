@@ -1,3 +1,5 @@
+@use '~@angular/material' as mat;
+@use 'theme' as theme;
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -6,7 +8,6 @@
 @import '~bootstrap/scss/images';
 @import '~bootstrap/scss/utilities/api';
 @import '~@angular/material/theming';
-@import 'theme';
 
 html,
 body {
@@ -22,14 +23,14 @@ body {
   margin: 0;
 }
 
-@include mat-core();
+@include mat.core();
 
-@include angular-material-theme($light-theme);
-@include theme-extension($light-theme);
+@include mat.all-component-themes(theme.$light-theme);
+@include theme.theme-extension(theme.$light-theme);
 
 @media (prefers-color-scheme: dark) {
-  @include angular-material-color($dark-theme);
-  @include theme-extension($dark-theme);
+  @include mat.all-component-colors(theme.$dark-theme);
+  @include theme.theme-extension(theme.$dark-theme);
 }
 
 .main-container {
@@ -276,7 +277,7 @@ app-nav {
 }
 
 .print-button {
-  bottom: 3rem;
+  bottom: 4rem;
   left: 3rem;
   position: absolute;
 }

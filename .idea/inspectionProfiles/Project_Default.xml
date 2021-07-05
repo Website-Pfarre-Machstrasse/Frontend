@@ -967,7 +967,6 @@
     <inspection_tool class="CssUnresolvedClassInComposesRule" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="CssUnresolvedCustomProperty" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="CssUnusedSymbol" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="CsvValidation" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="CucumberExamplesColon" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="CucumberJavaStepDefClassInDefaultPackage" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CucumberJavaStepDefClassIsPublic" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -1014,8 +1013,8 @@
     <inspection_tool class="DeprecatedClassUsageInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DeprecatedGradleDependency" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DeprecatedIsStillUsed" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="DeprecatedKindProjectorSyntax" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DeprecatedKey" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DeprecatedKindProjectorSyntax" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DeprecatedLombok" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DeprecatedMavenDependency" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DeprecatedPackageObject" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -1073,13 +1072,7 @@
     <inspection_tool class="DuplicateInterfacePrefix" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="DuplicateKeyInSection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DuplicateMnemonic" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="DuplicatePropertyInspection" enabled="false" level="WARNING" enabled_by_default="false">
-      <option name="CURRENT_FILE" value="true" />
-      <option name="MODULE_WITH_DEPENDENCIES" value="false" />
-      <option name="CHECK_DUPLICATE_VALUES" value="true" />
-      <option name="CHECK_DUPLICATE_KEYS" value="true" />
-      <option name="CHECK_DUPLICATE_KEYS_WITH_DIFFERENT_VALUES" value="true" />
-    </inspection_tool>
+    <inspection_tool class="DuplicatePropertyInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DuplicateSectionInFile" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DuplicateStringLiteralInspection" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="MIN_STRING_LENGTH" value="5" />
@@ -1159,8 +1152,8 @@
     <inspection_tool class="EjbSessionHomeInterfaceInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EjbStaticAccessInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="EjbThisExpressionInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="EmptyBody" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="EmbeddedNotMarkedInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="EmptyBody" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="EmptyCatchBlockJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="EmptyCheck" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="EmptyClass" enabled="false" level="WARNING" enabled_by_default="false">
@@ -1996,8 +1989,8 @@
     <inspection_tool class="LambdaParameterTypeCanBeSpecified" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="LambdaUnfriendlyMethodOverload" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="LanguageDetectionInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="LanguageLevel" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="LanguageFeature" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="LanguageLevel" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="LanguageMismatch" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="CHECK_NON_ANNOTATED_REFERENCES" value="true" />
     </inspection_tool>
@@ -2079,8 +2072,8 @@
     <inspection_tool class="MagicNumber" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MagicNumberJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MainFunctionReturnUnit" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="MalformedDataProvider" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MakeArrayToString" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="MalformedDataProvider" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MalformedFormatString" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MalformedSetUpTearDown" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ManagedBeanClassInspection" enabled="true" level="ERROR" enabled_by_default="true" />

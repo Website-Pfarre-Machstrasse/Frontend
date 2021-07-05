@@ -1,7 +1,8 @@
-@import 'src/theme';
+@use '~@angular/material' as mat;
+@use 'src/theme' as theme;
 
 @mixin page-renderer-theme($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
   $background: map-get($config, background);
@@ -15,8 +16,8 @@
   }
 }
 
-@include page-renderer-theme($light-theme);
+@include page-renderer-theme(theme.$light-theme);
 
 @media (prefers-color-scheme: dark) {
-  @include page-renderer-theme($dark-theme);
+  @include page-renderer-theme(theme.$dark-theme);
 }

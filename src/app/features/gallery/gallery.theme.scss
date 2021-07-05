@@ -1,7 +1,8 @@
-@import 'src/theme';
+@use '~@angular/material' as mat;
+@use 'src/theme' as theme;
 
 @mixin gallery-theme($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
   $background: map-get($config, background);
@@ -14,13 +15,13 @@
     }
 
     table {
-      //-webkit-box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 500);
-      box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 500);
+      //-webkit-box-shadow: 0 0 0.2rem mat.get-contrast-color-from-palette(mat.$grey-palette, 500);
+      box-shadow: 0 0 0.2rem mat.get-contrast-color-from-palette(mat.$grey-palette, 500);
     }
 
     .mat-header-cell {
-      background-color: mat-color($primary, 700);
-      color: mat-contrast($primary, 700);
+      background-color: mat.get-color-from-palette($primary, 700);
+      color: mat.get-contrast-color-from-palette($primary, 700);
     }
 
     .mat-row {
@@ -31,8 +32,8 @@
       }
 
       &:hover {
-        //-webkit-box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 200);
-        box-shadow: 0 0 0.2rem mat-contrast($mat-grey, 200);
+        //-webkit-box-shadow: 0 0 0.2rem mat.get-contrast-color-from-palette(mat.$grey-palette, 200);
+        box-shadow: 0 0 0.2rem mat.get-contrast-color-from-palette(mat.$grey-palette, 200);
       }
     }
   }
@@ -40,8 +41,8 @@
 
 }
 
-@include gallery-theme($light-theme);
+@include gallery-theme(theme.$light-theme);
 
 @media (prefers-color-scheme: dark) {
-  @include gallery-theme($dark-theme);
+  @include gallery-theme(theme.$dark-theme);
 }

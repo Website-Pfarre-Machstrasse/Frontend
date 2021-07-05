@@ -17,5 +17,5 @@
     <tr mat-header-row *matHeaderRowDef="(auth.isAuthenticated() | async) ? ['title', 'size', 'edit'] : ['title', 'size']"></tr>
     <tr mat-row *matRowDef="let row; columns: (auth.isAuthenticated() | async) ? ['title', 'size', 'edit'] : ['title', 'size'];" (click)="showGallery(row.id)"></tr>
   </table>
-  <button mat-fab class="edit-btn" (click)='openDialog()'><mat-icon>edit</mat-icon></button>
+  <button mat-fab *ngIf="auth.isAuthenticated() | async" class="edit-btn" (click)='openDialog()'><mat-icon>edit</mat-icon></button>
 </div>

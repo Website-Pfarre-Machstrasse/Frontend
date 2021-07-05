@@ -1,7 +1,9 @@
-@import 'src/theme';
+@use '~@angular/material' as mat;
+@use 'src/theme' as theme;
+
 
 @mixin editor-theme($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
   $background: map-get($config, background);
@@ -26,11 +28,11 @@
       }
 
       .cm-header {
-        color: mat-color($primary);
+        color: mat.get-color-from-palette($primary);
       }
 
       .cm-quote {
-        color: mat-color($accent);
+        color: mat.get-color-from-palette($accent);
       }
 
       .cm-negative {
@@ -54,11 +56,11 @@
       }
 
       .cm-def {
-        color: mat-color($primary, 800);
+        color: mat.get-color-from-palette($primary, 800);
       }
 
       .cm-variable-2 {
-        color: mat-color($primary, 700);
+        color: mat.get-color-from-palette($primary, 700);
       }
 
       .cm-variable-3,
@@ -67,7 +69,7 @@
       }
 
       .cm-comment {
-        color: mat-color($accent, 700);
+        color: mat.get-color-from-palette($accent, 700);
       }
 
       .cm-string {
@@ -87,7 +89,7 @@
       }
 
       .cm-builtin {
-        color: mat-color($primary, 600);
+        color: mat.get-color-from-palette($primary, 600);
       }
 
       .cm-bracket {
@@ -99,7 +101,7 @@
       }
 
       .cm-attribute {
-        color: mat-color($primary, 500);
+        color: mat.get-color-from-palette($primary, 500);
       }
 
       .cm-hr {
@@ -107,7 +109,7 @@
       }
 
       .cm-link {
-        color: mat-color($primary, 400);
+        color: mat.get-color-from-palette($primary, 400);
       }
 
       .cm-error {
@@ -121,7 +123,7 @@
   }
 
   app-editor .spinner-container {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
   }
 
   .editor-container .toolbar {
@@ -195,8 +197,8 @@
   display: none;
 }
 
-@include editor-theme($light-theme);
+@include editor-theme(theme.$light-theme);
 
 @media (prefers-color-scheme: dark) {
-  @include editor-theme($dark-theme);
+  @include editor-theme(theme.$dark-theme);
 }

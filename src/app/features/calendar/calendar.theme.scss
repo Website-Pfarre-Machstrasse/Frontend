@@ -1,7 +1,8 @@
-@import 'src/theme';
+@use '~@angular/material' as mat;
+@use 'src/theme' as theme;
 
 @mixin calendar-theme($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
   $background: map-get($config, background);
@@ -19,8 +20,8 @@
   }
 }
 
-@include calendar-theme($light-theme);
+@include calendar-theme(theme.$light-theme);
 
 @media (prefers-color-scheme: dark) {
-  @include calendar-theme($dark-theme);
+  @include calendar-theme(theme.$dark-theme);
 }

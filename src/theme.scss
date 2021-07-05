@@ -1,10 +1,14 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+//@import '~@angular/material/theming';
 
-$primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-teal, A200, A100, A400);
-$warn: mat-palette($mat-amber);
+$primary: mat.define-palette(mat.$indigo-palette);
+$accent: mat.define-palette(mat.$teal-palette, A200, A100, A400);
+$warn: mat.define-palette(mat.$amber-palette);
 
-$light-theme: mat-light-theme((
+$light-theme: mat.define-light-theme((
   color: (
     primary: $primary,
     accent: $accent,
@@ -12,7 +16,7 @@ $light-theme: mat-light-theme((
   )
 ));
 
-$dark-theme: mat-dark-theme((
+$dark-theme: mat.define-dark-theme((
   color: (
     primary: $primary,
     accent: $accent,
@@ -21,7 +25,7 @@ $dark-theme: mat-dark-theme((
 ));
 
 @mixin theme-extension($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
   $background: map-get($config, background);
@@ -32,12 +36,12 @@ $dark-theme: mat-dark-theme((
     .menu {
       li.button {
         a {
-          background-color: mat-color($primary, 700);
-          border: 1px solid mat-color($primary, 800);
+          background-color: mat.get-color-from-palette($primary, 700);
+          border: 1px solid mat.get-color-from-palette($primary, 800);
 
           &:hover {
-            background-color: mat-color($primary, 800);
-            border: 1px solid mat-color($primary, 900);
+            background-color: mat.get-color-from-palette($primary, 800);
+            border: 1px solid mat.get-color-from-palette($primary, 900);
           }
         }
       }
@@ -48,12 +52,12 @@ $dark-theme: mat-dark-theme((
     }
 
     .button:not(.secondary) a:hover {
-      background-color: mat-color($primary, 800);
-      border-color: mat-color($primary, 900);
+      background-color: mat.get-color-from-palette($primary, 800);
+      border-color: mat.get-color-from-palette($primary, 900);
     }
 
     .button.secondary a:hover {
-      color: mat-contrast($primary, 300);
+      color: mat.get-contrast-color-from-palette($primary, 300);
     }
   }
 
@@ -78,40 +82,40 @@ $dark-theme: mat-dark-theme((
   }
 
   nav {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
 
     a {
-      color: mat-contrast($primary, 300);
+      color: mat.get-contrast-color-from-palette($primary, 300);
     }
   }
 
   footer {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
 
     *,
     a {
-      color: mat-contrast($primary, 300);
+      color: mat.get-contrast-color-from-palette($primary, 300);
     }
 
     .mat-select-arrow {
-      color: mat-color($primary, default-contrast) !important;
+      color: mat.get-color-from-palette($primary, default-contrast) !important;
     }
   }
 
   .menu {
     li {
-      color: mat-contrast($primary, 300);
+      color: mat.get-contrast-color-from-palette($primary, 300);
 
       &.item:not(.button):not(.icon) {
         @include media-breakpoint-down(lg) {
           &.open {
-            background-color: mat-color($primary, 600);
+            background-color: mat.get-color-from-palette($primary, 600);
 
             ul {
               background-color: inherit;
 
               li:hover {
-                background-color: mat-color($primary, 700);
+                background-color: mat.get-color-from-palette($primary, 700);
               }
             }
           }
@@ -120,13 +124,13 @@ $dark-theme: mat-dark-theme((
         &:hover,
         &:focus,
         &:focus-within {
-          background-color: mat-color($primary, 600);
+          background-color: mat.get-color-from-palette($primary, 600);
 
           ul {
             background-color: inherit;
 
             li:hover {
-              background-color: mat-color($primary, 700);
+              background-color: mat.get-color-from-palette($primary, 700);
             }
           }
         }
@@ -134,7 +138,7 @@ $dark-theme: mat-dark-theme((
     }
 
     .button {
-      border-bottom: 1px mat-color($primary, 900) solid;
+      border-bottom: 1px mat.get-color-from-palette($primary, 900) solid;
     }
   }
 }
